@@ -1,2 +1,2 @@
-21502583;João Lionço
-21502968;André Graça
+a21502583;João Lionço
+a21502968;André Graça
