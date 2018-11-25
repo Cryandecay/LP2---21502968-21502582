@@ -123,7 +123,7 @@ public class Simulador {
         for (CrazyPiece crazy: crazyList) {
             if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                 //bishop
-                if (crazy.getIdTipoPeca() == 1 || crazy.getIdTipoPeca() == 7 ) {
+                if (crazy.getIdTipoPeca() == 0 || crazy.getIdTipoPeca() == 6 ) {
                     for (int e = 0; e < tamanhoTabuleiro; e++) {
                         if (xD == xO + e && yD == yO + e) {
                             crazy.setCoordenadaX(xD);
@@ -149,7 +149,7 @@ public class Simulador {
                     return false;
                 }
                 //horse
-                if (crazy.getIdTipoPeca() == 2 || crazy.getIdTipoPeca() == 8 ) {
+                if (crazy.getIdTipoPeca() == 1 || crazy.getIdTipoPeca() == 7 ) {
                     if (xD == xO + 1 && yD == yO + 2) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
@@ -193,7 +193,7 @@ public class Simulador {
                     return false;
                 }
                 //king
-                if (crazy.getIdTipoPeca() == 3 || crazy.getIdTipoPeca() == 9 ) {
+                if (crazy.getIdTipoPeca() == 2 || crazy.getIdTipoPeca() == 8 ) {
                     if (xD == xO + 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         return true;
@@ -238,7 +238,7 @@ public class Simulador {
                     return false;
                 }
                 //dama
-                if (crazy.getIdTipoPeca() == 4 | crazy.getIdTipoPeca() == 10) {
+                if (crazy.getIdTipoPeca() == 3 | crazy.getIdTipoPeca() == 9) {
                     for (int e = 0; e <= tamanhoTabuleiro; e++) {
                         if (xD == xO + e && yD == yO + e) {
                             crazy.setCoordenadaX(xD);
@@ -281,7 +281,7 @@ public class Simulador {
                     return false;
                 }
                 //tower
-                if (crazy.getIdTipoPeca() == 5 | crazy.getIdTipoPeca() == 11) {
+                if (crazy.getIdTipoPeca() == 4 | crazy.getIdTipoPeca() == 10) {
                     for (int e = 0; e <= tamanhoTabuleiro; e++) {
                         if (yD == yO + e && xD == xO) {
                             crazy.setCoordenadaY(yD);
@@ -304,7 +304,7 @@ public class Simulador {
                     return false;
                 }
                 //peon
-                if (crazy.getIdTipoPeca() == 6 || crazy.getIdTipoPeca() == 12) {
+                if (crazy.getIdTipoPeca() == 5 || crazy.getIdTipoPeca() == 11) {
                     if (yD == yO + 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
                         return true;
