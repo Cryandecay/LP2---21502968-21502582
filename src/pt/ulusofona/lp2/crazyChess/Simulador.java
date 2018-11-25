@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Simulador {
 
     File ficheiroInicial;
-    List<String> lista1=new ArrayList<>();
     List<CrazyPiece> crazyList=new ArrayList<CrazyPiece>();
     int turno=1;
 
@@ -19,8 +18,8 @@ public class Simulador {
 
     }
 
-    public boolean iniciaJogo(File ficheiroInicial) {
-        this.ficheiroInicial=ficheiroInicial;
+    public List<String> lista(){
+        List<String> lista=new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(ficheiroInicial.toString()));
             StringBuilder sb = new StringBuilder();
@@ -34,10 +33,9 @@ public class Simulador {
             String dados[] = everything.split("[\n\r]");
             for(int i = 0; i < dados.length; ++i) {
                 if((i%2)==0){
-                    lista1.add(dados[i]);
+                    lista.add(dados[i]);
                 }
             }
-            System.out.println(lista1);
             br.close();
 
         } catch (FileNotFoundException e) {
@@ -45,7 +43,11 @@ public class Simulador {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return lista;
+    }
 
+    public boolean iniciaJogo(File ficheiroInicial) {
+        this.ficheiroInicial=ficheiroInicial;
         if (ficheiroInicial==null){
             return false;
         }else{
@@ -54,16 +56,18 @@ public class Simulador {
     }
 
     public int getTamanhoTabuleiro(){
-        return Integer.parseInt(lista1.get(0));
+        List<String> lista= lista();
+        return Integer.parseInt(lista.get(0));
     }
 
 
     public boolean processaJogada(int xO, int yO, int xD, int Yd) {
+        List<String> lista= lista();
         for (int i = 0; i <= crazyList.size(); i++) {
             if (crazyList.get(i).x == xO & crazyList.get(i).y == yO) {
                 //bishop
                 if (crazyList.get(i).IdTipoPeca == 1 | crazyList.get(i).IdTipoPeca == 7 ) {
-                    for (int e = 0; e < Integer.parseInt(lista1.get(0)); e++) {
+                    for (int e = 0; e < Integer.parseInt(lista.get(0)); e++) {
                         if (xD == xO + e & Yd == yO + e) {
                             crazyList.get(i).x = xD;
                             crazyList.get(i).y = Yd;
@@ -221,7 +225,7 @@ public class Simulador {
                 }
                 //tower
                 if (crazyList.get(i).IdTipoPeca == 5 | crazyList.get(i).IdTipoPeca == 11) {
-                    for (int e = 0; e <= Integer.parseInt(lista1.get(0)); e++) {
+                    for (int e = 0; e <= Integer.parseInt(lista.get(0)); e++) {
                         if (Yd == yO + e & xD == xO) {
                             crazyList.get(i).y = Yd;
                             return true;
@@ -260,6 +264,7 @@ public class Simulador {
     }
 
     public List<CrazyPiece> getPecasMalucas(){
+        List<String> lista= lista();
         CrazyPiece KingWhite = new CrazyPiece();
         CrazyPiece KingBlack = new CrazyPiece();
         Random rando = new Random();
@@ -268,35 +273,35 @@ public class Simulador {
         KingWhite.IdEquipa=0;
         KingWhite.IdTipoPeca=3;
         KingWhite.Alcunha="Ferrari";
-        KingWhite.x= rando.nextInt(Integer.parseInt(lista1.get(0)));
-        KingWhite.y= rando.nextInt(Integer.parseInt(lista1.get(0)));
+        KingWhite.x= rando.nextInt(Integer.parseInt(lista.get(0)));
+        KingWhite.y= rando.nextInt(Integer.parseInt(lista.get(0)));
         crazyList.add(KingWhite);
         KingBlack.IdPeca=1;
         KingBlack.IdEquipa=0;
         KingBlack.IdTipoPeca=9;
         KingBlack.Alcunha="Ferrari";
-        KingBlack.x= rando.nextInt(Integer.parseInt(lista1.get(0)));
-        KingBlack.y= rando.nextInt(Integer.parseInt(lista1.get(0)));
+        KingBlack.x= rando.nextInt(Integer.parseInt(lista.get(0)));
+        KingBlack.y= rando.nextInt(Integer.parseInt(lista.get(0)));
         crazyList.add(KingBlack);
 
-        for(int i=2;i<=Integer.parseInt(lista1.get(1));i++){
+        for(int i=2;i<=Integer.parseInt(lista.get(1));i++){
             CrazyPiece piece1 = new CrazyPiece();
             Random rand = new Random();
-            if(i<Integer.parseInt(lista1.get(1))/2+1){
+            if(i<Integer.parseInt(lista.get(1))/2+1){
                 piece1.IdPeca=i;
                 piece1.IdEquipa=0;
                 piece1.IdTipoPeca=rand.nextInt(5)+1;
                 piece1.Alcunha="Ferrari";
-                piece1.x= rand.nextInt(Integer.parseInt(lista1.get(0)));
-                piece1.y= rand.nextInt(Integer.parseInt(lista1.get(0)));
+                piece1.x= rand.nextInt(Integer.parseInt(lista.get(0)));
+                piece1.y= rand.nextInt(Integer.parseInt(lista.get(0)));
                 crazyList.add(piece1);
             }else{
                 piece1.IdPeca=i;
                 piece1.IdEquipa=1;
                 piece1.IdTipoPeca=rand.nextInt(5)+6;
                 piece1.Alcunha="Ferrari";
-                piece1.x= rand.nextInt(Integer.parseInt(lista1.get(0)));
-                piece1.y= rand.nextInt(Integer.parseInt(lista1.get(0)));
+                piece1.x= rand.nextInt(Integer.parseInt(lista.get(0)));
+                piece1.y= rand.nextInt(Integer.parseInt(lista.get(0)));
                 crazyList.add(piece1);
             }
         }

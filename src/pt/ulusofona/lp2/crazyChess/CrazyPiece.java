@@ -55,4 +55,6 @@ public class CrazyPiece {
 
     public String toString(){return "1|1|1|Peca";}
 
+
+
 }
