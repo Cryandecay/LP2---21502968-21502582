@@ -68,11 +68,6 @@ public class Simulador {
                     crazyList.add(piece);
                 }
             }
-
-
-
-
-
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -86,7 +81,11 @@ public class Simulador {
     }
 
     public int numberInt(String number){
-        return Integer.parseInt(number);
+        try{
+            return Integer.parseInt(number);
+        }catch(NumberFormatException ex){ // handle your exception
+            return 0;
+        }
     }
 
     public int[] randomXeYComparation(){
