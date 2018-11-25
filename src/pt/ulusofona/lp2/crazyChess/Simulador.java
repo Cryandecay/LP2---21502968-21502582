@@ -1,25 +1,35 @@
 package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Simulador {
 
-    File ficheiroInicial;
-    List<CrazyPiece> crazyList=new ArrayList<CrazyPiece>();
-    int turno=1;
+    //File ficheiroInicial;
+    List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
+    int turno;
+    int equipaAJogar;// 0 pretas 1 brancas
+    List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
+    List<String> listaDocumentos = new ArrayList<String>();
+    List<String> autores = new ArrayList<String>();
+
 
     public Simulador(){
 
     }
 
-    public List<String> lista(){
-        List<String> lista=new ArrayList<>();
+    public Simulador(List<CrazyPiece> crazyList, int turno, int equipaAJogar, List<CrazyPiece> capturas) {
+        //this.ficheiroInicial = ficheiroInicial;
+        this.crazyList = crazyList;
+        this.turno = turno;
+        this.equipaAJogar = equipaAJogar;
+        this.capturas = capturas;
+    }
+
+
+    public boolean iniciaJogo(File ficheiroInicial) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(ficheiroInicial.toString()));
             StringBuilder sb = new StringBuilder();
@@ -33,190 +43,181 @@ public class Simulador {
             String dados[] = everything.split("[\n\r]");
             for(int i = 0; i < dados.length; ++i) {
                 if((i%2)==0){
-                    lista.add(dados[i]);
+                    listaDocumentos.add(dados[i]);
                 }
             }
             br.close();
-
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        return lista;
-    }
-
-    public boolean iniciaJogo(File ficheiroInicial) {
-        this.ficheiroInicial=ficheiroInicial;
-        if (ficheiroInicial==null){
             return false;
-        }else{
-            return true;
         }
     }
 
     public int getTamanhoTabuleiro(){
-        List<String> lista= lista();
-        return Integer.parseInt(lista.get(0));
+        return Integer.parseInt(listaDocumentos.get(0));
     }
 
 
-    public boolean processaJogada(int xO, int yO, int xD, int Yd) {
-        List<String> lista= lista();
-        for (int i = 0; i <= crazyList.size(); i++) {
-            if (crazyList.get(i).x == xO & crazyList.get(i).y == yO) {
+    public boolean processaJogada(int xO, int yO, int xD, int yD) {
+        int tamanhoTabuleiro = Integer.parseInt(listaDocumentos.get(0));
+        for (CrazyPiece crazy: crazyList) {
+            if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                 //bishop
-                if (crazyList.get(i).IdTipoPeca == 1 | crazyList.get(i).IdTipoPeca == 7 ) {
-                    for (int e = 0; e < Integer.parseInt(lista.get(0)); e++) {
-                        if (xD == xO + e & Yd == yO + e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                if (crazy.getIdTipoPeca() == 1 || crazy.getIdTipoPeca() == 7 ) {
+                    for (int e = 0; e < tamanhoTabuleiro; e++) {
+                        if (xD == xO + e && yD == yO + e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO - e & Yd == yO - e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO - e && yD == yO - e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO + e & Yd == yO - e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO + e && yD == yO - e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO - e & Yd == yO + e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO - e && yD == yO + e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
                     }
                     return false;
                 }
                 //horse
-                if (crazyList.get(i).IdTipoPeca == 2 | crazyList.get(i).IdTipoPeca == 8 ) {
-                    if (xD == xO + 1 & Yd == yO + 2) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                if (crazy.getIdTipoPeca() == 2 || crazy.getIdTipoPeca() == 8 ) {
+                    if (xD == xO + 1 && yD == yO + 2) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO + 1 & Yd == yO - 2) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO + 1 && yD == yO - 2) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);;
                         return true;
                     }
-                    if (xD == xO - 1 & Yd == yO - 2) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO - 1 && yD == yO - 2) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO - 1 & Yd == yO + 2) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO - 1 && yD == yO + 2) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO - 2 & Yd == yO + 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO - 2 && yD == yO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO - 2 & Yd == yO - 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO - 2 && yD == yO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO + 2 & Yd == yO + 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO + 2 && yD == yO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (xD == xO + 2 & Yd == yO - 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (xD == xO + 2 && yD == yO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
                     return false;
                 }
                 //king
-                if (crazyList.get(i).IdTipoPeca == 3 | crazyList.get(i).IdTipoPeca == 9 ) {
-                    if (xD == xO + 1 & Yd == yO) {
-                        crazyList.get(i).x = xD;
+                if (crazy.getIdTipoPeca() == 3 || crazy.getIdTipoPeca() == 9 ) {
+                    if (xD == xO + 1 && yD == yO) {
+                        crazy.setCoordenadaX(xD);
                         return true;
                     }
-                    if (xD == xO - 1 & Yd == yO) {
-                        crazyList.get(i).x = xD;
+                    if (xD == xO - 1 && yD == yO) {
+                        crazy.setCoordenadaX(xD);
                         return true;
                     }
-                    if (Yd == yO - 1 & xD == xO) {
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO - 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO + 1 & xD == xO) {
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO + 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO + 1 & xD == xO + 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO + 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO + 1 & xD == xO + 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO + 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO - 1 & xD == xO + 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO - 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO + 1 & xD == xO - 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO + 1 && xD == xO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO - 1 & xD == xO - 1) {
-                        crazyList.get(i).x = xD;
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO - 1 && xD == xO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
                     return false;
                 }
                 //dama
-                if (crazyList.get(i).IdTipoPeca == 4 | crazyList.get(i).IdTipoPeca == 10) {
-                    for (int e = 0; e <= Integer.parseInt(lista.get(0)); e++) {
-                        if (xD == xO + e & Yd == yO + e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                if (crazy.getIdTipoPeca() == 4 | crazy.getIdTipoPeca() == 10) {
+                    for (int e = 0; e <= tamanhoTabuleiro; e++) {
+                        if (xD == xO + e && yD == yO + e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO - e & Yd == yO - e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO - e && yD == yO - e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO + e & Yd == yO - e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO + e && yD == yO - e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (xD == xO - e & Yd == yO + e) {
-                            crazyList.get(i).x = xD;
-                            crazyList.get(i).y = Yd;
+                        if (xD == xO - e && yD == yO + e) {
+                            crazy.setCoordenadaX(xD);
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (Yd == yO + e & xD == xO) {
-                            crazyList.get(i).y = Yd;
+                        if (yD == yO + e && xD == xO) {
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (Yd == yO - e & xD == xO) {
-                            crazyList.get(i).y = Yd;
+                        if (yD == yO - e && xD == xO) {
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (Yd == yO & xD == xO+e) {
-                            crazyList.get(i).x = xD;
+                        if (yD == yO && xD == xO + e) {
+                            crazy.setCoordenadaX(xD);
                             return true;
                         }
-                        if (Yd == yO & xD == xO-e) {
-                            crazyList.get(i).x = xD;
+                        if (yD == yO && xD == xO - e) {
+                            crazy.setCoordenadaX(xD);
                             return true;
                         }
 
@@ -224,22 +225,22 @@ public class Simulador {
                     return false;
                 }
                 //tower
-                if (crazyList.get(i).IdTipoPeca == 5 | crazyList.get(i).IdTipoPeca == 11) {
-                    for (int e = 0; e <= Integer.parseInt(lista.get(0)); e++) {
-                        if (Yd == yO + e & xD == xO) {
-                            crazyList.get(i).y = Yd;
+                if (crazy.getIdTipoPeca() == 5 | crazy.getIdTipoPeca() == 11) {
+                    for (int e = 0; e <= tamanhoTabuleiro; e++) {
+                        if (yD == yO + e && xD == xO) {
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (Yd == yO - e & xD == xO) {
-                            crazyList.get(i).y = Yd;
+                        if (yD == yO - e && xD == xO) {
+                            crazy.setCoordenadaY(yD);
                             return true;
                         }
-                        if (Yd == yO & xD == xO+e) {
-                            crazyList.get(i).x = xD;
+                        if (yD == yO && xD == xO + e) {
+                            crazy.setCoordenadaX(xD);
                             return true;
                         }
-                        if (Yd == yO & xD == xO-e) {
-                            crazyList.get(i).x = xD;
+                        if (yD == yO && xD == xO - e) {
+                            crazy.setCoordenadaX(xD);
                             return true;
                         }
 
@@ -247,13 +248,13 @@ public class Simulador {
                     return false;
                 }
                 //peon
-                if (crazyList.get(i).IdTipoPeca == 6 | crazyList.get(i).IdTipoPeca == 12) {
-                    if (Yd == yO + 1 & xD == xO) {
-                        crazyList.get(i).y = Yd;
+                if (crazy.getIdTipoPeca() == 6 || crazy.getIdTipoPeca() == 12) {
+                    if (yD == yO + 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
-                    if (Yd == yO - 1 & xD == xO) {
-                        crazyList.get(i).y = Yd;
+                    if (yD == yO - 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
                         return true;
                     }
                     return false;
@@ -264,49 +265,6 @@ public class Simulador {
     }
 
     public List<CrazyPiece> getPecasMalucas(){
-        List<String> lista= lista();
-        CrazyPiece KingWhite = new CrazyPiece();
-        CrazyPiece KingBlack = new CrazyPiece();
-        Random rando = new Random();
-        //THERE MUST ALWAYS BE A CHESS KING
-        KingWhite.IdPeca=0;
-        KingWhite.IdEquipa=0;
-        KingWhite.IdTipoPeca=3;
-        KingWhite.Alcunha="Ferrari";
-        KingWhite.x= rando.nextInt(Integer.parseInt(lista.get(0)));
-        KingWhite.y= rando.nextInt(Integer.parseInt(lista.get(0)));
-        crazyList.add(KingWhite);
-        KingBlack.IdPeca=1;
-        KingBlack.IdEquipa=0;
-        KingBlack.IdTipoPeca=9;
-        KingBlack.Alcunha="Ferrari";
-        KingBlack.x= rando.nextInt(Integer.parseInt(lista.get(0)));
-        KingBlack.y= rando.nextInt(Integer.parseInt(lista.get(0)));
-        crazyList.add(KingBlack);
-
-        for(int i=2;i<=Integer.parseInt(lista.get(1));i++){
-            CrazyPiece piece1 = new CrazyPiece();
-            Random rand = new Random();
-            if(i<Integer.parseInt(lista.get(1))/2+1){
-                piece1.IdPeca=i;
-                piece1.IdEquipa=0;
-                piece1.IdTipoPeca=rand.nextInt(5)+1;
-                piece1.Alcunha="Ferrari";
-                piece1.x= rand.nextInt(Integer.parseInt(lista.get(0)));
-                piece1.y= rand.nextInt(Integer.parseInt(lista.get(0)));
-                crazyList.add(piece1);
-            }else{
-                piece1.IdPeca=i;
-                piece1.IdEquipa=1;
-                piece1.IdTipoPeca=rand.nextInt(5)+6;
-                piece1.Alcunha="Ferrari";
-                piece1.x= rand.nextInt(Integer.parseInt(lista.get(0)));
-                piece1.y= rand.nextInt(Integer.parseInt(lista.get(0)));
-                crazyList.add(piece1);
-            }
-        }
-
-
         return crazyList;
     }
 
@@ -315,7 +273,6 @@ public class Simulador {
     }
 
     public List<String> getAutores(){
-        List<String> autores = new ArrayList<String>();
         autores.add("André Graça");
         autores.add("João Lionço");
         return autores;
@@ -323,33 +280,34 @@ public class Simulador {
 
 
     public int getIDPeca(int x, int y) {
-        for(int i=0; i<crazyList.size();i++){
-            if(crazyList.get(i).getId()==i){
-                if (x == crazyList.get(i).x & y == crazyList.get(i).y) {
-                    if(crazyList.get(i).captured==false){
-                        return crazyList.get(i).getId();
-                    }else{
-                        return 0;
-                    }
-
-                }
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y){
+                return crazy.getId();
             }
         }
         return 0;
     }
 
     public int getIDEquipaAJogar(){
-        if (turno==0){
-            turno=1;
-            return 0;
-        }else{
-            turno=0;
-            return 1;
-        }
-
+        return equipaAJogar;
     }
 
-    public String getResultados(){
-     return "qa";
+
+
+
+
+
+
+    public List<CrazyPiece> getCrazyList() {
+        return crazyList;
     }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public List<CrazyPiece> getCapturas() {
+        return capturas;
+    }
+
 }
