@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.Random;
+
 public class CrazyPiece {
     int idPeca;
     int idTipoPeca;
@@ -19,15 +21,13 @@ public class CrazyPiece {
         this.coordenadaY = y;
     }
 
-    public CrazyPiece(int coordenadaX, int coordenadaY) {
-        idPeca =1;
-        idTipoPeca=3;
-        idEquipa=0;
-        alcunha="Rei";
-        this.coordenadaX=coordenadaX;
-        this.coordenadaY=coordenadaY;
-        captured= false;
+    public CrazyPiece(String idPeca, String idTipoPeca, String idEquipa, String alcunha) {
+        this.idPeca = Integer.parseInt(idPeca);
+        this.idTipoPeca = Integer.parseInt(idTipoPeca);
+        this.idEquipa = Integer.parseInt(idEquipa);
+        this.alcunha = alcunha;
     }
+
 
 
 

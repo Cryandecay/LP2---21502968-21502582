@@ -75,17 +75,16 @@ public class Simulador {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }catch(NumberFormatException ex) { // handle your exception
+            return false;
         }
-
-
     }
 
+
+
+
     public int numberInt(String number){
-        try{
             return Integer.parseInt(number);
-        }catch(NumberFormatException ex){ // handle your exception
-            return 0;
-        }
     }
 
     public int[] randomXeYComparation(){
