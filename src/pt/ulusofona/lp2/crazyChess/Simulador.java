@@ -182,7 +182,7 @@ public class Simulador {
                 }
                 //dama
                 if (crazyList.get(i).IdTipoPeca == 4 | crazyList.get(i).IdTipoPeca == 10) {
-                    for (int e = 0; e <= Integer.parseInt(lista1.get(0)); e++) {
+                    for (int e = 0; e <= Integer.parseInt(lista.get(0)); e++) {
                         if (xD == xO + e & Yd == yO + e) {
                             crazyList.get(i).x = xD;
                             crazyList.get(i).y = Yd;
