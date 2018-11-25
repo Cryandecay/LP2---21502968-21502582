@@ -54,19 +54,22 @@ public class Simulador {
             tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
             numeroPecas = numberInt(listaDocumentos.get(1));
             for(int i=2; i<listaDocumentos.size();i++){
-                if (i == 2){
-                    String dado[] = listaDocumentos.get(i).split(":");
-                    int[] random = new int[2];
-                    random= randomXeY();
-                    CrazyPiece piece = new CrazyPiece(dado[0],dado[1],dado[2],dado[3],random[0],random[1]);
-                    crazyList.add(piece);
-                }else{
-                    String dado[] = listaDocumentos.get(i).split(":");
-                    int[] random = new int[2];
-                    random = randomXeYComparation();
-                    CrazyPiece piece = new CrazyPiece(dado[0],dado[1],dado[2],dado[3],random[0],random[1]);
-                    crazyList.add(piece);
+                if(i <= numeroPecas+1) {
+                    if (i == 2) {
+                        String dado[] = listaDocumentos.get(i).split(":");
+                        int[] random = new int[2];
+                        random = randomXeY();
+                        CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
+                        crazyList.add(piece);
+                    } else {
+                        String dado[] = listaDocumentos.get(i).split(":");
+                        int[] random = new int[2];
+                        random = randomXeYComparation();
+                        CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
+                        crazyList.add(piece);
+                    }
                 }
+
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -79,6 +82,7 @@ public class Simulador {
             return false;
         }
     }
+
 
 
 
@@ -319,6 +323,7 @@ public class Simulador {
     }
 
     public List<CrazyPiece> getPecasMalucas(){
+        System.out.println(crazyList.size());
         return crazyList;
     }
 

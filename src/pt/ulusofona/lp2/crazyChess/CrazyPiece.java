@@ -11,7 +11,7 @@ public class CrazyPiece {
     int coordenadaY;
     boolean captured = false;
 
-    
+
 
     public CrazyPiece(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         this.idPeca = Integer.parseInt(idPeca);
