@@ -58,13 +58,13 @@ public class Simulador {
                     String dado[] = listaDocumentos.get(i).split(":");
                     int[] random = new int[2];
                     random= randomXeY();
-                    CrazyPiece piece = new CrazyPiece(numberInt(dado[0]),numberInt(dado[1]),numberInt(dado[2]),dado[3],random[0],random[1]);
+                    CrazyPiece piece = new CrazyPiece(dado[0],dado[1],dado[2],dado[3],random[0],random[1]);
                     crazyList.add(piece);
                 }else{
                     String dado[] = listaDocumentos.get(i).split(":");
                     int[] random = new int[2];
                     random = randomXeYComparation();
-                    CrazyPiece piece = new CrazyPiece(numberInt(dado[0]),numberInt(dado[1]),numberInt(dado[2]),dado[3],random[0],random[1]);
+                    CrazyPiece piece = new CrazyPiece(dado[0],dado[1],dado[2],dado[3],random[0],random[1]);
                     crazyList.add(piece);
                 }
             }
