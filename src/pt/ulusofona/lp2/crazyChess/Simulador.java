@@ -311,11 +311,6 @@ public class Simulador {
     }
 
     public boolean jogoTerminado(){
-        for(int i=0;i<crazyList.size();i++){
-            if(crazyList.get(i).IdTipoPeca == 3 & crazyList.get(i).captured == true){
-                return true;
-            }
-        }
         return false;
     }
 
