@@ -48,6 +48,8 @@ public class Simulador {
                 }
             }
             br.close();
+
+
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -56,6 +58,8 @@ public class Simulador {
             e.printStackTrace();
             return false;
         }
+
+
     }
 
     public int getTamanhoTabuleiro(){
@@ -266,6 +270,12 @@ public class Simulador {
     }
 
     public List<CrazyPiece> getPecasMalucas(){
+        int numeroDePecas = Integer.parseInt(listaDocumentos.get(1));
+        Random rand = new Random();
+        for (int i=0; i<numeroDePecas;i++){
+            CrazyPiece WhiteKing = new CrazyPiece(rand.nextInt(6)+1,rand.nextInt(6)+1);
+            crazyList.add(WhiteKing);
+        }
         return crazyList;
     }
 
