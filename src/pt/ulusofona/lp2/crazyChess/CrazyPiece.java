@@ -7,17 +7,16 @@ public class CrazyPiece {
     String alcunha;
     int coordenadaX;
     int coordenadaY;
-    boolean captured;
+    boolean captured = false;
 
 
-    public CrazyPiece(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y, boolean captured) {
+    public CrazyPiece(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         this.idPeca = idPeca;
         this.idTipoPeca = idTipoPeca;
         this.idEquipa = idEquipa;
         this.alcunha = alcunha;
         this.coordenadaX = x;
         this.coordenadaY = y;
-        this.captured = captured;
     }
 
     public CrazyPiece(int coordenadaX, int coordenadaY) {
@@ -30,45 +29,48 @@ public class CrazyPiece {
         captured= false;
     }
 
+
+
+
     public int getId(){
         return idPeca;
     }
 
     public String getImagePNG()  {
-            if (idTipoPeca ==1){
+            if (idTipoPeca ==0){
                 return "BishopWhite.png";
             }
-            if (idTipoPeca ==2){
+            if (idTipoPeca ==1){
                 return "HorseWhite.png";
             }
-            if (idTipoPeca ==3){
+            if (idTipoPeca ==2){
                 return "KingWhite.png";
             }
-            if (idTipoPeca ==4){
+            if (idTipoPeca ==3){
                 return "QueenWhite.png";
             }
-            if (idTipoPeca ==5){
+            if (idTipoPeca ==4){
                 return "TowerWhite.png";
             }
-            if (idTipoPeca ==6){
+            if (idTipoPeca ==5){
                 return "PeonWhite.png";
             }
-            if (idTipoPeca ==7){
+            if (idTipoPeca ==6){
                 return "BishopBlack.png";
             }
-            if (idTipoPeca ==8){
+            if (idTipoPeca ==7){
                 return "HorseBlack.png";
             }
-            if (idTipoPeca ==9){
+            if (idTipoPeca ==8){
                 return "KingBlack.png";
             }
-            if (idTipoPeca ==10){
+            if (idTipoPeca ==9){
                 return "QueenBlack.png";
             }
-            if (idTipoPeca ==11){
+            if (idTipoPeca ==10){
                 return "TowerBlack.png";
             }
-            if (idTipoPeca ==12){
+            if (idTipoPeca ==11){
                 return "PeonBlack.png";
             }
             return "table";

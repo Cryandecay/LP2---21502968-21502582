@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +12,8 @@ public class Simulador {
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
     int turno;
     int equipaAJogar;// 0 pretas 1 brancas
+    int tamanhoTabuleiro;
+    int numeroPecas;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
     List<String> listaDocumentos = new ArrayList<String>();
     List<String> autores = new ArrayList<String>();
@@ -48,6 +51,26 @@ public class Simulador {
                 }
             }
             br.close();
+            tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
+            numeroPecas = numberInt(listaDocumentos.get(1));
+            for(int i=2; i<listaDocumentos.size();i++){
+                if (i == 2){
+                    String dado[] = listaDocumentos.get(i).split(":");
+                    int[] random = new int[2];
+                    random= randomXeY();
+                    CrazyPiece piece = new CrazyPiece(numberInt(dado[0]),numberInt(dado[1]),numberInt(dado[2]),dado[3],random[0],random[1]);
+                    crazyList.add(piece);
+                }else{
+                    String dado[] = listaDocumentos.get(i).split(":");
+                    int[] random = new int[2];
+                    random = randomXeYComparation();
+                    CrazyPiece piece = new CrazyPiece(numberInt(dado[0]),numberInt(dado[1]),numberInt(dado[2]),dado[3],random[0],random[1]);
+                    crazyList.add(piece);
+                }
+            }
+
+
+
 
 
             return true;
@@ -62,13 +85,41 @@ public class Simulador {
 
     }
 
+    public int numberInt(String number){
+        return Integer.parseInt(number);
+    }
+
+    public int[] randomXeYComparation(){
+        Random rand = new Random();
+        int[] random = new int[2];
+        random[0]= rand.nextInt(tamanhoTabuleiro);
+        random[1]= rand.nextInt(tamanhoTabuleiro);
+        while  (true){
+            for(CrazyPiece crazy: crazyList){
+                if(random[0] == crazy.getCoordenadaX() && random[1] == crazy.getCoordenadaY()){
+                    random[0]= rand.nextInt(tamanhoTabuleiro);
+                    random[1]= rand.nextInt(tamanhoTabuleiro);
+                }else{
+                    return random;
+                }
+            }
+        }
+    }
+
+    public int[] randomXeY(){
+        Random rand = new Random();
+        int[] random = new int[2];
+        random[0]= rand.nextInt(tamanhoTabuleiro);
+        random[1]= rand.nextInt(tamanhoTabuleiro);
+        return random;
+    }
+
     public int getTamanhoTabuleiro(){
-        return Integer.parseInt(listaDocumentos.get(0));
+        return tamanhoTabuleiro;
     }
 
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
-        int tamanhoTabuleiro = Integer.parseInt(listaDocumentos.get(0));
         for (CrazyPiece crazy: crazyList) {
             if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                 //bishop
@@ -270,12 +321,6 @@ public class Simulador {
     }
 
     public List<CrazyPiece> getPecasMalucas(){
-        int numeroDePecas = Integer.parseInt(listaDocumentos.get(1));
-        Random rand = new Random();
-        for (int i=0; i<numeroDePecas;i++){
-            CrazyPiece WhiteKing = new CrazyPiece(rand.nextInt(6)+1,rand.nextInt(6)+1);
-            crazyList.add(WhiteKing);
-        }
         return crazyList;
     }
 
