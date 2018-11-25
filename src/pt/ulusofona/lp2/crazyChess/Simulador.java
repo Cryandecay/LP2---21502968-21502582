@@ -68,7 +68,7 @@ public class Simulador {
                         CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
                         crazyList.add(piece);
                     }
-
+                    assert false;
                 }
             }catch(AssertionError e) { // handle your exception
                 return false;
