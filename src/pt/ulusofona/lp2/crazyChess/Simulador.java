@@ -66,11 +66,12 @@ public class Simulador {
                         random = randomXeYComparation();
                         CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
                         crazyList.add(piece);
+
                 }
 
             }
-
-
+            System.out.println(crazyList);
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -80,7 +81,7 @@ public class Simulador {
         }catch(NumberFormatException ex) { // handle your exception
             return false;
         }
-        return true;
+
     }
 
 
@@ -347,8 +348,9 @@ public class Simulador {
 
     public int getIDPeca(int x, int y) {
         for(CrazyPiece crazy: crazyList){
+
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y){
-                return crazy.getId();
+                return crazy.getIdPeca();
             }
         }
         return 0;

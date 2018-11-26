@@ -13,7 +13,7 @@ public class CrazyPiece {
 
 
 
-    public CrazyPiece(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
+    public CrazyPiece(String idPeca, String idEquipa,String idTipoPeca , String alcunha, int x, int y) {
         this.idPeca = Integer.parseInt(idPeca);
         this.idTipoPeca = Integer.parseInt(idTipoPeca);
         this.idEquipa = Integer.parseInt(idEquipa);
