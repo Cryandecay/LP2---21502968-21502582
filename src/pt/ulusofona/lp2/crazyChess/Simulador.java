@@ -70,7 +70,7 @@ public class Simulador {
 
             }
 
-            return true;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -80,7 +80,7 @@ public class Simulador {
         }catch(NumberFormatException ex) { // handle your exception
             return false;
         }
-
+        return true;
     }
 
 
