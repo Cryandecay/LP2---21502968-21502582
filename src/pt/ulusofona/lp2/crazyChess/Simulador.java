@@ -10,7 +10,7 @@ public class Simulador {
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
     int turno=0;
-    int equipaAJogar=0;// 0 pretas 1 brancas
+    int equipaAJogar=1;// 0 pretas 1 brancas
     int tamanhoTabuleiro;
     int numeroPecas;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
