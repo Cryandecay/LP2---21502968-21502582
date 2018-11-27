@@ -118,4 +118,8 @@ public class CrazyPiece {
     public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
     }
+
+
+
+
 }

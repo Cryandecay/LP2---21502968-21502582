@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -53,24 +52,25 @@ public class Simulador {
             br.close();
             tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
             numeroPecas = numberInt(listaDocumentos.get(1));
-            for(int i=2; i<listaDocumentos.size();i++){
-                if (i == 2) {
-                        String dado[] = listaDocumentos.get(i).split(":");
-                        int[] random = new int[2];
-                        random = randomXeY();
-                        CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
-                        crazyList.add(piece);
-                } else {
-                        String dado[] = listaDocumentos.get(i).split(":");
-                        int[] random = new int[2];
-                        random = randomXeYComparation();
-                        CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], random[0], random[1]);
-                        crazyList.add(piece);
 
+            List<List<String>> listaMapa = new ArrayList<>();
+
+            for(int i=2+numeroPecas; i<listaDocumentos.size();i++) {
+                List<String> save = new ArrayList<String>();
+                String linha[]=listaDocumentos.get(i).split(":");
+                for(int e=0; e<linha.length;e++ ){
+                    save.add(linha[e]);
                 }
-
+                listaMapa.add(save);
             }
-            System.out.println(crazyList);
+
+
+            for(int i=2; i<listaDocumentos.size()-1;i++){
+                        String dado[] = listaDocumentos.get(i).split(":");
+                        List<Integer> stringTest = new ArrayList<Integer>();
+                        stringTest(listaMapa,dado);
+            }
+
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -91,6 +91,19 @@ public class Simulador {
     public int numberInt(String number){
             return Integer.parseInt(number);
     }
+
+    void stringTest(List<List<String>> listaMapa, String dado[]){
+        List<Integer> stringTest = new ArrayList<Integer>();
+        for(int i=0;i<listaMapa.size();i++){
+            for(int e=0;e<listaMapa.get(i).size();e++){
+                if(listaMapa.get(i).get(e).equals(dado[0])){
+                    CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], e, i);
+                    crazyList.add(piece);
+                }
+            }
+        }
+    }
+
 
     public int[] randomXeYComparation(){
         Random rand = new Random();
