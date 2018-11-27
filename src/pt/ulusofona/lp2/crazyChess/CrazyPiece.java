@@ -32,13 +32,13 @@ public class CrazyPiece {
 
     public String getImagePNG()  {
             if (idTipoPeca ==0){
-                return "BishopWhite.png";
+                return "KingWhite.png";
             }
             if (idTipoPeca ==1){
                 return "HorseWhite.png";
             }
             if (idTipoPeca ==2){
-                return "KingWhite.png";
+                return "BishopWhite.png";
             }
             if (idTipoPeca ==3){
                 return "QueenWhite.png";
@@ -49,13 +49,13 @@ public class CrazyPiece {
             if (idTipoPeca ==5){
                 return "PeonWhite.png";
             }
-            if (idTipoPeca ==6){
+            if (idTipoPeca ==8){
                 return "BishopBlack.png";
             }
             if (idTipoPeca ==7){
                 return "HorseBlack.png";
             }
-            if (idTipoPeca ==8){
+            if (idTipoPeca ==6){
                 return "KingBlack.png";
             }
             if (idTipoPeca ==9){

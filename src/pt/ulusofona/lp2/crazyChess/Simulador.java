@@ -9,8 +9,8 @@ public class Simulador {
 
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
-    int turno;
-    int equipaAJogar;// 0 pretas 1 brancas
+    int turno=0;
+    int equipaAJogar=0;// 0 pretas 1 brancas
     int tamanhoTabuleiro;
     int numeroPecas;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
@@ -50,11 +50,13 @@ public class Simulador {
                 }
             }
             br.close();
+
             tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
             numeroPecas = numberInt(listaDocumentos.get(1));
-
+            if(listaDocumentos.size()!=(tamanhoTabuleiro+numeroPecas+2)){
+                return false;
+            }
             List<List<String>> listaMapa = new ArrayList<>();
-
             for(int i=2+numeroPecas; i<listaDocumentos.size();i++) {
                 List<String> save = new ArrayList<String>();
                 String linha[]=listaDocumentos.get(i).split(":");
@@ -63,14 +65,10 @@ public class Simulador {
                 }
                 listaMapa.add(save);
             }
-
-
             for(int i=2; i<listaDocumentos.size()-1;i++){
                         String dado[] = listaDocumentos.get(i).split(":");
-                        List<Integer> stringTest = new ArrayList<Integer>();
                         stringTest(listaMapa,dado);
             }
-
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -84,10 +82,6 @@ public class Simulador {
 
     }
 
-
-
-
-
     public int numberInt(String number){
             return Integer.parseInt(number);
     }
@@ -97,38 +91,18 @@ public class Simulador {
         for(int i=0;i<listaMapa.size();i++){
             for(int e=0;e<listaMapa.get(i).size();e++){
                 if(listaMapa.get(i).get(e).equals(dado[0])){
-                    CrazyPiece piece = new CrazyPiece(dado[0], dado[1], dado[2], dado[3], e, i);
-                    crazyList.add(piece);
+                    if (dado[2].equals("0")){
+                        CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1], dado[3], e, i);
+                        crazyList.add(piece);
+                    }else{
+                        CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1]+6, dado[3], e, i);
+                        crazyList.add(piece);
+                    }
                 }
             }
         }
     }
 
-
-    public int[] randomXeYComparation(){
-        Random rand = new Random();
-        int[] random = new int[2];
-        random[0]= rand.nextInt(tamanhoTabuleiro);
-        random[1]= rand.nextInt(tamanhoTabuleiro);
-        while  (true){
-            for(CrazyPiece crazy: crazyList){
-                if(random[0] == crazy.getCoordenadaX() && random[1] == crazy.getCoordenadaY()){
-                    random[0]= rand.nextInt(tamanhoTabuleiro);
-                    random[1]= rand.nextInt(tamanhoTabuleiro);
-                }else{
-                    return random;
-                }
-            }
-        }
-    }
-
-    public int[] randomXeY(){
-        Random rand = new Random();
-        int[] random = new int[2];
-        random[0]= rand.nextInt(tamanhoTabuleiro);
-        random[1]= rand.nextInt(tamanhoTabuleiro);
-        return random;
-    }
 
     public int getTamanhoTabuleiro(){
         return tamanhoTabuleiro;
@@ -139,7 +113,7 @@ public class Simulador {
         for (CrazyPiece crazy: crazyList) {
             if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                 //bishop
-                if (crazy.getIdTipoPeca() == 0 || crazy.getIdTipoPeca() == 6 ) {
+                if (crazy.getIdTipoPeca() == 2 || crazy.getIdTipoPeca() == 8 ) {
                     for (int e = 0; e < tamanhoTabuleiro; e++) {
                         if (xD == xO + e && yD == yO + e) {
                             crazy.setCoordenadaX(xD);
@@ -209,7 +183,7 @@ public class Simulador {
                     return false;
                 }
                 //king
-                if (crazy.getIdTipoPeca() == 2 || crazy.getIdTipoPeca() == 8 ) {
+                if (crazy.getIdTipoPeca() == 0 || crazy.getIdTipoPeca() == 6 ) {
                     if (xD == xO + 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         return true;
@@ -341,14 +315,6 @@ public class Simulador {
     }
 
     public boolean jogoTerminado(){
-        for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdPeca() == 3){
-                return false;
-            }
-            else{
-                return false;
-            }
-        }
         return false;
     }
 
@@ -361,7 +327,6 @@ public class Simulador {
 
     public int getIDPeca(int x, int y) {
         for(CrazyPiece crazy: crazyList){
-
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y){
                 return crazy.getIdPeca();
             }
@@ -370,7 +335,14 @@ public class Simulador {
     }
 
     public int getIDEquipaAJogar(){
-        return equipaAJogar;
+        if (equipaAJogar == 1){
+            equipaAJogar=0;
+            return 1;
+        } else {
+            equipaAJogar=1;
+            return 0;
+        }
+
     }
 
     public List<String> getResultados(){
