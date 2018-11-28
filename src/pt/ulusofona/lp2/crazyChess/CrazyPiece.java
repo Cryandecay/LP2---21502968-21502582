@@ -80,14 +80,12 @@ public class CrazyPiece {
 
     @Override
     public String toString() {
-        return "CrazyPiece{" +
-                "idPeca=" + idPeca +
-                ", idTipoPeca=" + idTipoPeca +
-                ", idEquipa=" + idEquipa +
-                ", alcunha='" + alcunha + '\'' +
-                ", coordenadaX=" + coordenadaX +
-                ", coordenadaY=" + coordenadaY +
-                '}';
+        return " "+idPeca +" | "+
+                + idTipoPeca + " | "
+                + idEquipa + " | "
+                + alcunha + " @"+
+                " (" + coordenadaX +
+                ", " + coordenadaY +")";
     }
 
     public int getIdPeca() {
