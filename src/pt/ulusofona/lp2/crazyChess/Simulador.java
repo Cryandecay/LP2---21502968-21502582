@@ -510,7 +510,7 @@ public class Simulador {
             }
         }
         if (blackKing.size()==1 && whiteKing.size()==1){
-            resultadoFinal="EMPATE 1 KING EACH";
+            resultadoFinal="EMPATE";
             return true;
         }
         if (blackKing.size()==0){
@@ -522,7 +522,7 @@ public class Simulador {
             return true;
         }
         if(turnoCaptura==10){
-            resultadoFinal="EMPATE 10 TURNS WHIT NO CAPTURE";
+            resultadoFinal="EMPATE";
             return true;
         }
         return false;
@@ -559,17 +559,7 @@ public class Simulador {
     }
 
     public List<String> getResultados(){
-        resultado.add("JOGO DE CRAZY CHESS");
-        resultado.add("Resultado: " + resultadoFinal );
-        resultado.add( "---" );
-        resultado.add("Equipa das Pretas\n");
-        resultado.add("<NR CAPTURAS> " + contarPecasCapturadas(1));
-        resultado.add("<NR JOGADAS VALIDAS> " + jodaValidaPretas);
-        resultado.add("<NR INVALIDAS>\n" + jodaInvalidaPretas);
-        resultado.add("Equipa das Brancas\n");
-        resultado.add("<NR CAPTURAS> " + contarPecasCapturadas(0));
-        resultado.add("<NR VALIDAS> " + jodaValidaBrancas);
-        resultado.add("<NR INVALIDAS>" + jodaInvalidaBrancas);
+        resultado.add("JOGO DE CRAZY CHESS, Resultado:"+ resultadoFinal+", ---, Equipa das Pretas, "+ contarPecasCapturadas(1)+","+jodaValidaPretas+","+ jodaInvalidaPretas+", Equipa das Brancas,"+ contarPecasCapturadas(0)+","+jodaValidaBrancas+","+ jodaInvalidaBrancas);
         return resultado;
     }
 
