@@ -507,7 +507,7 @@ public class Simulador {
                 whiteKing.add(crazy);
             }
         }
-        if (blackKing.size()==1 && whiteKing.size()==1 && turno==1){
+        if (blackKing.size()==1 && whiteKing.size()==1){
             resultadoFinal="EMPATE";
             return true;
         }
