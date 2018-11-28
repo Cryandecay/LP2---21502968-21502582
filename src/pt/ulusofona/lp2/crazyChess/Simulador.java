@@ -115,6 +115,7 @@ public class Simulador {
         for(CrazyPiece crazy: crazyList){
             if(crazy.getId()==0){
                 capturas.add(crazy);
+                turnoCaptura=0;
             }
         }
         removeCrazyList();
@@ -138,14 +139,6 @@ public class Simulador {
                 crazyList.remove(captured);
             }
         }
-
-
-
-
-
-
-
-
 
     public int getTamanhoTabuleiro(){
         return tamanhoTabuleiro;
@@ -525,7 +518,7 @@ public class Simulador {
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
-        if(turnoCaptura==10){
+        if(turnoCaptura==20){
             resultadoFinal="EMPATE";
             return true;
         }
