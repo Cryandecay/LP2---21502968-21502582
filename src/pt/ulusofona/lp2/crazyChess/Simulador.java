@@ -53,7 +53,6 @@ public class Simulador {
                 }
             }
             br.close();
-
             tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
             numeroPecas = numberInt(listaDocumentos.get(1));
             if(listaDocumentos.size()!=(tamanhoTabuleiro+numeroPecas+2)){
@@ -68,7 +67,7 @@ public class Simulador {
                 }
                 listaMapa.add(save);
             }
-            for(int i=2; i<listaDocumentos.size()-1;i++){
+            for(int i=2; i<=listaDocumentos.size()-1;i++){
                         String dado[] = listaDocumentos.get(i).split(":");
                         stringTest(listaMapa,dado);
             }
