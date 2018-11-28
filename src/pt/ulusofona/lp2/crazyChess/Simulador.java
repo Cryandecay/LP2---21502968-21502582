@@ -512,11 +512,11 @@ public class Simulador {
             return true;
         }
         if (blackKing.size()==0){
-            resultadoFinal="WHITE PIECES WIN";
+            resultadoFinal="VENCERAM AS BRANCAS";
             return true;
         }
         if (whiteKing.size()==0){
-            resultadoFinal="BLACK PIECES WIN";
+            resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
         if(turnoCaptura==10){
