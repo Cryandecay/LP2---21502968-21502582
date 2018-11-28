@@ -37,7 +37,7 @@ public class Simulador {
 
     public boolean iniciaJogo(File ficheiroInicial) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("dados.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(ficheiroInicial));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
