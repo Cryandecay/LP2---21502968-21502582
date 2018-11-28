@@ -10,8 +10,9 @@ public class Simulador {
 
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
-    int turno=0;
-    int turnoAnterior=0;
+    int turnoCaptura=0; //contador dos turnos sem captura
+    int turno=0; //Turnos do jogo
+    int turnoAnterior=0; //contador do turno anterior serve para evitar que jogadas invalidas contem como turno
     int equipaAJogar=0;// 0 pretas 1 brancas
     int tamanhoTabuleiro;
     int numeroPecas;
@@ -36,7 +37,7 @@ public class Simulador {
 
     public boolean iniciaJogo(File ficheiroInicial) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(ficheiroInicial.toString()));
+            BufferedReader br = new BufferedReader(new FileReader("dados.txt"));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -90,10 +91,12 @@ public class Simulador {
 
     void findCapture(int x, int y, int iD){
         turno=turno+1;
+        turnoCaptura=turnoCaptura+1;
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
                 if(crazy.getId()!=iD && crazy.getId()!=0){
                     capturas.add(crazy);
+                    turnoCaptura=0;
                 }
             }
         }
@@ -123,7 +126,6 @@ public class Simulador {
                         }else{
                             CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1], dado[3], e, i);
                             crazyList.add(piece);
-                            System.out.println(piece);
                         }
                     }
                 }
@@ -427,12 +429,20 @@ public class Simulador {
                 whiteKing.add(crazy);
             }
         }
+        if (blackKing.size()==1 && whiteKing.size()==1){
+            System.out.println("EMPATE 1 KING EACH");
+            return true;
+        }
         if (blackKing.size()==0){
             System.out.println("WHITE PIECES WIN");
             return true;
         }
         if (whiteKing.size()==0){
             System.out.println("BLACK PIECES WIN");
+            return true;
+        }
+        if(turnoCaptura==4){
+            System.out.println("EMPATE 10 TURNS WHIT NO CAPTURE");
             return true;
         }
         return false;
