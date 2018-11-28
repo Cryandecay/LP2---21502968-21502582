@@ -2,9 +2,9 @@ package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class Simulador {
 
@@ -14,10 +14,14 @@ public class Simulador {
     int turno=0; //Turnos do jogo
     int turnoAnterior=0; //contador do turno anterior serve para evitar que jogadas invalidas contem como turno
     int equipaAJogar=0;// 0 pretas 1 brancas
+    int jodaInvalidaBrancas =0;
+    int jodaInvalidaPretas =0;
+    int jodaValidaBrancas =0;
+    int jodaValidaPretas =0;
     int tamanhoTabuleiro;
     int numeroPecas;
+    String resultadoFinal;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
-    List<String> listaDocumentos = new ArrayList<String>();
     List<String> autores = new ArrayList<String>();
     List<String> resultado = new ArrayList<String>();
 
@@ -36,46 +40,32 @@ public class Simulador {
 
 
     public boolean iniciaJogo(File ficheiroInicial) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(ficheiroInicial));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            String everything = sb.toString();
-            String dados[] = everything.split("[\n\r]");
-            for(int i = 0; i < dados.length; ++i) {
-                if((i%2)==0){
-                    listaDocumentos.add(dados[i]);
+            List<List <String>> teste = new ArrayList<List <String>>();
+            List<List <String>> mapas = new ArrayList<List <String>>();
+            List<List <String>> pecas = new ArrayList<List <String>>();
+            try {
+
+                File ficheiro = new File(ficheiroInicial.getName());
+                Scanner leitorFicheiro = new Scanner(ficheiro);
+                while(leitorFicheiro.hasNextLine()) {
+                    List<String> testew = new ArrayList<String>();
+                    String linha = leitorFicheiro.nextLine();
+                    String dados[] = linha.split(":");
+                    testew.addAll(Arrays.asList(dados));
+                    teste.add(testew);
                 }
-            }
-            br.close();
-            tamanhoTabuleiro = numberInt(listaDocumentos.get(0));
-            numeroPecas = numberInt(listaDocumentos.get(1));
-            if(listaDocumentos.size()!=(tamanhoTabuleiro+numeroPecas+2)){
-                return false;
-            }
-            List<List<String>> listaMapa = new ArrayList<>();
-            for(int i=2+numeroPecas; i<listaDocumentos.size();i++) {
-                List<String> save = new ArrayList<String>();
-                String linha[]=listaDocumentos.get(i).split(":");
-                for(int e=0; e<linha.length;e++ ){
-                    save.add(linha[e]);
+                leitorFicheiro.close();
+                tamanhoTabuleiro=Integer.parseInt(teste.get(0).get(0));
+                numeroPecas=Integer.parseInt(teste.get(1).get(0));
+                for(int i=2;i<numeroPecas+2;i++){
+                    pecas.add(teste.get(i));
                 }
-                listaMapa.add(save);
-            }
-            for(int i=2; i<=listaDocumentos.size()-1;i++){
-                        String dado[] = listaDocumentos.get(i).split(":");
-                        stringTest(listaMapa,dado);
-            }
-            return true;
+                for(int i=2+numeroPecas;i<teste.size();i++){
+                    mapas.add(teste.get(i));
+                }
+                stringTest(pecas, mapas);
+                return true;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -111,21 +101,29 @@ public class Simulador {
 
 
 
-    void stringTest(List<List<String>> listaMapa, String dado[]){
-        List<Integer> stringTest = new ArrayList<Integer>();
-        for(int i=0;i<listaMapa.size();i++){
-            for(int e=0;e<listaMapa.get(i).size();e++){
-                if(listaMapa.get(i).get(e).equals(dado[0])){
-                    if(crazyList.size()<numeroPecas){
-                        if (dado[2].equals("0")){
-                            CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1]+6, dado[3], e, i);
+    void stringTest(List<List<String>> peca, List<List <String>> mapas){
+        System.out.println(peca);
+        System.out.println(mapas);
+        for(int i=0; i< peca.size();i++) {
+            for (int e = 0; e < mapas.size(); e++) {
+                for (int u = 0; u < mapas.get(e).size(); u++) {
+                    if (mapas.get(e).get(u).equals(peca.get(i).get(0))) {
+                        if(peca.get(i).get(2).equals("0")){
+                            //peca.get(i).get(0) = id
+                            //peca.get(i).get(1) = tipoPecas
+                            //peca.get(i).get(2) = equipas
+                            //peca.get(i).get(3) = alcunhas
+                            //coordenadaX= u;
+                            //coordenadaY= e;
+                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0), peca.get(i).get(2), peca.get(i).get(1), peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }else{
-                            CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1], dado[3], e, i);
+                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0), peca.get(i).get(2), peca.get(i).get(1)+6, peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }
                     }
                 }
+
             }
         }
     }
@@ -216,53 +214,63 @@ public class Simulador {
                     if (xD == xO + 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (xD == xO - 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaBrancas++;
                         return true;
                     }
+                    jodaInvalidaBrancas++;
                     return false;
                 }
 
@@ -270,53 +278,63 @@ public class Simulador {
                     if (xD == xO + 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (xD == xO - 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
                         findCapture(xD, yD,crazy.idPeca);
+                        jodaValidaPretas++;
                         return true;
                     }
+                    jodaInvalidaPretas++;
                     return false;
                 }
 
@@ -427,19 +445,19 @@ public class Simulador {
             }
         }
         if (blackKing.size()==1 && whiteKing.size()==1){
-            System.out.println("EMPATE 1 KING EACH");
+            resultadoFinal="EMPATE 1 KING EACH";
             return true;
         }
         if (blackKing.size()==0){
-            System.out.println("WHITE PIECES WIN");
+            resultadoFinal="WHITE PIECES WIN";
             return true;
         }
         if (whiteKing.size()==0){
-            System.out.println("BLACK PIECES WIN");
+            resultadoFinal="BLACK PIECES WIN";
             return true;
         }
-        if(turnoCaptura==4){
-            System.out.println("EMPATE 10 TURNS WHIT NO CAPTURE");
+        if(turnoCaptura==10){
+            resultadoFinal="EMPATE 10 TURNS WHIT NO CAPTURE";
             return true;
         }
         return false;
@@ -476,7 +494,29 @@ public class Simulador {
     }
 
     public List<String> getResultados(){
+        resultado.add("JOGO DE CRAZY CHESS");
+        resultado.add("Resultado: " + resultadoFinal );
+        resultado.add( "---" );
+        resultado.add("Equipa das Pretas\n");
+        resultado.add("<NR CAPTURAS> " + contarPecasCapturadas(1));
+        resultado.add("<NR JOGADAS VALIDAS> " + jodaValidaPretas);
+        resultado.add("<NR INVALIDAS>\n" + jodaInvalidaPretas);
+        resultado.add("Equipa das Brancas\n");
+        resultado.add("<NR CAPTURAS> " + contarPecasCapturadas(0));
+        resultado.add("<NR VALIDAS> " + jodaValidaBrancas);
+        resultado.add("<NR INVALIDAS>" + jodaInvalidaBrancas);
         return resultado;
+    }
+
+
+    public int contarPecasCapturadas(int equipa){
+        int capturadas=0;
+        for (CrazyPiece captured: capturas){
+            if(captured.getIdEquipa()==equipa){
+                capturadas++;
+            }
+        }
+        return capturadas;
     }
 
     public List<CrazyPiece> getCrazyList() {
