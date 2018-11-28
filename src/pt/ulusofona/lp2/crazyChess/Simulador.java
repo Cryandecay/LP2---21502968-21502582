@@ -11,6 +11,7 @@ public class Simulador {
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
     int turno=0;
+    int turnoAnterior=0;
     int equipaAJogar=0;// 0 pretas 1 brancas
     int tamanhoTabuleiro;
     int numeroPecas;
@@ -88,6 +89,7 @@ public class Simulador {
     }
 
     void findCapture(int x, int y, int iD){
+        turno=turno+1;
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
                 if(crazy.getId()!=iD && crazy.getId()!=0){
@@ -417,12 +419,11 @@ public class Simulador {
     public boolean jogoTerminado(){
         List<CrazyPiece> whiteKing = new ArrayList<CrazyPiece>();
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
-        System.out.println(crazyList.size());
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdEquipa()==0 && crazy.getIdPeca()==6){
+            if(crazy.getIdEquipa()==0 && crazy.getIdTipoPeca()==6){
                 blackKing.add(crazy);
             }
-            if(crazy.getIdEquipa()==1 && crazy.getIdPeca()==0){
+            if(crazy.getIdEquipa()==1 && crazy.getIdTipoPeca()==0){
                 whiteKing.add(crazy);
             }
         }
@@ -454,10 +455,17 @@ public class Simulador {
     }
 
     public int getIDEquipaAJogar(){
-        if (turno==0){
-            return equipaAJogar;
+        if (equipaAJogar==0 && turno!=turnoAnterior){
+            equipaAJogar=1;
+            turnoAnterior=turno;
+            return 1;
         }
-        return turno;
+        if (equipaAJogar==1 && turno!=turnoAnterior){
+            equipaAJogar=0;
+            turnoAnterior=turno;
+            return 0;
+        }
+        return equipaAJogar;
     }
 
     public List<String> getResultados(){
