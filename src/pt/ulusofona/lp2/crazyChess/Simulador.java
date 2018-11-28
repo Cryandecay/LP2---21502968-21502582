@@ -559,7 +559,17 @@ public class Simulador {
     }
 
     public List<String> getResultados(){
-        resultado.add("JOGO DE CRAZY CHESS, Resultado:"+ resultadoFinal+", ---, Equipa das Pretas, "+ contarPecasCapturadas(1)+","+jodaValidaPretas+","+ jodaInvalidaPretas+", Equipa das Brancas,"+ contarPecasCapturadas(0)+","+jodaValidaBrancas+","+ jodaInvalidaBrancas);
+        resultado.add("JOGO DE CRAZY CHESS");
+        resultado.add("Resultado: " + resultadoFinal+"," );
+        resultado.add( " ---," );
+        resultado.add("Equipa das Pretas,");
+        resultado.add("" + contarPecasCapturadas(1));
+        resultado.add("," + jodaValidaPretas);
+        resultado.add("," + jodaInvalidaPretas);
+        resultado.add(", Equipa das Brancas,");
+        resultado.add("" + contarPecasCapturadas(0)+"," );
+        resultado.add("," + jodaValidaBrancas);
+        resultado.add("m" + jodaInvalidaBrancas);
         return resultado;
     }
 
