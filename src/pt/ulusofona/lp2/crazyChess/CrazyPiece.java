@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import java.util.Random;
 
 public class CrazyPiece {
     int idPeca;
