@@ -72,10 +72,14 @@ public class Simulador {
                         stringTest(listaMapa,dado);
             }
             return true;
-        }  catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+
     }
 
     public int numberInt(String number){
