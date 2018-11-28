@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -86,17 +87,42 @@ public class Simulador {
             return Integer.parseInt(number);
     }
 
+    void findCapture(int x, int y, int iD){
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
+                if(crazy.getId()!=iD && crazy.getId()!=0){
+                    capturas.add(crazy);
+                }
+            }
+        }
+        removeCrazyList();
+    }
+
+    void removeCrazyList(){
+        for(CrazyPiece captured: capturas){
+                crazyList.remove(captured);
+            }
+        }
+
+
+
+
+
+
     void stringTest(List<List<String>> listaMapa, String dado[]){
         List<Integer> stringTest = new ArrayList<Integer>();
         for(int i=0;i<listaMapa.size();i++){
             for(int e=0;e<listaMapa.get(i).size();e++){
                 if(listaMapa.get(i).get(e).equals(dado[0])){
-                    if (dado[2].equals("0")){
-                        CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1], dado[3], e, i);
-                        crazyList.add(piece);
-                    }else{
-                        CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1]+6, dado[3], e, i);
-                        crazyList.add(piece);
+                    if(crazyList.size()<numeroPecas){
+                        if (dado[2].equals("0")){
+                            CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1]+6, dado[3], e, i);
+                            crazyList.add(piece);
+                        }else{
+                            CrazyPiece piece = new CrazyPiece(dado[0],dado[2],dado[1], dado[3], e, i);
+                            crazyList.add(piece);
+                            System.out.println(piece);
+                        }
                     }
                 }
             }
@@ -107,6 +133,7 @@ public class Simulador {
     public int getTamanhoTabuleiro(){
         return tamanhoTabuleiro;
     }
+
 
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
@@ -183,87 +210,160 @@ public class Simulador {
                     return false;
                 }
                 //king
-                if (crazy.getIdTipoPeca() == 0 || crazy.getIdTipoPeca() == 6 ) {
+
+                if (crazy.getIdTipoPeca() == 0 && equipaAJogar==1 ) {
                     if (xD == xO + 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (xD == xO - 1 && yD == yO) {
                         crazy.setCoordenadaX(xD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO) {
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
                         return true;
                     }
                     return false;
                 }
+
+                if (crazy.getIdTipoPeca() == 6 && equipaAJogar==0 ) {
+                    if (xD == xO + 1 && yD == yO) {
+                        crazy.setCoordenadaX(xD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (xD == xO - 1 && yD == yO) {
+                        crazy.setCoordenadaX(xD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO - 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO + 1 && xD == xO) {
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO + 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO + 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO - 1 && xD == xO + 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO + 1 && xD == xO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    if (yD == yO - 1 && xD == xO - 1) {
+                        crazy.setCoordenadaX(xD);
+                        crazy.setCoordenadaY(yD);
+                        findCapture(xD, yD,crazy.idPeca);
+                        return true;
+                    }
+                    return false;
+                }
+
                 //dama
                 if (crazy.getIdTipoPeca() == 3 | crazy.getIdTipoPeca() == 9) {
                     for (int e = 0; e <= tamanhoTabuleiro; e++) {
                         if (xD == xO + e && yD == yO + e) {
                             crazy.setCoordenadaX(xD);
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (xD == xO - e && yD == yO - e) {
                             crazy.setCoordenadaX(xD);
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (xD == xO + e && yD == yO - e) {
                             crazy.setCoordenadaX(xD);
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (xD == xO - e && yD == yO + e) {
                             crazy.setCoordenadaX(xD);
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (yD == yO + e && xD == xO) {
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (yD == yO - e && xD == xO) {
                             crazy.setCoordenadaY(yD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (yD == yO && xD == xO + e) {
                             crazy.setCoordenadaX(xD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
                         if (yD == yO && xD == xO - e) {
                             crazy.setCoordenadaX(xD);
+                            findCapture(xD, yD,crazy.idPeca);
                             return true;
                         }
 
@@ -315,6 +415,25 @@ public class Simulador {
     }
 
     public boolean jogoTerminado(){
+        List<CrazyPiece> whiteKing = new ArrayList<CrazyPiece>();
+        List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
+        System.out.println(crazyList.size());
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.getIdEquipa()==0 && crazy.getIdPeca()==6){
+                blackKing.add(crazy);
+            }
+            if(crazy.getIdEquipa()==1 && crazy.getIdPeca()==0){
+                whiteKing.add(crazy);
+            }
+        }
+        if (blackKing.size()==0){
+            System.out.println("WHITE PIECES WIN");
+            return true;
+        }
+        if (whiteKing.size()==0){
+            System.out.println("BLACK PIECES WIN");
+            return true;
+        }
         return false;
     }
 
@@ -335,25 +454,15 @@ public class Simulador {
     }
 
     public int getIDEquipaAJogar(){
-        if (equipaAJogar == 1){
-            equipaAJogar=0;
-            return 1;
-        } else {
-            equipaAJogar=1;
-            return 0;
+        if (turno==0){
+            return equipaAJogar;
         }
-
+        return turno;
     }
 
     public List<String> getResultados(){
         return resultado;
     }
-
-
-
-
-
-
 
     public List<CrazyPiece> getCrazyList() {
         return crazyList;

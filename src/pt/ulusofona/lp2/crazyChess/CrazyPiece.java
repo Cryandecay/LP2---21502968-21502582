@@ -22,6 +22,15 @@ public class CrazyPiece {
         this.coordenadaY = y;
     }
 
+    public CrazyPiece(int idPeca, int idEquipa,int idTipoPeca , String alcunha, int x, int y) {
+        this.idPeca = idPeca;
+        this.idTipoPeca = idTipoPeca;
+        this.idEquipa = idEquipa;
+        this.alcunha = alcunha;
+        this.coordenadaX = x;
+        this.coordenadaY = y;
+    }
+
 
 
 
