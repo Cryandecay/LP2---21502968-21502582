@@ -58,6 +58,7 @@ public class Simulador {
                 numeroPecas=Integer.parseInt(firstRow.get(1).get(0));
                 for(int i=2;i<numeroPecas+2;i++){
                     pecas.add(firstRow.get(i));
+                    System.out.println(pecas);
                 }
                 for(int i=2+numeroPecas;i<firstRow.size();i++){
                     mapas.add(firstRow.get(i));
@@ -569,7 +570,6 @@ public class Simulador {
         resultado.add( contarPecasCapturadas(0)+"" );
         resultado.add(jodaValidaBrancas+"" );
         resultado.add("" + jodaInvalidaBrancas);
-        System.out.println(resultado);
         return resultado;
     }
 
