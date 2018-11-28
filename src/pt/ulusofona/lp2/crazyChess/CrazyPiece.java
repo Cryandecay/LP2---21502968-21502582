@@ -9,7 +9,6 @@ public class CrazyPiece {
     String alcunha;
     int coordenadaX;
     int coordenadaY;
-    boolean captured = false;
 
 
 
@@ -88,7 +87,6 @@ public class CrazyPiece {
                 ", alcunha='" + alcunha + '\'' +
                 ", coordenadaX=" + coordenadaX +
                 ", coordenadaY=" + coordenadaY +
-                ", captured=" + captured +
                 '}';
     }
 
@@ -114,10 +112,6 @@ public class CrazyPiece {
 
     public int getCoordenadaY() {
         return coordenadaY;
-    }
-
-    public boolean isCaptured() {
-        return captured;
     }
 
     public void setCoordenadaX(int coordenadaX) {
