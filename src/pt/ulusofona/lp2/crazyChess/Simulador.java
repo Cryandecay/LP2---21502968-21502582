@@ -117,7 +117,7 @@ public class Simulador {
                             CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }else{
-                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1)+6, peca.get(i).get(2) , peca.get(i).get(3), u, e);
+                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1), peca.get(i).get(2) , peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }
                     }
