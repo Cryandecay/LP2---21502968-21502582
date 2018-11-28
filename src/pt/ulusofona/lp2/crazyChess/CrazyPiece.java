@@ -13,7 +13,7 @@ public class CrazyPiece {
 
 
 
-    public CrazyPiece(String idPeca, String idEquipa,String idTipoPeca , String alcunha, int x, int y) {
+    public CrazyPiece(String idPeca, String idTipoPeca,String idEquipa , String alcunha, int x, int y) {
         this.idPeca = Integer.parseInt(idPeca);
         this.idTipoPeca = Integer.parseInt(idTipoPeca);
         this.idEquipa = Integer.parseInt(idEquipa);
@@ -22,7 +22,7 @@ public class CrazyPiece {
         this.coordenadaY = y;
     }
 
-    public CrazyPiece(int idPeca, int idEquipa,int idTipoPeca , String alcunha, int x, int y) {
+    public CrazyPiece(int idPeca, int idTipoPeca,int idEquipa, String alcunha, int x, int y) {
         this.idPeca = idPeca;
         this.idTipoPeca = idTipoPeca;
         this.idEquipa = idEquipa;

@@ -64,6 +64,7 @@ public class Simulador {
                     mapas.add(teste.get(i));
                 }
                 stringTest(pecas, mapas);
+                System.out.println(crazyList);
                 return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -102,8 +103,6 @@ public class Simulador {
 
 
     void stringTest(List<List<String>> peca, List<List <String>> mapas){
-        System.out.println(peca);
-        System.out.println(mapas);
         for(int i=0; i< peca.size();i++) {
             for (int e = 0; e < mapas.size(); e++) {
                 for (int u = 0; u < mapas.get(e).size(); u++) {
@@ -115,10 +114,10 @@ public class Simulador {
                             //peca.get(i).get(3) = alcunhas
                             //coordenadaX= u;
                             //coordenadaY= e;
-                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0), peca.get(i).get(2), peca.get(i).get(1), peca.get(i).get(3), u, e);
+                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }else{
-                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0), peca.get(i).get(2), peca.get(i).get(1)+6, peca.get(i).get(3), u, e);
+                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1)+6, peca.get(i).get(2) , peca.get(i).get(3), u, e);
                             crazyList.add(piece);
                         }
                     }
