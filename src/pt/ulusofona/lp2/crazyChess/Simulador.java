@@ -18,8 +18,8 @@ public class Simulador {
     int jodaInvalidaPretas =0;
     int jodaValidaBrancas =0;
     int jodaValidaPretas =0;
-    int tamanhoTabuleiro;
-    int numeroPecas;
+    int tamanhoTabuleiro =0;
+    int numeroPecas =0;
     String resultadoFinal;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
     List<String> autores = new ArrayList<String>();
@@ -57,6 +57,9 @@ public class Simulador {
                 leitorFicheiro.close();
                 tamanhoTabuleiro=Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas=Integer.parseInt(firstRow.get(1).get(0));
+                if (numeroPecas==2 || numeroPecas==0 || numeroPecas==1){
+                    return false;
+                }
                 for(int i=2;i<numeroPecas+2;i++){
                     pecas.add(firstRow.get(i));
                 }
@@ -64,7 +67,6 @@ public class Simulador {
                     mapas.add(firstRow.get(i));
                 }
                 stringTest(pecas, mapas);
-                System.out.println(crazyList);
                 return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -509,6 +511,8 @@ public class Simulador {
                 whiteKing.add(crazy);
             }
         }
+
+
         if (blackKing.size()==1 && whiteKing.size()==1){
             resultadoFinal="EMPATE";
             return true;
@@ -570,6 +574,7 @@ public class Simulador {
         resultado.add( contarPecasCapturadas(0)+"" );
         resultado.add(jodaValidaBrancas+"" );
         resultado.add("" + jodaInvalidaBrancas);
+        System.out.println(resultado);
         return resultado;
     }
 
