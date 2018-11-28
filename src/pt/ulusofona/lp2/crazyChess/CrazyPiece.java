@@ -80,7 +80,7 @@ public class CrazyPiece {
 
     @Override
     public String toString() {
-        return " "+idPeca +" | "+
+        return  idPeca +" | "+
                 + idTipoPeca + " | "
                 + idEquipa + " | "
                 + alcunha + " @"+
