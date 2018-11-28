@@ -58,12 +58,18 @@ public class Simulador {
                 numeroPecas=Integer.parseInt(firstRow.get(1).get(0));
                 for(int i=2;i<numeroPecas+2;i++){
                     pecas.add(firstRow.get(i));
-                    System.out.println(pecas);
                 }
                 for(int i=2+numeroPecas;i<firstRow.size();i++){
                     mapas.add(firstRow.get(i));
                 }
                 stringTest(pecas, mapas);
+                if (crazyList.size()!=numeroPecas){
+                    for (int i=0;i<numeroPecas-crazyList.size()+1;i++){
+                        CrazyPiece pie = new CrazyPiece(0,0,0,"0",-1,-1);
+                        crazyList.add(pie);
+                    }
+                }
+                System.out.println(crazyList.size());
                 return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -71,7 +77,24 @@ public class Simulador {
         }
 
     }
-
+    void stringTest(List<List<String>> peca, List<List <String>> mapas){
+        for(int i=0; i< peca.size();i++) {
+            for (int e = 0; e < mapas.size(); e++) {
+                for (int u = 0; u < mapas.get(e).size(); u++) {
+                    if (mapas.get(e).get(u).equals(peca.get(i).get(0))) {
+                        //peca.get(i).get(0) = id
+                        //peca.get(i).get(1) = tipoPecas
+                        //peca.get(i).get(2) = equipas
+                        //peca.get(i).get(3) = alcunhas
+                        //coordenadaX= u;
+                        //coordenadaY= e;
+                        CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
+                        crazyList.add(piece);
+                    }
+                }
+            }
+        }
+    }
     public int numberInt(String number){
             return Integer.parseInt(number);
     }
@@ -87,6 +110,11 @@ public class Simulador {
                         turnoCaptura=0;
                     }
                 }
+            }
+        }
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.getId()==0){
+                capturas.add(crazy);
             }
         }
         removeCrazyList();
@@ -116,30 +144,7 @@ public class Simulador {
 
 
 
-    void stringTest(List<List<String>> peca, List<List <String>> mapas){
-        for(int i=0; i< peca.size();i++) {
-            for (int e = 0; e < mapas.size(); e++) {
-                for (int u = 0; u < mapas.get(e).size(); u++) {
-                    if (mapas.get(e).get(u).equals(peca.get(i).get(0))) {
-                        //if(peca.get(i).get(2).equals("0")){
-                            //peca.get(i).get(0) = id
-                            //peca.get(i).get(1) = tipoPecas
-                            //peca.get(i).get(2) = equipas
-                            //peca.get(i).get(3) = alcunhas
-                            //coordenadaX= u;
-                            //coordenadaY= e;
-                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
-                            crazyList.add(piece);
-                        /*}else{
-                            CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1), peca.get(i).get(2) , peca.get(i).get(3), u, e);
-                            crazyList.add(piece);
-                        }*/
-                    }
-                }
 
-            }
-        }
-    }
 
 
     public int getTamanhoTabuleiro(){
