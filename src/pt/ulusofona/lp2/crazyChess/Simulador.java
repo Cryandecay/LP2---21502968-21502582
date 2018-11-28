@@ -23,7 +23,6 @@ public class Simulador {
     String resultadoFinal;
     List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
     List<String> autores = new ArrayList<String>();
-    List<String> resultado = new ArrayList<String>();
 
 
     public Simulador(){
@@ -57,9 +56,6 @@ public class Simulador {
                 leitorFicheiro.close();
                 tamanhoTabuleiro=Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas=Integer.parseInt(firstRow.get(1).get(0));
-                if (numeroPecas==2 || numeroPecas==0 || numeroPecas==1){
-                    return false;
-                }
                 for(int i=2;i<numeroPecas+2;i++){
                     pecas.add(firstRow.get(i));
                 }
@@ -511,8 +507,6 @@ public class Simulador {
                 whiteKing.add(crazy);
             }
         }
-
-
         if (blackKing.size()==1 && whiteKing.size()==1){
             resultadoFinal="EMPATE";
             return true;
@@ -563,6 +557,7 @@ public class Simulador {
     }
 
     public List<String> getResultados(){
+        List<String> resultado = new ArrayList<String>();
         resultado.add("JOGO DE CRAZY CHESS");
         resultado.add("Resultado: " + resultadoFinal );
         resultado.add( "---" );
