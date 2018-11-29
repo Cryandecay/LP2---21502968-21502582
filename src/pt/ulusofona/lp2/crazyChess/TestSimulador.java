@@ -13,4 +13,11 @@ public class TestSimulador {
         File file = new File("random.txt");
         assertEquals(simulador.iniciaJogo(file),false);
     }
+
+    @Test
+    public void processaJogada() {
+        assertEquals(simulador.processaJogada(0,0,4,4),false);
+    }
+
+
 }
