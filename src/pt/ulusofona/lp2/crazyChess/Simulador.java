@@ -12,7 +12,7 @@ public class Simulador {
     List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
     int turnoCaptura=0; //contador dos turnos sem captura
     int turno=0; //Turnos do jogo
-    int equipaAJogar=1;// 0 pretas 1 brancas
+    int equipaAJogar=0;// 0 pretas 1 brancas
     int jodaInvalidaBrancas =0;
     int jodaInvalidaPretas =0;
     int jodaValidaBrancas =0;
