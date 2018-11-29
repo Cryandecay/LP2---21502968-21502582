@@ -390,7 +390,7 @@ public class Simulador {
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
-        if(turnoCaptura==20 && capturas.size()>=1){
+        if(turnoCaptura==10 && capturas.size()>=1){
             resultadoFinal="EMPATE";
             return true;
         }
