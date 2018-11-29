@@ -249,8 +249,6 @@ public class Simulador {
                     return false;
                 }
 
-             
-
                 if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == equipaAJogar ) {
                     System.out.println(crazy.getIdEquipa());
                     if (xD == xO + 1 && yD == yO) {
@@ -339,10 +337,19 @@ public class Simulador {
                         findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
                         return true;
                     }
+
                     invalidoBranco();
                     return false;
                 }
+                if (crazy.getIdEquipa() != equipaAJogar ) {
+                    if (crazy.getIdEquipa()==0){
+                        invalidoPreto();
+                    }else{
+                        invalidoBranco();
+                    }
+                }
             }
+
         }
 
         return false;
