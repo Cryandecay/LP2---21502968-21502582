@@ -10,7 +10,7 @@ public class TestSimulador {
     Simulador simulador = new Simulador();
     @Test
     public void iniciaJogo() {
-        File file = new File("dados.txt");
-        assertEquals(simulador.iniciaJogo(file),true);
+        File file = new File("random.txt");
+        assertEquals(simulador.iniciaJogo(file),false);
     }
 }
