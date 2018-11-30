@@ -11,13 +11,13 @@ public class CrazyPiece {
 
 
 
-    public CrazyPiece(String idPeca, String idTipoPeca,String idEquipa , String alcunha, int x, int y) {
+    public CrazyPiece(String idPeca, String idTipoPeca,String idEquipa , String alcunha, int coordenadaX, int coordenadaY) {
         this.idPeca = Integer.parseInt(idPeca);
         this.idTipoPeca = Integer.parseInt(idTipoPeca);
         this.idEquipa = Integer.parseInt(idEquipa);
         this.alcunha = alcunha;
-        this.coordenadaX = x;
-        this.coordenadaY = y;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
     }
 
     public CrazyPiece(int idPeca, int idTipoPeca,int idEquipa, String alcunha, int x, int y) {

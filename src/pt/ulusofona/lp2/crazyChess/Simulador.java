@@ -36,7 +36,6 @@ public class Simulador {
         this.capturas = capturas;
     }
 
-
     public boolean iniciaJogo(File ficheiroInicial) {
             List<List <String>> firstRow = new ArrayList<List <String>>();
             List<List <String>> mapas = new ArrayList<List <String>>();
@@ -76,6 +75,7 @@ public class Simulador {
         }
 
     }
+
     void stringTest(List<List<String>> peca, List<List <String>> mapas){
         for(int i=0; i< peca.size();i++) {
             for (int e = 0; e < mapas.size(); e++) {
@@ -94,6 +94,7 @@ public class Simulador {
             }
         }
     }
+
     public int numberInt(String number){
             return Integer.parseInt(number);
     }
@@ -149,8 +150,6 @@ public class Simulador {
     public int getTamanhoTabuleiro(){
         return tamanhoTabuleiro;
     }
-
-
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
         for (CrazyPiece crazy: crazyList) {
@@ -403,7 +402,6 @@ public class Simulador {
         return autores;
     }
 
-
     public int getIDPeca(int x, int y) {
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y){
@@ -432,7 +430,6 @@ public class Simulador {
         resultado.add("" + jodaInvalidaBrancas);
         return resultado;
     }
-
 
     public int contarPecasCapturadas(int equipa){
         int capturadas=0;
