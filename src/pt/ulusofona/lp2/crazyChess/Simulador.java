@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Simulador {
 
     //File ficheiroInicial;
-    List<CrazyPiece> crazyList = new ArrayList<CrazyPiece>();
+    List<CrazyPiece> crazyList = new ArrayList<>();
     int turnoCaptura=0; //contador dos turnos sem captura
     int turno=0; //Turnos do jogo
-    int equipaAJogar=0;// 0 pretas 1 brancas
+    int equipaAJogar=10;// 0 pretas 1 brancas
     Integer jodaInvalidaBrancas=0;
     Integer jodaInvalidaPretas=0;
     int jodaValidaBrancas =0 ;
@@ -20,12 +20,11 @@ public class Simulador {
     int tamanhoTabuleiro =0;
     int numeroPecas =0;
     String resultadoFinal;
-    List<CrazyPiece> capturas = new ArrayList<CrazyPiece>();
-    List<String> autores = new ArrayList<String>();
+    List<CrazyPiece> capturas = new ArrayList<>();
+    List<String> autores = new ArrayList<>();
 
 
     public Simulador(){
-
     }
 
     public Simulador(List<CrazyPiece> crazyList, int turno, int equipaAJogar, List<CrazyPiece> capturas) {
@@ -52,8 +51,9 @@ public class Simulador {
                     firstRow.add(testew);
                 }
                 leitorFicheiro.close();
-                tamanhoTabuleiro=Integer.parseInt(firstRow.get(0).get(0));
-                numeroPecas=Integer.parseInt(firstRow.get(1).get(0));
+                tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
+                numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
+
                 for(int i=2;i<numeroPecas+2;i++){
                     pecas.add(firstRow.get(i));
                 }
@@ -63,7 +63,7 @@ public class Simulador {
                 stringTest(pecas, mapas);
                 if (crazyList.size()!=numeroPecas){
                     for (int i=0;i<numeroPecas-crazyList.size()+1;i++){
-                        CrazyPiece pie = new CrazyPiece(0,0,0,"0",-1,-1);
+                        CrazyPiece pie = new Rei(0,0,10,"0",-1,-1);
                         crazyList.add(pie);
                     }
                 }
@@ -87,7 +87,7 @@ public class Simulador {
                         //peca.get(i).get(3) = alcunhas
                         //coordenadaX= u;
                         //coordenadaY= e;
-                        CrazyPiece piece = new CrazyPiece(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
+                        CrazyPiece piece = new Rei(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
                         crazyList.add(piece);
                     }
                 }
@@ -102,11 +102,11 @@ public class Simulador {
     void findCapture(int x, int y, int iD, int equipa){
         turno=turno+1;
         turnoCaptura=turnoCaptura+1;
-        if (equipaAJogar==0){
+        if (equipaAJogar==20){
             equipaAJogar=1;
             jodaValidaPretas++;
         }else{
-            equipaAJogar=0;
+            equipaAJogar=10;
             jodaValidaBrancas++;
         }
         for(CrazyPiece crazy: crazyList){
@@ -159,89 +159,89 @@ public class Simulador {
                 if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == equipaAJogar ) {
                     System.out.println(crazy.getIdEquipa());
                     if (xD == xO + 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                            return false;
                         }
                         crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (xD == xO - 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     jodaInvalidaPretas++;
@@ -251,89 +251,89 @@ public class Simulador {
                 if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == equipaAJogar ) {
                     System.out.println(crazy.getIdEquipa());
                     if (xD == xO + 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (xD == xO - 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.idPeca, crazy.getIdEquipa())){
+                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
                             jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
                         crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.idPeca, crazy.getIdEquipa());
+                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
 
@@ -341,7 +341,7 @@ public class Simulador {
                     return false;
                 }
                 if (crazy.getIdEquipa() != equipaAJogar ) {
-                    if (crazy.getIdEquipa()==0){
+                    if (crazy.getIdEquipa()==10){
                         invalidoPreto();
                     }else{
                         invalidoBranco();
@@ -370,10 +370,10 @@ public class Simulador {
         List<CrazyPiece> whiteKing = new ArrayList<CrazyPiece>();
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdEquipa()==0 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa()==10 && crazy.getIdTipoPeca()==0){
                 blackKing.add(crazy);
             }
-            if(crazy.getIdEquipa()==1 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa()==20 && crazy.getIdTipoPeca()==0){
                 whiteKing.add(crazy);
             }
         }
@@ -405,7 +405,7 @@ public class Simulador {
     public int getIDPeca(int x, int y) {
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y){
-                return crazy.getIdPeca();
+                return crazy.getId();
             }
         }
         return 0;
@@ -431,6 +431,7 @@ public class Simulador {
         return resultado;
     }
 
+
     public int contarPecasCapturadas(int equipa){
         int capturadas=0;
         for (CrazyPiece captured: capturas){
@@ -451,6 +452,13 @@ public class Simulador {
 
     public List<CrazyPiece> getCapturas() {
         return capturas;
+    }
+
+    public List<String> obterSugestoesJogada(int xO, int yO){
+        List<String> tabela = new ArrayList<String>();
+        tabela.add("1");
+        tabela.add("2");
+        return tabela;
     }
 
 }
