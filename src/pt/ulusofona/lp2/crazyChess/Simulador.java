@@ -11,14 +11,14 @@ public class Simulador {
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<>();
     int turnoCaptura=0; //contador dos turnos sem captura
-    int turno=0; //Turnos do jogo
-    int equipaAJogar=10;// 0 pretas 1 brancas
-    Integer jodaInvalidaBrancas=0;
-    Integer jodaInvalidaPretas=0;
-    int jodaValidaBrancas =0 ;
-    int jodaValidaPretas =0;
-    int tamanhoTabuleiro =0;
-    int numeroPecas =0;
+    int turno = 0; //Turnos do jogo
+    int equipaAJogar = 10;// 0 pretas 1 brancas
+    Integer jodaInvalidaBrancas = 0;
+    Integer jodaInvalidaPretas = 0;
+    int jodaValidaBrancas = 0 ;
+    int jodaValidaPretas = 0;
+    int tamanhoTabuleiro = 0;
+    int numeroPecas = 0;
     String resultadoFinal;
     List<CrazyPiece> capturas = new ArrayList<>();
     List<String> autores = new ArrayList<>();
@@ -43,6 +43,7 @@ public class Simulador {
 
                 File ficheiro = new File(ficheiroInicial.getName());
                 Scanner leitorFicheiro = new Scanner(ficheiro);
+
                 while(leitorFicheiro.hasNextLine()) {
                     List<String> testew = new ArrayList<String>();
                     String linha = leitorFicheiro.nextLine();
@@ -51,24 +52,27 @@ public class Simulador {
                     firstRow.add(testew);
                 }
                 leitorFicheiro.close();
+
                 tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
 
-                for(int i=2;i<numeroPecas+2;i++){
+                for(int i = 2; i < numeroPecas + 2; i++){
                     pecas.add(firstRow.get(i));
                 }
-                for(int i=2+numeroPecas;i<firstRow.size();i++){
+                for(int i = 2 + numeroPecas; i < firstRow.size(); i++){
                     mapas.add(firstRow.get(i));
                 }
+
                 stringTest(pecas, mapas);
-                if (crazyList.size()!=numeroPecas){
-                    for (int i=0;i<numeroPecas-crazyList.size()+1;i++){
-                        CrazyPiece pie = new Rei(0,0,10,"0",-1,-1);
-                        crazyList.add(pie);
+
+                if (crazyList.size() != numeroPecas){
+                    for (int i = 0; i < numeroPecas - crazyList.size() + 1; i++){
+                        crazyList.add(new Rei(0,0,10,"0",-1,-1));
                     }
                 }
-                System.out.println(crazyList);
+
                 return true;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -93,10 +97,6 @@ public class Simulador {
                 }
             }
         }
-    }
-
-    public int numberInt(String number){
-            return Integer.parseInt(number);
     }
 
     void findCapture(int x, int y, int iD, int equipa){
@@ -430,7 +430,6 @@ public class Simulador {
         resultado.add("" + jodaInvalidaBrancas);
         return resultado;
     }
-
 
     public int contarPecasCapturadas(int equipa){
         int capturadas=0;

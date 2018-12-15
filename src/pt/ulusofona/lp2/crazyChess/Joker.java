@@ -9,8 +9,11 @@ public class Joker extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
 
-    @Override
     public String getImagePNG() {
-        return null;
+        if (idEquipa == 10){
+            return "JokerBlack.png";
+        } else {
+            return "JokerWhite.png";
+        }
     }
 }

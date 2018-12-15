@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.crazyChess;
 
-abstract class CrazyPiece {
+public abstract class CrazyPiece {
     protected int idPeca;
     protected int idTipoPeca;
     protected int idEquipa;
@@ -18,7 +18,7 @@ abstract class CrazyPiece {
         this.coordenadaY = y;
     }
 
-    public CrazyPiece(int idPeca, int idTipoPeca,int idEquipa, String alcunha, int x, int y) {
+    public CrazyPiece(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         this.idPeca = idPeca;
         this.idTipoPeca = idTipoPeca;
         this.idEquipa = idEquipa;
