@@ -9,11 +9,17 @@ public class Lebre extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
 
+    @Override
     public String getImagePNG() {
         if (idEquipa == 10){
             return "LebreBlack.png";
         } else {
             return "LebreWhite.png";
         }
+    }
+
+    @Override
+    public void previsoes() {
+
     }
 }

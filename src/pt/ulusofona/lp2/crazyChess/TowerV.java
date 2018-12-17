@@ -9,11 +9,18 @@ public class TowerV extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
 
+    @Override
     public String getImagePNG() {
         if (idEquipa == 10){
-            return "TorreVBlack.png";
+            return "TowerBlackV.png";
         } else {
-            return "TorreVWhite.png";
+            return "TowerWhiteV.png";
         }
     }
+
+    @Override
+    public void previsoes() {
+
+    }
+
 }

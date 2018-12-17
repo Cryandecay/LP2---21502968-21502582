@@ -16,4 +16,9 @@ public class Joker extends CrazyPiece {
             return "JokerWhite.png";
         }
     }
+
+    @Override
+    public void previsoes() {
+
+    }
 }

@@ -10,14 +10,17 @@ public class PadreDaVila extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
 
-
+    @Override
     public String getImagePNG() {
         if (idEquipa == 10){
-            return "BishopWhite.png";
+            return "PriestWhite.png";
         } else {
-            return "BishopBlack.png";
+            return "PriestBlack.png";
         }
     }
 
+    @Override
+    public void previsoes() {
 
+    }
 }

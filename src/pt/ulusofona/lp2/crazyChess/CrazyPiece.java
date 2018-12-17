@@ -1,6 +1,11 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class CrazyPiece {
+
+    protected ArrayList<List<Integer>> previsao = new ArrayList<>();
     protected int idPeca;
     protected int idTipoPeca;
     protected int idEquipa;
@@ -29,8 +34,7 @@ public abstract class CrazyPiece {
 
     public abstract String getImagePNG();
 
-    //public abstract void movimento();
-
+    public abstract void previsoes();
 
     @Override
     public String toString() {
@@ -74,5 +78,7 @@ public abstract class CrazyPiece {
         this.coordenadaY = coordenadaY;
     }
 
-
+    public ArrayList<List<Integer>> getPrevisao() {
+        return previsao;
+    }
 }

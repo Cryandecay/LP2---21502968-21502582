@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rei extends CrazyPiece {
 
     public Rei(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
@@ -10,30 +13,60 @@ public class Rei extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
 
+    @Override
     public String getImagePNG() {
-
         if (idEquipa == 10){
             return "KingBlack.png";
         } else {
             return "KingWhite.png";
         }
-
     }
 
-    public void moverCima(){
-        coordenadaY = coordenadaY + 1;
-    }
+    @Override
+    public void previsoes(){
+        List<Integer> indentacao = new ArrayList<>();
 
-    public void moverBaixo(){
-        coordenadaY = coordenadaY - 1;
-    }
+        indentacao.add(coordenadaX + 1);//direita
+        indentacao.add(coordenadaY);
+        previsao.add(indentacao);
+        indentacao.clear();
 
-    public void moverEsquerda(){
-        coordenadaX = coordenadaX - 1;
-    }
+        indentacao.add(coordenadaX - 1);//esquerda
+        indentacao.add(coordenadaY);
+        previsao.add(indentacao);
+        indentacao.clear();
 
-    public void moverDireita(){
-        coordenadaX = coordenadaX + 1;
+        indentacao.add(coordenadaX);//cima
+        indentacao.add(coordenadaY + 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+        indentacao.add(coordenadaX);//baixo
+        indentacao.add(coordenadaY - 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+        indentacao.add(coordenadaX + 1);//cima direita
+        indentacao.add(coordenadaY + 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+        indentacao.add(coordenadaX + 1);//baixo direita
+        indentacao.add(coordenadaY - 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+        indentacao.add(coordenadaX - 1);//baixo esquerda
+        indentacao.add(coordenadaY - 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+        indentacao.add(coordenadaX - 1);//cima esquerda
+        indentacao.add(coordenadaY + 1);
+        previsao.add(indentacao);
+        indentacao.clear();
+
+
     }
 
 

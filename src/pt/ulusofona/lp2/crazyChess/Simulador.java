@@ -10,22 +10,21 @@ public class Simulador {
 
     //File ficheiroInicial;
     List<CrazyPiece> crazyList = new ArrayList<>();
-    int turnoCaptura=0; //contador dos turnos sem captura
-    int turno = 0; //Turnos do jogo
-    int equipaAJogar = 10;// 0 pretas 1 brancas
-    Integer jodaInvalidaBrancas = 0;
-    Integer jodaInvalidaPretas = 0;
-    int jodaValidaBrancas = 0 ;
-    int jodaValidaPretas = 0;
-    int tamanhoTabuleiro = 0;
-    int numeroPecas = 0;
+    static int turnoCaptura = 0; //contador dos turnos sem captura
+    static int turno = 0; //Turnos do jogo
+    static int equipaAJogar = 10;// 0 pretas 1 brancas
+    static Integer jodaInvalidaBrancas = 0;
+    static Integer jodaInvalidaPretas = 0;
+    static int jodaValidaBrancas = 0 ;
+    static int jodaValidaPretas = 0;
+    static int tamanhoTabuleiro = 0;
+    static int numeroPecas = 0;
     String resultadoFinal;
     List<CrazyPiece> capturas = new ArrayList<>();
     List<String> autores = new ArrayList<>();
 
 
-    public Simulador(){
-    }
+    public Simulador(){ }
 
     public Simulador(List<CrazyPiece> crazyList, int turno, int equipaAJogar, List<CrazyPiece> capturas) {
         //this.ficheiroInicial = ficheiroInicial;
@@ -91,41 +90,75 @@ public class Simulador {
                         //peca.get(i).get(3) = alcunhas
                         //coordenadaX= u;
                         //coordenadaY= e;
-                        CrazyPiece piece = new Rei(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e);
-                        crazyList.add(piece);
+
+                        if(peca.get(i).get(1).equals("0")) {//Rei
+                            crazyList.add(new Rei(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("1")) {//Rainha
+                            crazyList.add(new Rainha(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("2")) {//PoneiMagico
+                            crazyList.add(new PoneiMagico(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("3")){//PadreDaVila
+                            crazyList.add(new PadreDaVila(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("4")){//TorreH
+                            crazyList.add(new TorreH(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("5")){//TorreV
+                            crazyList.add(new TowerV(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("6")){//Lebre
+                            crazyList.add(new Lebre(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+
+                        } else if(peca.get(i).get(1).equals("7")){//Joker
+                            crazyList.add(new Joker(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+                        }
                     }
                 }
             }
+        }
+
+        for(CrazyPiece crazyList: crazyList){
+            crazyList.previsoes();
         }
     }
 
     void findCapture(int x, int y, int iD, int equipa){
-        turno=turno+1;
-        turnoCaptura=turnoCaptura+1;
-        if (equipaAJogar==20){
-            equipaAJogar=1;
+        turno++;
+        turnoCaptura++;
+
+        if (equipaAJogar == 20){
+            equipaAJogar = 1;
             jodaValidaPretas++;
-        }else{
-            equipaAJogar=10;
+        } else {
+            equipaAJogar = 10;
             jodaValidaBrancas++;
         }
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
-                if(crazy.getId()!=iD && crazy.getId()!=0){
+                if(crazy.getId() != iD && crazy.getId() != 0){
                     if(crazy.getIdEquipa() != equipa){
                         capturas.add(crazy);
-                        turnoCaptura=0;
+                        turnoCaptura = 0;
                     }
                 }
             }
         }
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getId()==0){
+            if(crazy.getId() == 0){
                 capturas.add(crazy);
-                turnoCaptura=0;
+                turnoCaptura = 0;
             }
         }
         removeCrazyList();
+    }
+
+    void removeCrazyList(){
+        for(CrazyPiece captured: capturas){
+            crazyList.remove(captured);
+        }
     }
 
     boolean findFriend(int x, int y, int iD, int equipa) {
@@ -140,12 +173,6 @@ public class Simulador {
         }
         return true;
     }
-
-    void removeCrazyList(){
-        for(CrazyPiece captured: capturas){
-                crazyList.remove(captured);
-            }
-        }
 
     public int getTamanhoTabuleiro(){
         return tamanhoTabuleiro;
