@@ -19,9 +19,8 @@ public class Rainha extends CrazyPiece{
     }
 
     @Override
-    public void previsoes() {
-
+    public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
     }
-
 
 }
