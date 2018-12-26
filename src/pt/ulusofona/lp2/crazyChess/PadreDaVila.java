@@ -21,8 +21,18 @@ public class PadreDaVila extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        if(deltaX > 3){
+            return false;
+        }
+
+        if(deltaY > 3){
+            return false;
+        }
+
+        return true; //TODO
+        }
     }
-
-
-}

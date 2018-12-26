@@ -12,7 +12,7 @@ public class Simulador {
     static List<CrazyPiece> crazyList = new ArrayList<>();
     static int turnoCaptura = 0; //contador dos turnos sem captura
     static int turno = 0; //Turnos do jogo
-    static int equipaAJogar = 10;// 10 pretas 20 brancas
+    static int equipaAJogar = 20;// 10 pretas 20 brancas
     static Integer jodaInvalidaBrancas = 0;
     static Integer jodaInvalidaPretas = 0;
     static int jodaValidaBrancas = 0 ;
@@ -134,7 +134,11 @@ public class Simulador {
 
         for (CrazyPiece crazy: crazyList) {
              if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
-                 return crazy.movimento(xO, yO, xD, yD, crazy);
+                 if(equipaAJogar == crazy.getIdEquipa()) {
+                     return crazy.movimento(xO, yO, xD, yD, crazy);
+                 } else {
+                     return false;
+                 }
              }
         }
 
@@ -245,7 +249,7 @@ public class Simulador {
                     listaDeSugestoes.add("Pedido Invalido");
                     return listaDeSugestoes;
                 }
-                listaDeSugestoes.add("Calcular Jogadas possiveis da peca:" + crazy.getIdTipoPeca() + " " + crazy.getAlcunha());
+                listaDeSugestoes.add("");//TODO
             }
         }
 

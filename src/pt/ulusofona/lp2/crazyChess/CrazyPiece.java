@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import java.util.List;
 import static pt.ulusofona.lp2.crazyChess.Simulador.equipaAJogar;
 import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaPretas;
 import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaBrancas;
@@ -68,13 +67,14 @@ public abstract class CrazyPiece {
         turno++;
         turnoCaptura++;
 
-        if (equipaAJogar == 20){
-            equipaAJogar = 1;
+        if (equipaAJogar == 10){
+            equipaAJogar = 20;
             jodaValidaPretas++;
         } else {
             equipaAJogar = 10;
             jodaValidaBrancas++;
         }
+
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
                 if(crazy.getId() != iD && crazy.getId() != 0){
@@ -85,6 +85,7 @@ public abstract class CrazyPiece {
                 }
             }
         }
+
         for(CrazyPiece crazy: crazyList){
             if(crazy.getId() == 0){
                 capturas.add(crazy);

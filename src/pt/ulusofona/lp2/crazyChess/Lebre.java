@@ -22,15 +22,30 @@ public class Lebre extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+/*
         if(turno%2 == 0){
             return false;
         } else {
-            if(xD - xO > 1 || yD - yO > 1){
-                return false;
-            } else {
-                
-            }
-        }
-    }
+            */
+            int deltaX = Math.abs(xD - xO);
+            int deltaY = Math.abs(yD - yO);
 
-}
+            if (deltaX != 1) {
+                return false;
+            }
+            if (deltaY != 1) {
+                return false;
+            }
+
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+
+            findCapture(xD, yD, idPeca, idEquipa);
+            coordenadaX = xD;
+            coordenadaY = yD;
+
+            return true; //TODO
+            }
+        //}
+    }
