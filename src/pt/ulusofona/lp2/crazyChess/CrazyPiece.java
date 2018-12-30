@@ -8,6 +8,7 @@ import static pt.ulusofona.lp2.crazyChess.Simulador.turnoCaptura;
 import static pt.ulusofona.lp2.crazyChess.Simulador.capturas;
 import static pt.ulusofona.lp2.crazyChess.Simulador.crazyList;
 
+
 public abstract class CrazyPiece {
 
     protected int idPeca;
@@ -16,7 +17,6 @@ public abstract class CrazyPiece {
     protected String alcunha;
     protected int coordenadaX;
     protected int coordenadaY;
-
 
     public CrazyPiece(String idPeca, String idTipoPeca,String idEquipa , String alcunha, int x, int y) {
         this.idPeca = Integer.parseInt(idPeca);
@@ -41,9 +41,9 @@ public abstract class CrazyPiece {
     public abstract boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy);
 
     @Override
-    public String toString() {
-        return  idPeca +" | "+
-                + idTipoPeca + " | "
+    public String toString() {//TODO: Falta fazer para capturadas
+        return  idPeca + " | "
+                + getClass().getSimpleName() + " | "
                 + idEquipa + " | "
                 + alcunha + " @"+
                 " (" + coordenadaX +

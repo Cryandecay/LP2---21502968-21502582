@@ -10,6 +10,7 @@ public class Simulador {
 
     //File ficheiroInicial;
     static List<CrazyPiece> crazyList = new ArrayList<>();
+    static List<CrazyPiece> capturas = new ArrayList<>();
     static int turnoCaptura = 0; //contador dos turnos sem captura
     static int turno = 0; //Turnos do jogo
     static int equipaAJogar = 20;// 10 pretas 20 brancas
@@ -20,8 +21,13 @@ public class Simulador {
     static int tamanhoTabuleiro = 0;
     static int numeroPecas = 0;
     String resultadoFinal;
-    static List<CrazyPiece> capturas = new ArrayList<>();
     List<String> autores = new ArrayList<>();
+
+    List<CrazyPiece> crazyListDaJogadaAnterior = new ArrayList<>();
+    static List<CrazyPiece> capturasDaJogadaAnterior = new ArrayList<>();
+    int turnoAnterior = 0;
+    int getEquipaAJogarAnterior = 20;
+
 
 
     public Simulador(){ }
@@ -121,14 +127,25 @@ public class Simulador {
         }
     }
 
+    void jogadaInvalida(){
+        if(equipaAJogar == 10){
+            jodaInvalidaPretas++;
+        } else {
+            jodaInvalidaBrancas++;
+        }
+    }
+
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
         if(xO == xD && yO == yD){
+            jogadaInvalida();
             return false;
         }
         if(xD < 0 || yD < 0){
+            jogadaInvalida();
             return false;
         }
         if(xD > tamanhoTabuleiro || yD > tamanhoTabuleiro){
+            jogadaInvalida();
             return false;
         }
 
@@ -137,16 +154,22 @@ public class Simulador {
                  if(equipaAJogar == crazy.getIdEquipa()) {
                      return crazy.movimento(xO, yO, xD, yD, crazy);
                  } else {
+                     jogadaInvalida();
                      return false;
                  }
              }
         }
 
+        jogadaInvalida();
         return false;
     }
 
-    public List<CrazyPiece> getPecasMalucas(){
-        return crazyList;
+    public List<CrazyPiece> getPecasMalucas(){//TODO:Confirmar, era suposto dar TODOS OS RESULTADOS, so retornavamos o crazyList
+        List<CrazyPiece> merged = new ArrayList<>();
+        merged.addAll(crazyList);
+        merged.addAll(capturas);
+
+        return merged;
     }
 
     public boolean jogoTerminado(){
@@ -202,7 +225,7 @@ public class Simulador {
         return equipaAJogar;
     }
 
-    public List<String> getResultados(){
+    public List<String> getResultados(){//TODO:Ler e confirmar no enunciado
         List<String> resultado = new ArrayList<String>();
         resultado.add("JOGO DE CRAZY CHESS");
         resultado.add("Resultado: " + resultadoFinal );
@@ -257,7 +280,11 @@ public class Simulador {
         return listaDeSugestoes;
     }
 
-    public boolean gravarJogo(File ficheiroDestino){
+    public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
+
+    }
+
+    public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
         return false;
     }
 

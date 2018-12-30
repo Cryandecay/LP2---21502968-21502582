@@ -34,6 +34,6 @@ public class TowerV extends CrazyPiece {
         coordenadaX = xD;
         coordenadaY = yD;
 
-        return true;//TODO: Nao testado.
+        return true;//TODO:Testar
     }
 }

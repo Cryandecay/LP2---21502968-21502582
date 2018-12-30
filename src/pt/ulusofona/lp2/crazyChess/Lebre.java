@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.crazyChess;
 import static pt.ulusofona.lp2.crazyChess.Simulador.turno;
 
 public class Lebre extends CrazyPiece {
+
     public Lebre(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
     }
