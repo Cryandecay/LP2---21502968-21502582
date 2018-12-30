@@ -20,6 +20,20 @@ public class TorreH extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+        int deltaY = Math.abs(yD - yO);
+
+        if(deltaY != 0){
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        findCapture(xD, yD, idPeca, idEquipa);
+        coordenadaX = xD;
+        coordenadaY = yD;
+
+        return true;//TODO:Nao testado.
     }
 }

@@ -20,7 +20,25 @@ public class Rainha extends CrazyPiece{
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        if (deltaX > 5) {
+            return false;
+        }
+        if (deltaY > 5) {
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        findCapture(xD, yD, idPeca, idEquipa);
+        coordenadaX = xD;
+        coordenadaY = yD;
+
+        return true;//TODO:Testar
     }
 
 }

@@ -25,14 +25,22 @@ public class PadreDaVila extends CrazyPiece {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
-        if(deltaX > 3){
+        if (deltaX != 1 || deltaX != 2 || deltaX != 3) {
             return false;
         }
 
-        if(deltaY > 3){
+        if (deltaY != 1 || deltaX !=2 || deltaX != 3){
             return false;
         }
 
-        return true; //TODO
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        findCapture(xD, yD, idPeca, idEquipa);
+        coordenadaX = xD;
+        coordenadaY = yD;
+
+        return true; //TODO: Não Testado
         }
     }

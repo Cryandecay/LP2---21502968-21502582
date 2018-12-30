@@ -22,11 +22,11 @@ public class Lebre extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-/*
+
         if(turno%2 == 0){
             return false;
         } else {
-            */
+
             int deltaX = Math.abs(xD - xO);
             int deltaY = Math.abs(yD - yO);
 
@@ -45,7 +45,7 @@ public class Lebre extends CrazyPiece {
             coordenadaX = xD;
             coordenadaY = yD;
 
-            return true; //TODO
+            return true; //TODO: Até contrário funciona.
             }
-        //}
+        }
     }

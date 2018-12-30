@@ -257,4 +257,8 @@ public class Simulador {
         return listaDeSugestoes;
     }
 
+    public boolean gravarJogo(File ficheiroDestino){
+        return false;
+    }
+
 }
