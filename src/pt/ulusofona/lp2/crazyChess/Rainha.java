@@ -41,4 +41,6 @@ public class Rainha extends CrazyPiece{
         return true;//TODO:Testar
     }
 
+
+
 }

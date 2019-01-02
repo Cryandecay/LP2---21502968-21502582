@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.List;
+
 public class PadreDaVila extends CrazyPiece {
     String tipo = "Padre da Vila";
 
@@ -26,15 +28,19 @@ public class PadreDaVila extends CrazyPiece {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
-        if (deltaX != 1 || deltaX != 2 || deltaX != 3) {
+        if (deltaX != deltaY) {
             return false;
         }
 
-        if (deltaY != 1 || deltaX !=2 || deltaX != 3){
+        if (deltaX > 3 || deltaY > 3){
             return false;
         }
 
-        if(!findFriend(xD, yD, idPeca, idEquipa)){
+        if (!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!encontraRainha(xD, yD)){
             return false;
         }
 
@@ -42,6 +48,26 @@ public class PadreDaVila extends CrazyPiece {
         coordenadaX = xD;
         coordenadaY = yD;
 
-        return true; //TODO:Testar
+        return true; //TODO:Ja funca com as rainhas, testar board maior e pecas pelo caminho
+    }
+
+    public boolean encontraRainha(int xD, int yD){
+        List<CrazyPiece> rainhas = getRainha();
+        int deltaXDestino;
+        int deltaYDestino;
+
+        for(CrazyPiece rainha: rainhas){
+            if(rainha.idEquipa != this.idEquipa){
+                deltaXDestino = Math.abs(rainha.coordenadaX - xD);
+                deltaYDestino = Math.abs(rainha.coordenadaY - yD);
+
+                if (deltaXDestino <= 2 && deltaYDestino <= 2){
+                    return true;
+                }
+            }
         }
+
+        return false;
+    }
+
     }

@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import static pt.ulusofona.lp2.crazyChess.Simulador.tamanhoTabuleiro;
+
 public class TorreH extends CrazyPiece {
     String tipo = "TorreH";
 
@@ -22,7 +24,11 @@ public class TorreH extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
 
         if(deltaY != 0){
             return false;
@@ -32,10 +38,13 @@ public class TorreH extends CrazyPiece {
             return false;
         }
 
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, tamanhoTabuleiro, tamanhoTabuleiro)) {
+            return false;
+        }
+
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
-        coordenadaY = yD;
 
-        return true;//TODO:Testar
+        return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
 }

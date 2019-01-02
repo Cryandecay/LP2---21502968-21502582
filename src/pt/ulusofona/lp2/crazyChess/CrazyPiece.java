@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static pt.ulusofona.lp2.crazyChess.Simulador.equipaAJogar;
 import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaPretas;
 import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaBrancas;
@@ -131,6 +134,124 @@ public abstract class CrazyPiece {
 
     public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
+    }
+
+    public List<CrazyPiece> getRainha(){
+        List<CrazyPiece> rainhas = new ArrayList<>();
+
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.idTipoPeca == 1){
+                rainhas.add(crazy);
+            }
+        }
+        return rainhas;
+    }
+
+    public boolean descobreDirecao(int direcaoX, int direcaoY, int xO, int yO, int deltaXMAXIMO, int deltaYMAXIMO) {
+        List<CrazyPiece> linha = new ArrayList<>();
+
+        if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
+
+        }
+
+        if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
+
+        }
+
+        if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
+
+        }
+
+        if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
+
+        }
+
+        if (direcaoX == 0 && direcaoY < 0) {//CIMA
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                if (crazy.coordenadaX == xO) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaY < yO && deltaYPeca < deltaYMAXIMO){//le para cima
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        if (direcaoX == 0 && direcaoY > 0){//BAIXO
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                if (crazy.coordenadaX == xO) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaY > yO && deltaYPeca < deltaYMAXIMO){//le para baixo
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+        }
+
+        if (direcaoX > 0 && direcaoY == 0) {//DIREITA
+            int deltaXPeca;
+            for(CrazyPiece crazy: crazyList){
+                if (crazy.coordenadaY == yO) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    if (peca.coordenadaX > xO && deltaXPeca < deltaXMAXIMO){//le para a direita
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        if (direcaoX < 0 && direcaoY == 0) {//ESQUERDA
+            int deltaXPeca;
+            for(CrazyPiece crazy: crazyList){
+                if (crazy.coordenadaY == yO) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    if (peca.coordenadaX < xO && deltaXPeca < deltaXMAXIMO){//le para a esquerda
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
