@@ -60,5 +60,9 @@ public class PadreDaVila extends CrazyPiece {
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
 
+     @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
+    }
 
     }
