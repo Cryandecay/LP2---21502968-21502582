@@ -51,7 +51,11 @@ public class Rainha extends CrazyPiece{
 
         return true;//TODO:Testar direcao, testar caça rainha
     }
-
+    
+    @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
+    }
 
 
 }
