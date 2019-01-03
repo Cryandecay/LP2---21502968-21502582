@@ -47,4 +47,9 @@ public class TorreH extends CrazyPiece {
 
         return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
+    
+     @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
+    }
 }
