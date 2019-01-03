@@ -51,10 +51,35 @@ public class Rainha extends CrazyPiece{
 
         return true;//TODO:Testar direcao, testar caça rainha
     }
-    
+
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX > 5) {
+            return false;
+        }
+        if (deltaY > 5) {
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!encontraRainha(xD, yD)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 5, 5)) {
+            return false;
+        }
+
+        return true;//TODO:Testar direcao, testar caça rainha
     }
 
 

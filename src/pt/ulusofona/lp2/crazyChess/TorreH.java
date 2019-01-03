@@ -47,9 +47,28 @@ public class TorreH extends CrazyPiece {
 
         return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
-    
-     @Override
+
+    @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if(deltaY != 0){
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, tamanhoTabuleiro, 0)) {
+            return false;
+        }
+
+
+        return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
 }

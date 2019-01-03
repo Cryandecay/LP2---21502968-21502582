@@ -49,9 +49,27 @@ public class Lebre extends CrazyPiece {
             return true; //TODO: Até contrário funciona.
             }
         }
-    
-     @Override
+    @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+
+        if(turno%2 == 0){
+            return false;
+        } else {
+
+            int deltaX = Math.abs(xD - xO);
+            int deltaY = Math.abs(yD - yO);
+
+            if (deltaX != 1) {
+                return false;
+            }
+            if (deltaY != 1) {
+                return false;
+            }
+
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+            return true; //TODO: Até contrário funciona.
+        }
     }
     }

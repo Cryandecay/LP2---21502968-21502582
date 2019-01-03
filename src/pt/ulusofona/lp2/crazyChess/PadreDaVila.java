@@ -59,10 +59,37 @@ public class PadreDaVila extends CrazyPiece {
 
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
-
-     @Override
+    @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
+
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX != deltaY) {
+            return false;
+        }
+
+        if (deltaX > 3 || deltaY > 3){
+            return false;
+        }
+
+        if (!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!encontraRainha(xD, yD)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 3, 3)) {
+            return false;
+        }
+
+        return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
+
 
     }

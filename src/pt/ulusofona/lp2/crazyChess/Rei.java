@@ -222,8 +222,9 @@ public class Rei extends CrazyPiece {
                 }
         return false;
     }
-    
-    
+
+
+
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         //king

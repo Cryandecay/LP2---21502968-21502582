@@ -49,10 +49,26 @@ public class TowerV extends CrazyPiece {
 
         return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
     }
-    
-     @Override
+    @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        return false;
-    }
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
 
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX != 0) {
+            return false;
+        }
+
+        if (!findFriend(xD, yD, idPeca, idEquipa)) {
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 0, tamanhoTabuleiro)) {
+            return false;
+        }
+
+        return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
+    }
 }

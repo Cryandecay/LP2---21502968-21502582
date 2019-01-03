@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Simulador {
 
     //File ficheiroInicial;
+    List<Integer> memPeca = new ArrayList<Integer>();
     static List<CrazyPiece> crazyList = new ArrayList<>();
     static List<CrazyPiece> capturas = new ArrayList<>();
     static int turnoCaptura = 0; //contador dos turnos sem captura
@@ -22,7 +23,6 @@ public class Simulador {
     static int numeroPecas = 0;
     String resultadoFinal;
     List<String> autores = new ArrayList<>();
-
     List<CrazyPiece> crazyListDaJogadaAnterior = new ArrayList<>();
     static List<CrazyPiece> capturasDaJogadaAnterior = new ArrayList<>();
     int turnoAnterior = 0;
@@ -152,7 +152,11 @@ public class Simulador {
         for (CrazyPiece crazy: crazyList) {
              if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                  if(equipaAJogar == crazy.getIdEquipa()) {
-                     return crazy.movimento(xO, yO, xD, yD, crazy);
+                     memPeca.clear();
+                     memPeca.add(crazy.getId());
+                     memPeca.add(xO);
+                     memPeca.add(yO);
+                      return crazy.movimento(xO, yO, xD, yD, crazy);
                  } else {
                      jogadaInvalida();
                      return false;
@@ -262,9 +266,8 @@ public class Simulador {
     public List<CrazyPiece> getCapturas() {
         return capturas;
     }
-    
-    
-  public List<String> obterSugestoesJogada(int xO, int yO){
+
+    public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
         for (CrazyPiece aCrazyList : crazyList) {
             if (aCrazyList.getCoordenadaX()==xO && aCrazyList.getCoordenadaY()==yO){
@@ -280,7 +283,7 @@ public class Simulador {
         return listaDeSugestoes;
     }
 
-     public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
+    public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
         for (int i=0;i<crazyList.size();i++){
             if (memPeca.get(0)==crazyList.get(i).getId()){
                 for (int a=0;a<capturas.size();a++){
@@ -298,28 +301,23 @@ public class Simulador {
 
     }
 
-
-    public boolean gravarJogo(File ficheiroDestino){
+    public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
         String newLine = System.getProperty( "line.separator" );
         try {
             File output = new File( ficheiroDestino.getName() );
             FileWriter writer = new FileWriter(output);
-            //numero de pecas
             writer.write(String.valueOf(crazyList.size()));
             writer.write(newLine);
-            //tamanho tabuleiro
             writer.write(String.valueOf(getTamanhoTabuleiro()));
             writer.write(newLine);
-            //id:tipopeca:idequipa:alcunha
             for (CrazyPiece aCrazyList : crazyList) {
                 writer.write(aCrazyList.getId() + ":" + aCrazyList.getIdTipoPeca() + ":" + aCrazyList.getIdEquipa() + ":" + aCrazyList.getAlcunha());
                 writer.write(newLine);
             }
-            //gerador de tabuleiro
+
             for (int i=0;i<getTamanhoTabuleiro();i++){
                 for(int a=0;a<getTamanhoTabuleiro();a++){
                     String zero = "0";
-                    //verificador x,y das pecas
                     for (CrazyPiece aCrazyList : crazyList) {
                         if(aCrazyList.getCoordenadaX()==a && aCrazyList.getCoordenadaY()==i){
                             writer.write(String.valueOf(aCrazyList.getId()));
@@ -344,7 +342,5 @@ public class Simulador {
         }
         return true;
     }
-    
-   
 
 }
