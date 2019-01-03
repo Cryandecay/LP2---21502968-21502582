@@ -284,8 +284,50 @@ public class Simulador {
 
     }
 
-    public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
-        return false;
+    public boolean gravarJogo(File ficheiroDestino){
+        String newLine = System.getProperty( "line.separator" );
+        try {
+            File output = new File( ficheiroDestino.getName() );
+            FileWriter writer = new FileWriter(output);
+            //numero de pecas
+            writer.write(String.valueOf(crazyList.size()));
+            writer.write(newLine);
+            //tamanho tabuleiro
+            writer.write(String.valueOf(getTamanhoTabuleiro()));
+            writer.write(newLine);
+            //id:tipopeca:idequipa:alcunha
+            for (CrazyPiece aCrazyList : crazyList) {
+                writer.write(aCrazyList.getId() + ":" + aCrazyList.getIdTipoPeca() + ":" + aCrazyList.getIdEquipa() + ":" + aCrazyList.getAlcunha());
+                writer.write(newLine);
+            }
+            //gerador de tabuleiro
+            for (int i=0;i<getTamanhoTabuleiro();i++){
+                for(int a=0;a<getTamanhoTabuleiro();a++){
+                    String zero = "0";
+                    //verificador x,y das pecas
+                    for (CrazyPiece aCrazyList : crazyList) {
+                        if(aCrazyList.getCoordenadaX()==a && aCrazyList.getCoordenadaY()==i){
+                            writer.write(String.valueOf(aCrazyList.getId()));
+                            zero="1";
+                        }
+                    }
+                    if (zero.equals("0")){
+                        writer.write(zero);
+                    }
+                    if (a<getTamanhoTabuleiro()-1){
+                        writer.write(":");
+                    }else{
+
+                    }
+                }
+                writer.write(newLine);
+            }
+            writer.close();
+        }
+        catch (IOException e) {
+            System.out.println( "Ocorreu um erro." );
+        }
+        return true;
     }
 
 }
