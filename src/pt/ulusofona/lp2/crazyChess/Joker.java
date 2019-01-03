@@ -24,5 +24,10 @@ public class Joker extends CrazyPiece {
         return false;
 
     }
+    
+     @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
+    }
 
 }
