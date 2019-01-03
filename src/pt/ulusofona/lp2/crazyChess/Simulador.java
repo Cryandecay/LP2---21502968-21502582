@@ -280,9 +280,24 @@ public class Simulador {
         return listaDeSugestoes;
     }
 
-    public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
+     public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
+        for (int i=0;i<crazyList.size();i++){
+            if (memPeca.get(0)==crazyList.get(i).getId()){
+                for (int a=0;a<capturas.size();a++){
+                    if(capturas.get(a).getCoordenadaX()==crazyList.get(i).getCoordenadaX() && capturas.get(a).getCoordenadaY()==crazyList.get(i).getCoordenadaY()){
+                        crazyList.add(capturas.get(a));
+                        getIDPeca( capturas.get(a).getCoordenadaX(), capturas.get(a).getCoordenadaY());
+                        capturas.remove(a);
+                    }
+                }
+                crazyList.get(i).setCoordenadaX(memPeca.get(1));
+                crazyList.get(i).setCoordenadaY(memPeca.get(2));
+                getIDPeca( crazyList.get(i).getCoordenadaX(), crazyList.get(i).getCoordenadaY());
+            }
+        }
 
     }
+
 
     public boolean gravarJogo(File ficheiroDestino){
         String newLine = System.getProperty( "line.separator" );
