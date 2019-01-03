@@ -49,4 +49,9 @@ public class Lebre extends CrazyPiece {
             return true; //TODO: Até contrário funciona.
             }
         }
+    
+     @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        return false;
+    }
     }
