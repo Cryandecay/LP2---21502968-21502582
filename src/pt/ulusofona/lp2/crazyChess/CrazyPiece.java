@@ -42,6 +42,8 @@ public abstract class CrazyPiece {
     public abstract String getImagePNG();
 
     public abstract boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy);
+    
+    public abstract boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy);
 
     @Override
     public String toString() {//TODO: Falta fazer para capturadas
