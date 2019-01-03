@@ -262,21 +262,21 @@ public class Simulador {
     public List<CrazyPiece> getCapturas() {
         return capturas;
     }
-
-    public List<String> obterSugestoesJogada(int xO, int yO){
+    
+    
+  public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
-
-        for (CrazyPiece crazy: crazyList) {
-            if(crazy.coordenadaX == xO && crazy.coordenadaY == yO){
-                if(crazy.getIdEquipa() != equipaAJogar){
-                    listaDeSugestoes.add("Pedido Invalido");
-                    return listaDeSugestoes;
+        for (CrazyPiece aCrazyList : crazyList) {
+            if (aCrazyList.getCoordenadaX()==xO && aCrazyList.getCoordenadaY()==yO){
+                for (int a = 0; a < getTamanhoTabuleiro(); a++) {
+                    for (int e = 0; e < getTamanhoTabuleiro(); e++) {
+                        if (aCrazyList.movimentoPrevisao(xO, yO, a, e, aCrazyList)) {
+                            listaDeSugestoes.add(e + "," + a);
+                        }
+                    }
                 }
-                listaDeSugestoes.add("");//TODO
             }
         }
-
-        listaDeSugestoes.add("Pedido Invalido");
         return listaDeSugestoes;
     }
 
