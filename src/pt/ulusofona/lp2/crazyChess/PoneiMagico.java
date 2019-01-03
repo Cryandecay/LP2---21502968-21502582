@@ -48,7 +48,7 @@ public class PoneiMagico extends CrazyPiece {
         coordenadaX = xD;
         coordenadaY = yD;
 
-        return true;//TODO:Testar e encontrar Reis
+        return true;//TODO:Testado e encontra reis
     }
 
     public boolean antiRei(int xO, int yO, int xD, int yD, int direcaoX, int direcaoY) {
@@ -63,11 +63,14 @@ public class PoneiMagico extends CrazyPiece {
             deltaXReiOrigem = Math.abs(rei.coordenadaX - xO);
             deltaYReiOrigem = Math.abs(rei.coordenadaY - yO);
 
+            deltaXReiDestino = Math.abs(rei.coordenadaX - xD);
+            deltaYReiDestino = Math.abs(rei.coordenadaY - yD);
+
             if (rei.coordenadaX == xD && rei.coordenadaY == yD){
                 return true;
             }
 
-            if (deltaXReiOrigem > 2 && deltaYReiOrigem > 2) {
+            if (deltaXReiOrigem > 2 || deltaYReiOrigem > 2) {
                 continue;
             }
 
@@ -76,54 +79,46 @@ public class PoneiMagico extends CrazyPiece {
             }
 
             if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
-                deltaXReiDestino = rei.coordenadaX - xD;
-                deltaYReiDestino = rei.coordenadaY - yD;
 
                 if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 || deltaYReiDestino <= 2){
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
                     return false;
                 }
 
             }
 
             if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
-                deltaXReiDestino = rei.coordenadaX - xD;
-                deltaYReiDestino = rei.coordenadaY - yD;
 
                 if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 || deltaYReiDestino <= 2){
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
                     return false;
                 }
             }
 
             if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
-                deltaXReiDestino = rei.coordenadaX - xD;
-                deltaYReiDestino = rei.coordenadaY - yD;
 
                 if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 || deltaYReiDestino <= 2){
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
                     return false;
                 }
             }
 
             if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
-                deltaXReiDestino = rei.coordenadaX - xD;
-                deltaYReiDestino = rei.coordenadaY - yD;
 
                 if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 || deltaYReiDestino <= 2){
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
                     return false;
                 }
             }
