@@ -222,5 +222,129 @@ public class Rei extends CrazyPiece {
                 }
         return false;
     }
+    
+    
+    @Override
+    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        //king
+        //preta
+        if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == equipaAJogar ) {
+            if (xD == xO + 1 && yD == yO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (xD == xO - 1 && yD == yO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO - 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO - 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == equipaAJogar ) {
+            System.out.println(crazy.getIdEquipa());
+            if (xD == xO + 1 && yD == yO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (xD == xO - 1 && yD == yO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO + 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO + 1 && xD == xO - 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            if (yD == yO - 1 && xD == xO - 1) {
+                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
 }
