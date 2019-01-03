@@ -23,6 +23,9 @@ public class Rainha extends CrazyPiece{
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
         if (deltaX > 5) {
             return false;
         }
@@ -34,11 +37,19 @@ public class Rainha extends CrazyPiece{
             return false;
         }
 
+        if (!encontraRainha(xD, yD)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 5, 5)) {
+            return false;
+        }
+
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
         coordenadaY = yD;
 
-        return true;//TODO:Testar
+        return true;//TODO:Testar direcao, testar caça rainha
     }
 
 

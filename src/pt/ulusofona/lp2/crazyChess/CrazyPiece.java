@@ -136,6 +136,31 @@ public abstract class CrazyPiece {
         this.coordenadaY = coordenadaY;
     }
 
+    public boolean encontraRainha(int xD, int yD){
+        List<CrazyPiece> rainhas = getRainha();
+        int deltaXDestino;
+        int deltaYDestino;
+
+        for(CrazyPiece rainha: rainhas){
+            if(rainha.idEquipa != this.idEquipa){
+                deltaXDestino = Math.abs(rainha.coordenadaX - xD);
+                deltaYDestino = Math.abs(rainha.coordenadaY - yD);
+
+                if (this.idTipoPeca == 1){
+                    if(deltaXDestino == 0 && deltaYDestino == 0){
+                        return false;
+                    }
+                }
+
+                if (deltaXDestino <= 2 && deltaYDestino <= 2){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public List<CrazyPiece> getRainha(){
         List<CrazyPiece> rainhas = new ArrayList<>();
 
@@ -151,19 +176,116 @@ public abstract class CrazyPiece {
         List<CrazyPiece> linha = new ArrayList<>();
 
         if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
+            int deltaXCrazy;
+            int deltaYCrazy;
 
+            int deltaXPeca;
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                deltaXCrazy = Math.abs(crazy.coordenadaX - xO);
+                deltaYCrazy = Math.abs(crazy.coordenadaY - yO);
+                if (deltaXCrazy == deltaYCrazy) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaX < xO && peca.coordenadaY > yO && deltaXPeca < deltaXMAXIMO && deltaYPeca < deltaYMAXIMO){//le para a esquerda
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
 
         if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
+            int deltaXCrazy;
+            int deltaYCrazy;
+
+            int deltaXPeca;
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                deltaXCrazy = Math.abs(crazy.coordenadaX - xO);
+                deltaYCrazy = Math.abs(crazy.coordenadaY - yO);
+                if (deltaXCrazy == deltaYCrazy) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaX < xO && peca.coordenadaY < yO && deltaXPeca < deltaXMAXIMO && deltaYPeca < deltaYMAXIMO){//le para a esquerda
+                        return false;
+                    }
+                }
+                return true;
+            }
 
         }
 
         if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
+            int deltaXCrazy;
+            int deltaYCrazy;
 
+            int deltaXPeca;
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                deltaXCrazy = Math.abs(crazy.coordenadaX - xO);
+                deltaYCrazy = Math.abs(crazy.coordenadaY - yO);
+                if (deltaXCrazy == deltaYCrazy) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaX > xO && peca.coordenadaY < yO && deltaXPeca < deltaXMAXIMO && deltaYPeca < deltaYMAXIMO){//le para a esquerda
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
 
         if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
+            int deltaXCrazy;
+            int deltaYCrazy;
 
+            int deltaXPeca;
+            int deltaYPeca;
+            for(CrazyPiece crazy: crazyList){
+                deltaXCrazy = Math.abs(crazy.coordenadaX - xO);
+                deltaYCrazy = Math.abs(crazy.coordenadaY - yO);
+                if (deltaXCrazy == deltaYCrazy) {
+                    linha.add(crazy);
+                }
+            }
+
+            if (linha.size() == 0) {
+                return true;
+            } else {
+                for (CrazyPiece peca: linha){
+                    deltaXPeca = Math.abs(peca.coordenadaX - xO);
+                    deltaYPeca = Math.abs(peca.coordenadaY - yO);
+                    if (peca.coordenadaX > xO && peca.coordenadaY > yO && deltaXPeca < deltaXMAXIMO && deltaYPeca < deltaYMAXIMO){//le para a esquerda
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
 
         if (direcaoX == 0 && direcaoY < 0) {//CIMA
