@@ -150,14 +150,13 @@ public abstract class CrazyPiece {
                     if(deltaXDestino == 0 && deltaYDestino == 0){
                         return false;
                     }
-                }
-
-                if (deltaXDestino <= 2 && deltaYDestino <= 2){
-                    return true;
+                } else {
+                    if (deltaXDestino <= 2 && deltaYDestino <= 2){
+                        return true;
+                    }
                 }
             }
         }
-
         return false;
     }
 
@@ -170,6 +169,17 @@ public abstract class CrazyPiece {
             }
         }
         return rainhas;
+    }
+
+    public List<CrazyPiece> getRei(){
+        List<CrazyPiece> reis = new ArrayList<>();
+
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.idTipoPeca == 0){
+                reis.add(crazy);
+            }
+        }
+        return reis;
     }
 
     public boolean descobreDirecao(int direcaoX, int direcaoY, int xO, int yO, int deltaXMAXIMO, int deltaYMAXIMO) {
@@ -309,7 +319,7 @@ public abstract class CrazyPiece {
             }
         }
 
-        if (direcaoX == 0 && direcaoY > 0){//BAIXO
+        if (direcaoX == 0 && direcaoY > 0) {//BAIXO
             int deltaYPeca;
             for(CrazyPiece crazy: crazyList){
                 if (crazy.coordenadaX == xO) {
