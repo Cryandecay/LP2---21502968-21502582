@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import static pt.ulusofona.lp2.crazyChess.Simulador.turno;
-
 public class Lebre extends CrazyPiece {
 
     public Lebre(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
@@ -24,7 +22,7 @@ public class Lebre extends CrazyPiece {
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
 
-        if(turno%2 == 0){
+        if(estatisticas.turno%2 == 0){
             return false;
         } else {
 
@@ -52,7 +50,7 @@ public class Lebre extends CrazyPiece {
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
 
-        if(turno%2 == 0){
+        if(estatisticas.turno%2 == 0){
             return false;
         } else {
 

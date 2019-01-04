@@ -1,10 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static pt.ulusofona.lp2.crazyChess.Simulador.crazyList;
-import static pt.ulusofona.lp2.crazyChess.Simulador.tamanhoTabuleiro;
 
 public class TowerV extends CrazyPiece {
     public TowerV(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
@@ -65,7 +60,7 @@ public class TowerV extends CrazyPiece {
             return false;
         }
 
-        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 0, tamanhoTabuleiro)) {
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
             return false;
         }
 

@@ -1,8 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import java.util.List;
-
-import static pt.ulusofona.lp2.crazyChess.Simulador.tamanhoTabuleiro;
 
 public class PadreDaVila extends CrazyPiece {
     String tipo = "Padre da Vila";
@@ -84,7 +81,7 @@ public class PadreDaVila extends CrazyPiece {
             return false;
         }
 
-        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 3, 3)) {
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
             return false;
         }
 

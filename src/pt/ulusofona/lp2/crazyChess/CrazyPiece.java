@@ -3,16 +3,11 @@ package pt.ulusofona.lp2.crazyChess;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pt.ulusofona.lp2.crazyChess.Simulador.equipaAJogar;
-import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaPretas;
-import static pt.ulusofona.lp2.crazyChess.Simulador.jodaValidaBrancas;
-import static pt.ulusofona.lp2.crazyChess.Simulador.turno;
-import static pt.ulusofona.lp2.crazyChess.Simulador.turnoCaptura;
-import static pt.ulusofona.lp2.crazyChess.Simulador.capturas;
-import static pt.ulusofona.lp2.crazyChess.Simulador.crazyList;
-
-
 public abstract class CrazyPiece {
+
+    List<CrazyPiece> crazyList = null;
+    List<CrazyPiece> capturas = null;
+    Estatisticas estatisticas = null;
 
     protected int idPeca;
     protected int idTipoPeca;
@@ -55,6 +50,18 @@ public abstract class CrazyPiece {
                 ", " + coordenadaY +")";
     }
 
+    void setCrayList(List<CrazyPiece> lista) {
+        crazyList = lista;
+    }
+
+    void setEstatisticas(Estatisticas dados){
+        estatisticas = dados;
+    }
+
+    public void setCapturas(List<CrazyPiece> capturas) {
+        this.capturas = capturas;
+    }
+
     boolean findFriend(int x, int y, int iD, int equipa) {
         for (CrazyPiece crazy : crazyList) {
             if (crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y) {
@@ -69,15 +76,15 @@ public abstract class CrazyPiece {
     }
 
     void findCapture(int x, int y, int iD, int equipa) {
-        turno++;
-        turnoCaptura++;
+        estatisticas.turno++;
+        estatisticas.turnoCaptura++;
 
-        if (equipaAJogar == 10){
-            equipaAJogar = 20;
-            jodaValidaPretas++;
+        if (estatisticas.equipaAJogar == 10){
+            estatisticas.equipaAJogar = 20;
+            estatisticas.jodaValidaPretas++;
         } else {
-            equipaAJogar = 10;
-            jodaValidaBrancas++;
+            estatisticas.equipaAJogar = 10;
+            estatisticas.jodaValidaBrancas++;
         }
 
         for(CrazyPiece crazy: crazyList){
@@ -85,7 +92,7 @@ public abstract class CrazyPiece {
                 if(crazy.getId() != iD && crazy.getId() != 0){
                     if(crazy.getIdEquipa() != equipa){
                         capturas.add(crazy);
-                        turnoCaptura = 0;
+                        estatisticas.turnoCaptura = 0;
                     }
                 }
             }
@@ -94,7 +101,7 @@ public abstract class CrazyPiece {
         for(CrazyPiece crazy: crazyList){
             if(crazy.getId() == 0){
                 capturas.add(crazy);
-                turnoCaptura = 0;
+                estatisticas.turnoCaptura = 0;
             }
         }
         removeCrazyList();

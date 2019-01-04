@@ -86,7 +86,7 @@ public class Rainha extends CrazyPiece{
                 return false;
             }
 
-            if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 5, 5)) {
+            if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
                 return false;
             }
 

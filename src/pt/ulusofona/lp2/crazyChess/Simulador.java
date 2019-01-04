@@ -10,24 +10,19 @@ public class Simulador {
 
     //File ficheiroInicial;
     List<Integer> memPeca = new ArrayList<Integer>();
-    static List<CrazyPiece> crazyList = new ArrayList<>();
-    static List<CrazyPiece> capturas = new ArrayList<>();
-    static int turnoCaptura = 0; //contador dos turnos sem captura
-    static int turno = 0; //Turnos do jogo
-    static int equipaAJogar = 20;// 10 pretas 20 brancas
-    static Integer jodaInvalidaBrancas = 0;
-    static Integer jodaInvalidaPretas = 0;
-    static int jodaValidaBrancas = 0 ;
-    static int jodaValidaPretas = 0;
-    static int tamanhoTabuleiro = 0;
-    static int numeroPecas = 0;
+    List<CrazyPiece> crazyList = new ArrayList<>();
+    List<CrazyPiece> capturas = new ArrayList<>();
+    int turnoCaptura = 0; //contador dos turnos sem captura
+    int turno = 0; //Turnos do jogo
+    int equipaAJogar = 20;// 10 pretas 20 brancas
+    Integer jodaInvalidaBrancas = 0;
+    Integer jodaInvalidaPretas = 0;
+    int jodaValidaBrancas = 0 ;
+    int jodaValidaPretas = 0;
+    int tamanhoTabuleiro = 0;
+    int numeroPecas = 0;
     String resultadoFinal;
     List<String> autores = new ArrayList<>();
-    List<CrazyPiece> crazyListDaJogadaAnterior = new ArrayList<>();
-    static List<CrazyPiece> capturasDaJogadaAnterior = new ArrayList<>();
-    int turnoAnterior = 0;
-    int getEquipaAJogarAnterior = 20;
-
 
 
     public Simulador(){ }
@@ -136,6 +131,8 @@ public class Simulador {
     }
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
+        Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar, jodaInvalidaBrancas, jodaInvalidaPretas, jodaValidaBrancas, jodaValidaPretas);
+
         if(xO == xD && yO == yD){
             jogadaInvalida();
             return false;
@@ -150,6 +147,9 @@ public class Simulador {
         }
 
         for (CrazyPiece crazy: crazyList) {
+            crazy.setCrayList(crazyList);
+            crazy.setCapturas(capturas);
+            crazy.setEstatisticas(estatisticas);
              if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                  if(equipaAJogar == crazy.getIdEquipa()) {
                      memPeca.clear();
@@ -268,8 +268,9 @@ public class Simulador {
 
     public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
+
         for (CrazyPiece aCrazyList : crazyList) {
-            if (aCrazyList.getCoordenadaX()==xO && aCrazyList.getCoordenadaY()==yO){
+            if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
                 for (int a = 0; a < getTamanhoTabuleiro(); a++) {
                     for (int e = 0; e < getTamanhoTabuleiro(); e++) {
                         if (aCrazyList.movimentoPrevisao(xO, yO, a, e, aCrazyList)) {

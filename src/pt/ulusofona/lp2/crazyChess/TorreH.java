@@ -64,7 +64,7 @@ public class TorreH extends CrazyPiece {
             return false;
         }
 
-        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, tamanhoTabuleiro, 0)) {
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
             return false;
         }
 
