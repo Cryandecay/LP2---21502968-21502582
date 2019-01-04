@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
+import java.util.List;
+
 public class PoneiMagico extends CrazyPiece {
 
     public PoneiMagico(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
@@ -24,6 +26,9 @@ public class PoneiMagico extends CrazyPiece {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
         if (deltaX != 2) {
             return false;
         }
@@ -32,6 +37,10 @@ public class PoneiMagico extends CrazyPiece {
         }
 
         if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if(!antiRei(xO, yO, xD, yD, direcaoX, direcaoY)){
             return false;
         }
 
@@ -39,13 +48,92 @@ public class PoneiMagico extends CrazyPiece {
         coordenadaX = xD;
         coordenadaY = yD;
 
-        return true;//TODO:Testar
+        return true;//TODO:Testado e encontra reis
     }
 
+    public boolean antiRei(int xO, int yO, int xD, int yD, int direcaoX, int direcaoY) {
+        List<CrazyPiece> reis = getRei();
+        int deltaXReiOrigem;
+        int deltaYReiOrigem;
+
+        int deltaXReiDestino;
+        int deltaYReiDestino;
+
+        for (CrazyPiece rei: reis){
+            deltaXReiOrigem = Math.abs(rei.coordenadaX - xO);
+            deltaYReiOrigem = Math.abs(rei.coordenadaY - yO);
+
+            deltaXReiDestino = Math.abs(rei.coordenadaX - xD);
+            deltaYReiDestino = Math.abs(rei.coordenadaY - yD);
+
+            if (rei.coordenadaX == xD && rei.coordenadaY == yD){
+                return true;
+            }
+
+            if (deltaXReiOrigem > 2 || deltaYReiOrigem > 2) {
+                continue;
+            }
+
+            if (deltaXReiOrigem == 1 && deltaYReiOrigem == 1){
+                continue;
+            }
+
+            if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
+
+                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                    return false;
+                }
+
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                    return false;
+                }
+
+            }
+
+            if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
+
+                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                    return false;
+                }
+
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                    return false;
+                }
+            }
+
+            if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
+
+                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                    return false;
+                }
+
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                    return false;
+                }
+            }
+
+            if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
+
+                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                    return false;
+                }
+
+                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
 
         if (deltaX != 2) {
             return false;
@@ -58,7 +146,16 @@ public class PoneiMagico extends CrazyPiece {
             return false;
         }
 
-        return true;//TODO:Testar
-    }
+        if(!antiRei(xO, yO, xD, yD, direcaoX, direcaoY)){
+            return false;
+        }
 
+        return true;//TODO:Testado e encontra reis
+    }
 }
+
+
+
+
+
+

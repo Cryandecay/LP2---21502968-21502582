@@ -144,16 +144,10 @@ public abstract class CrazyPiece {
         int deltaYDestino;
 
         for(CrazyPiece rainha: rainhas){
+            deltaXDestino = Math.abs(rainha.coordenadaX - xD);
+            deltaYDestino = Math.abs(rainha.coordenadaY - yD);
+
             if(rainha.idEquipa != this.idEquipa){
-                deltaXDestino = Math.abs(rainha.coordenadaX - xD);
-                deltaYDestino = Math.abs(rainha.coordenadaY - yD);
-
-                if (this.idTipoPeca == 1){
-                    if(deltaXDestino == 0 && deltaYDestino == 0){
-                        return false;
-                    }
-                }
-
                 if (deltaXDestino <= 2 && deltaYDestino <= 2){
                     return true;
                 }
@@ -172,6 +166,17 @@ public abstract class CrazyPiece {
             }
         }
         return rainhas;
+    }
+
+    public List<CrazyPiece> getRei(){
+        List<CrazyPiece> reis = new ArrayList<>();
+
+        for(CrazyPiece crazy: crazyList){
+            if(crazy.idTipoPeca == 0){
+                reis.add(crazy);
+            }
+        }
+        return reis;
     }
 
     public boolean descobreDirecao(int direcaoX, int direcaoY, int xO, int yO, int deltaXMAXIMO, int deltaYMAXIMO) {
