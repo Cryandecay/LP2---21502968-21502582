@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.crazyChess;
 
-import static pt.ulusofona.lp2.crazyChess.Simulador.tamanhoTabuleiro;
-
 public class TorreH extends CrazyPiece {
     String tipo = "TorreH";
 
