@@ -163,7 +163,6 @@ public class Simulador {
                  }
              }
         }
-
         jogadaInvalida();
         return false;
     }

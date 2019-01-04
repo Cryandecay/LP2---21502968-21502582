@@ -49,7 +49,7 @@ public class PadreDaVila extends CrazyPiece {
             return false;
         }
 
-        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 3, 3)) {
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
             return false;
         }
 

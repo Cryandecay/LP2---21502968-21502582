@@ -40,7 +40,7 @@ public class TowerV extends CrazyPiece {
             return false;
         }
 
-        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, 0, tamanhoTabuleiro)) {
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
             return false;
         }
 
