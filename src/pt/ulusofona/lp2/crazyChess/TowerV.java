@@ -48,6 +48,7 @@ public class TowerV extends CrazyPiece {
 
         return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
     }
+
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int deltaX = Math.abs(xD - xO);

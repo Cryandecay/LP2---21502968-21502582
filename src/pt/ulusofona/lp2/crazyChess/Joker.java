@@ -358,7 +358,207 @@ public class Joker extends CrazyPiece {
 
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int contador = 0;
+        int multiploDe5 = 0;
+        while(contador != estatisticas.turno){
+
+            if (contador % 5 == 0 && contador != 0){
+                multiploDe5 = multiploDe5 + 5;
+            }
+
+            contador++;
+        }
+
+        if (estatisticas.turno - multiploDe5 == 0){//Rainha
+            idTipoPeca = 1;
+            return movimentoPrevisaoRainha(xO, yO, xD, yD, crazy);
+        }
+
+        if (estatisticas.turno - multiploDe5 == 1){//Ponei Magico
+            idTipoPeca = 2;
+            return movimentoPrevisaoPoneiMagico(xO, yO, xD, yD, crazy);
+        }
+
+        if (estatisticas.turno - multiploDe5 == 2){//Padre da Vila
+            idTipoPeca = 3;
+            return movimentoPrevisaoPadreDaVila(xO, yO, xD, yD, crazy);
+        }
+
+        if (estatisticas.turno - multiploDe5 == 3){//TorreH
+            idTipoPeca = 4;
+            return movimentoPrevisaoTorreH(xO, yO, xD, yD, crazy);
+        }
+
+        if (estatisticas.turno - multiploDe5 == 4){//TorreV
+            idTipoPeca = 5;
+            return movimentoPrevisaoTorreV(xO, yO, xD, yD, crazy);
+        }
+
+        if (estatisticas.turno - multiploDe5 == 5){//Lebre
+            idTipoPeca = 6;
+            return movimentoPrevisaoLebre(xO, yO, xD, yD, crazy);
+        }
+
         return false;
+    }
+
+    public boolean movimentoPrevisaoRainha(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX > 5) {
+            return false;
+        }
+
+        if (deltaY > 5) {
+            return false;
+        }
+
+        if (deltaX == deltaY || deltaX == 0 || deltaY == 0) {
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+
+            if (!antiRainha(xD, yD)){
+                return false;
+            }
+
+            if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
+                return false;
+            }
+
+
+            return true;//TODO:Testar direcao, testar caça rainha
+        } else {
+            return false;
+        }
+    }
+
+    public boolean movimentoPrevisaoPoneiMagico(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX != 2) {
+            return false;
+        }
+        if (deltaY != 2) {
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if(!antiRei(xO, yO, xD, yD, direcaoX, direcaoY)){
+            return false;
+        }
+
+        return true;//TODO:Testado e encontra reis
+    }
+
+    public boolean movimentoPrevisaoPadreDaVila(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX != deltaY) {
+            return false;
+        }
+
+        if (deltaX > 3 || deltaY > 3){
+            return false;
+        }
+
+        if (!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!encontraRainha(xD, yD)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
+            return false;
+        }
+
+        return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
+    }
+
+    public boolean movimentoPrevisaoTorreH(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if(deltaY != 0){
+            return false;
+        }
+
+        if(!findFriend(xD, yD, idPeca, idEquipa)){
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
+            return false;
+        }
+
+
+        return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
+    }
+
+    public boolean movimentoPrevisaoTorreV(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
+
+        int direcaoX = xD - xO;
+        int direcaoY = yD - yO;
+
+        if (deltaX != 0) {
+            return false;
+        }
+
+        if (!findFriend(xD, yD, idPeca, idEquipa)) {
+            return false;
+        }
+
+        if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
+            return false;
+        }
+
+        return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
+    }
+
+    public boolean movimentoPrevisaoLebre(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+
+        if(estatisticas.turno%2 != 0){
+            return false;
+        } else {
+
+            int deltaX = Math.abs(xD - xO);
+            int deltaY = Math.abs(yD - yO);
+
+            if (deltaX != 1) {
+                return false;
+            }
+            if (deltaY != 1) {
+                return false;
+            }
+
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+            return true; //TODO: Até contrário funciona.
+        }
     }
 
 }

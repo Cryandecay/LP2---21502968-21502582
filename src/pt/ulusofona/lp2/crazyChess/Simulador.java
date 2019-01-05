@@ -77,8 +77,6 @@ public class Simulador {
                     mapas.add(firstRow.get(i));
                 }
 
-
-
                 stringTest(pecas, mapas);
 
                 if (crazyList.size() != numeroPecas){
@@ -166,6 +164,7 @@ public class Simulador {
             crazy.setCrayList(crazyList);
             crazy.setCapturas(capturas);
             crazy.setEstatisticas(estatisticas);
+
              if (crazy.getCoordenadaX() == xO && crazy.getCoordenadaY() == yO) {
                  if(equipaAJogar == crazy.getIdEquipa()) {
                      memPeca.clear();
@@ -210,27 +209,27 @@ public class Simulador {
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
 
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdEquipa()==10 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa() == 10 && crazy.getIdTipoPeca() == 0){
                 blackKing.add(crazy);
             }
-            if(crazy.getIdEquipa()==20 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa() == 20 && crazy.getIdTipoPeca() == 0){
                 whiteKing.add(crazy);
             }
         }
-        if (blackKing.size() == 1 && whiteKing.size() == 1){
+        if (blackKing.size() == 1 && whiteKing.size() == 1 && crazyList.size() == 2){
             resultadoFinal="EMPATE";
             return true;
         }
-        if (blackKing.size()==0){
+        if (blackKing.size() == 0){
             resultadoFinal="VENCERAM AS BRANCAS";
             return true;
         }
-        if (whiteKing.size()==0){
+        if (whiteKing.size() == 0){
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
         if(turnoCaptura == 10 && capturas.size() >= 1){
-            resultadoFinal="EMPATE";
+            resultadoFinal = "EMPATE";
             return true;
         }
         return false;
@@ -280,7 +279,7 @@ public class Simulador {
     public int contarPecasCapturadas(int equipa){
         int capturadas = 0;
         for (CrazyPiece captured: capturas){
-            if(captured.getIdEquipa()==equipa){
+            if(captured.getIdEquipa() == equipa){
                 capturadas++;
             }
         }
@@ -302,7 +301,7 @@ public class Simulador {
     public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-        String equipaNaoAtiva = "Pedido Invalido";
+        String equipaNaoAtiva = "Pedido inválido";
 
         for (CrazyPiece aCrazyList : crazyList) {
             if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
@@ -352,6 +351,8 @@ public class Simulador {
             equipaAJogar = 10;
         }
 
+        turno--;
+
     }
 
     public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
@@ -363,7 +364,6 @@ public class Simulador {
             writer.write(newLine);
             writer.write(String.valueOf(numeroPecas));
             writer.write(newLine);
-
 
             for (CrazyPiece aCrazyList : crazyList) {
                 writer.write(aCrazyList.getId() + ":" + aCrazyList.getIdTipoPeca() + ":" + aCrazyList.getIdEquipa() + ":" + aCrazyList.getAlcunha());
