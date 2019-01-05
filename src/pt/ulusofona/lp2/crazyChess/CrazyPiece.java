@@ -46,8 +46,8 @@ public abstract class CrazyPiece {
     @Override
     public String toString() {//TODO: Falta fazer para capturadas
         return  idPeca + " | " +
-                this.valorRelativo + " | "
-                + this.tipoeDePeca + " | "
+                this.tipoeDePeca + " | "
+                + this.valorRelativo + " | "
                 + idEquipa + " | "
                 + alcunha + " @"+
                 " (" + coordenadaX +

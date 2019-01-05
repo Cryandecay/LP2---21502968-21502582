@@ -14,7 +14,7 @@ public class Simulador {
     List<CrazyPiece> capturas = new ArrayList<>();
     int turnoCaptura = 0; //contador dos turnos sem captura
     int turno = 0; //Turnos do jogo
-    int equipaAJogar = 20;// 10 pretas 20 brancas
+    int equipaAJogar = 10;// 10 pretas 20 brancas
     Integer jodaInvalidaBrancas = 0;
     Integer jodaInvalidaPretas = 0;
     int jodaValidaBrancas = 0 ;
@@ -311,6 +311,12 @@ public class Simulador {
                 crazyList.get(i).setCoordenadaY(memPeca.get(2));
                 getIDPeca( crazyList.get(i).getCoordenadaX(), crazyList.get(i).getCoordenadaY());
             }
+        }
+
+        if (equipaAJogar == 10){
+            equipaAJogar = 20;
+        } else {
+            equipaAJogar = 10;
         }
 
     }
