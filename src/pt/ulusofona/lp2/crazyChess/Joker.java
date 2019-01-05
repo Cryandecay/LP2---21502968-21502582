@@ -30,7 +30,7 @@ public class Joker extends CrazyPiece {
         int contador = 0;
         int multiploDe5 = 0;
         while(contador != estatisticas.turno){
-            
+
             if (contador % 5 == 0 && contador != 0){
                 multiploDe5 = multiploDe5 + 5;
             }
@@ -329,7 +329,7 @@ public class Joker extends CrazyPiece {
     }
 
     public boolean movimentoLebre(int xO, int yO, int xD, int yD, CrazyPiece crazy){
-        if(estatisticas.turno%2 == 0){
+        if(estatisticas.turno%2 != 0){
             return false;
         } else {
 

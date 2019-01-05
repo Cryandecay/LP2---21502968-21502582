@@ -25,297 +25,33 @@ public class Rei extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-                //king
-                //preta
-                if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == estatisticas.equipaAJogar ) {
-                    System.out.println(crazy.getIdEquipa());
-                    if (xD == xO + 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (xD == xO - 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    return false;
-                }
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
 
-                if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == estatisticas.equipaAJogar ) {
-                    System.out.println(crazy.getIdEquipa());
-                    if (xD == xO + 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (xD == xO - 1 && yD == yO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO + 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO + 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
-                    if (yD == yO - 1 && xD == xO - 1) {
-                        if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            return false;
-                        }
-                        crazy.setCoordenadaX(xD);
-                        crazy.setCoordenadaY(yD);
-                        findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
-                        return true;
-                    }
+        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1){
 
-                    return false;
-                }
-        return false;
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+
+            findCapture(xD, yD, idPeca, idEquipa);
+            coordenadaX = xD;
+            coordenadaY = yD;
+
+            return true; //TODO: Até contrário funciona.
+
+        } else {
+            return false;
+        }
+
     }
 
 
 
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        //king
-        //preta
-        if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == estatisticas.equipaAJogar ) {
-            if (xD == xO + 1 && yD == yO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (xD == xO - 1 && yD == yO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO - 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO - 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            return false;
-        }
 
-        if (crazy.getIdTipoPeca() == 0 && crazy.getIdEquipa() == estatisticas.equipaAJogar ) {
-            System.out.println(crazy.getIdEquipa());
-            if (xD == xO + 1 && yD == yO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (xD == xO - 1 && yD == yO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO + 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO + 1 && xD == xO - 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            if (yD == yO - 1 && xD == xO - 1) {
-                if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                    return false;
-                }
-                return true;
-            }
-            return false;
-        }
+
         return false;
     }
 

@@ -26,7 +26,7 @@ public class Lebre extends CrazyPiece {
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
 
-        if(estatisticas.turno%2 == 0){
+        if(estatisticas.turno%2 != 0){
             return false;
         } else {
 
