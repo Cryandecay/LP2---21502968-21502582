@@ -7,7 +7,7 @@ public class Joker extends CrazyPiece {
 
     public Joker(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
-        tipoeDePeca = "Joker";
+        tipoeDePeca = "Joker/Rainha";
         valorRelativo = "4";
     }
 
@@ -40,31 +40,37 @@ public class Joker extends CrazyPiece {
 
         if (estatisticas.turno - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
+            tipoeDePeca = "Joker/Rainha";
             return movimentoRainha(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.turno - multiploDe5 == 1){//Ponei Magico
             idTipoPeca = 2;
+            tipoeDePeca = "Joker/Ponei Magico";
             return movimentoPoneiMagico(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.turno - multiploDe5 == 2){//Padre da Vila
             idTipoPeca = 3;
+            tipoeDePeca = "Joker/Padre da Vila";
             return movimentoPadreDaVila(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.turno - multiploDe5 == 3){//TorreH
             idTipoPeca = 4;
+            tipoeDePeca = "Joker/TorreH";
             return movimentoTorreH(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.turno - multiploDe5 == 4){//TorreV
             idTipoPeca = 5;
+            tipoeDePeca = "Joker/TorreV";
             return movimentoTorreV(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.turno - multiploDe5 == 5){//Lebre
             idTipoPeca = 6;
+            tipoeDePeca = "Joker/Lebre";
             return movimentoLebre(xO, yO, xD, yD, crazy);
         }
 

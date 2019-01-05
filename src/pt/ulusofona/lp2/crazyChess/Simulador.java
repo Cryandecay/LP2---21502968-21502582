@@ -194,27 +194,27 @@ public class Simulador {
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
 
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdEquipa()==10 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa() == 10 && crazy.getIdTipoPeca() == 0){
                 blackKing.add(crazy);
             }
-            if(crazy.getIdEquipa()==20 && crazy.getIdTipoPeca()==0){
+            if(crazy.getIdEquipa() == 20 && crazy.getIdTipoPeca() == 0){
                 whiteKing.add(crazy);
             }
         }
-        if (blackKing.size() == 1 && whiteKing.size() == 1){
+        if (blackKing.size() == 1 && whiteKing.size() == 1 && crazyList.size() < 2){
             resultadoFinal="EMPATE";
             return true;
         }
-        if (blackKing.size()==0){
+        if (blackKing.size() == 0){
             resultadoFinal="VENCERAM AS BRANCAS";
             return true;
         }
-        if (whiteKing.size()==0){
+        if (whiteKing.size() == 0){
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
         if(turnoCaptura == 10 && capturas.size() >= 1){
-            resultadoFinal="EMPATE";
+            resultadoFinal = "EMPATE";
             return true;
         }
         return false;
@@ -264,7 +264,7 @@ public class Simulador {
     public int contarPecasCapturadas(int equipa){
         int capturadas = 0;
         for (CrazyPiece captured: capturas){
-            if(captured.getIdEquipa()==equipa){
+            if(captured.getIdEquipa() == equipa){
                 capturadas++;
             }
         }
@@ -286,7 +286,7 @@ public class Simulador {
     public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-        String equipaNaoAtiva = "Pedido Invalido";
+        String equipaNaoAtiva = "Pedido inválido";
 
         for (CrazyPiece aCrazyList : crazyList) {
             if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
@@ -335,6 +335,8 @@ public class Simulador {
         } else {
             equipaAJogar = 10;
         }
+
+        turno--;
 
     }
 
