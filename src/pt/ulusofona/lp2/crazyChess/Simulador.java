@@ -56,12 +56,28 @@ public class Simulador {
                 tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
 
+                if (firstRow.size()==tamanhoTabuleiro+numeroPecas+1){
+                    for (int e=0;e<Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(0));e++) {
+                        capturas.add(new Rei("0","0","10","Dummie",2,1));
+                    }
+                    jodaValidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(1));
+                    jodaInvalidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(2));
+                    for (int e=0;e<Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(3));e++) {
+                        capturas.add(new Rei("0","0","20","Dummie",2,1));
+                    }
+                    jodaValidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(4));
+                    jodaInvalidaBrancas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(5));
+                    firstRow.remove(tamanhoTabuleiro+numeroPecas+2);
+                }
+
                 for(int i = 2; i < numeroPecas + 2; i++){
                     pecas.add(firstRow.get(i));
                 }
                 for(int i = 2 + numeroPecas; i < firstRow.size(); i++){
                     mapas.add(firstRow.get(i));
                 }
+
+
 
                 stringTest(pecas, mapas);
 
@@ -194,27 +210,27 @@ public class Simulador {
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
 
         for(CrazyPiece crazy: crazyList){
-            if(crazy.getIdEquipa() == 10 && crazy.getIdTipoPeca() == 0){
+            if(crazy.getIdEquipa()==10 && crazy.getIdTipoPeca()==0){
                 blackKing.add(crazy);
             }
-            if(crazy.getIdEquipa() == 20 && crazy.getIdTipoPeca() == 0){
+            if(crazy.getIdEquipa()==20 && crazy.getIdTipoPeca()==0){
                 whiteKing.add(crazy);
             }
         }
-        if (blackKing.size() == 1 && whiteKing.size() == 1 && crazyList.size() < 2){
+        if (blackKing.size() == 1 && whiteKing.size() == 1){
             resultadoFinal="EMPATE";
             return true;
         }
-        if (blackKing.size() == 0){
+        if (blackKing.size()==0){
             resultadoFinal="VENCERAM AS BRANCAS";
             return true;
         }
-        if (whiteKing.size() == 0){
+        if (whiteKing.size()==0){
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
         if(turnoCaptura == 10 && capturas.size() >= 1){
-            resultadoFinal = "EMPATE";
+            resultadoFinal="EMPATE";
             return true;
         }
         return false;
@@ -264,7 +280,7 @@ public class Simulador {
     public int contarPecasCapturadas(int equipa){
         int capturadas = 0;
         for (CrazyPiece captured: capturas){
-            if(captured.getIdEquipa() == equipa){
+            if(captured.getIdEquipa()==equipa){
                 capturadas++;
             }
         }
@@ -286,7 +302,7 @@ public class Simulador {
     public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-        String equipaNaoAtiva = "Pedido inválido";
+        String equipaNaoAtiva = "Pedido Invalido";
 
         for (CrazyPiece aCrazyList : crazyList) {
             if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
@@ -336,8 +352,6 @@ public class Simulador {
             equipaAJogar = 10;
         }
 
-        turno--;
-
     }
 
     public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
@@ -345,13 +359,22 @@ public class Simulador {
         try {
             File output = new File( ficheiroDestino.getName() );
             FileWriter writer = new FileWriter(output);
-            writer.write(String.valueOf(crazyList.size()));
-            writer.write(newLine);
             writer.write(String.valueOf(getTamanhoTabuleiro()));
             writer.write(newLine);
+            writer.write(String.valueOf(numeroPecas));
+            writer.write(newLine);
+
+
             for (CrazyPiece aCrazyList : crazyList) {
                 writer.write(aCrazyList.getId() + ":" + aCrazyList.getIdTipoPeca() + ":" + aCrazyList.getIdEquipa() + ":" + aCrazyList.getAlcunha());
                 writer.write(newLine);
+            }
+
+            if (capturas.size()>0){
+                for (int i=0; i<capturas.size();i++){
+                    writer.write(capturas.get(i).getId() + ":" + capturas.get(i).getIdTipoPeca() + ":" + capturas.get(i).getIdEquipa() + ":" + capturas.get(i).getAlcunha());
+                    writer.write(newLine);
+                }
             }
 
             for (int i=0;i<getTamanhoTabuleiro();i++){
@@ -374,6 +397,17 @@ public class Simulador {
                 }
                 writer.write(newLine);
             }
+            writer.write(String.valueOf(contarPecasCapturadas(10)));
+            writer.write(":");
+            writer.write(String.valueOf(jodaValidaPretas));
+            writer.write(":");
+            writer.write(String.valueOf(jodaInvalidaPretas));
+            writer.write(":");
+            writer.write(String.valueOf(contarPecasCapturadas(20)));
+            writer.write(":");
+            writer.write(String.valueOf(jodaValidaBrancas));
+            writer.write(":");
+            writer.write(String.valueOf(jodaInvalidaBrancas));
             writer.close();
         }
         catch (IOException e) {

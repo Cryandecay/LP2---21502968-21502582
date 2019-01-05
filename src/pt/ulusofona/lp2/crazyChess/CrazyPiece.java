@@ -162,10 +162,11 @@ public abstract class CrazyPiece {
             deltaXDestino = Math.abs(rainha.coordenadaX - xD);
             deltaYDestino = Math.abs(rainha.coordenadaY - yD);
 
+            if(rainha.idEquipa != this.idEquipa){
                 if (deltaXDestino <= 2 && deltaYDestino <= 2){
                     return true;
                 }
-
+            }
         }
 
         return false;
