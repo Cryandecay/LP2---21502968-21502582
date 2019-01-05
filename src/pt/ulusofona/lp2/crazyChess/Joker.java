@@ -27,41 +27,50 @@ public class Joker extends CrazyPiece {
 
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
-        if (estatisticas.turno % 5 == 0 && estatisticas.turno != 0){
+        int contador = 0;
+        int multiploDe5 = 0;
+        while(contador != estatisticas.turno){
+            
+            if (contador % 5 == 0 && contador != 0){
+                multiploDe5 = multiploDe5 + 5;
+            }
 
+            contador++;
         }
-        if (estatisticas.turno == 0){//Rainha
+
+        if (estatisticas.turno - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
             return movimentoRainha(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno == 1){//Ponei Magico
+        if (estatisticas.turno - multiploDe5 == 1){//Ponei Magico
             idTipoPeca = 2;
             return movimentoPoneiMagico(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno == 2){//Padre da Vila
+        if (estatisticas.turno - multiploDe5 == 2){//Padre da Vila
             idTipoPeca = 3;
             return movimentoPadreDaVila(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno == 3){//TorreH
+        if (estatisticas.turno - multiploDe5 == 3){//TorreH
             idTipoPeca = 4;
             return movimentoTorreH(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno == 4){//TorreV
+        if (estatisticas.turno - multiploDe5 == 4){//TorreV
             idTipoPeca = 5;
             return movimentoTorreV(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno == 5){//Lebre
+        if (estatisticas.turno - multiploDe5 == 5){//Lebre
             idTipoPeca = 6;
             return movimentoLebre(xO, yO, xD, yD, crazy);
         }
 
         return false;
     }
+
 
     public boolean movimentoRainha(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int deltaX = Math.abs(xD - xO);
@@ -153,12 +162,18 @@ public class Joker extends CrazyPiece {
         int deltaXReiDestino;
         int deltaYReiDestino;
 
+        int lateralX;
+        int lateralY;
+
         for (CrazyPiece rei: reis){
             deltaXReiOrigem = Math.abs(rei.coordenadaX - xO);
             deltaYReiOrigem = Math.abs(rei.coordenadaY - yO);
 
             deltaXReiDestino = Math.abs(rei.coordenadaX - xD);
             deltaYReiDestino = Math.abs(rei.coordenadaY - yD);
+
+            lateralX = rei.coordenadaX - xO;
+            lateralY = rei.coordenadaY - yO;
 
             if (rei.coordenadaX == xD && rei.coordenadaY == yD){
                 return true;
@@ -174,52 +189,59 @@ public class Joker extends CrazyPiece {
 
             if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
 
-                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                if ((lateralX == -1 && lateralY == 0) && (lateralX == 0 && lateralY == 1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
 
             }
 
             if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
 
-                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                if ((lateralX == -1 && lateralY == 0) && (lateralX == 0 && lateralY == -1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
             if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
 
-                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                if ((lateralX == 1 && lateralY == 0) && (lateralX == 0 && lateralY == -1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
             if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
 
-                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                if ((lateralX == 1 && lateralY == 0) && (lateralX == 0 && lateralY == 1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
         }
-
-        return true;
+        return false;
     }
 
     public boolean movimentoPadreDaVila(int xO, int yO, int xD, int yD, CrazyPiece crazy){

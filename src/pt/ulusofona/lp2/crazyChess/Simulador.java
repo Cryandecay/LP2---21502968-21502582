@@ -192,6 +192,7 @@ public class Simulador {
     public boolean jogoTerminado(){
         List<CrazyPiece> whiteKing = new ArrayList<CrazyPiece>();
         List<CrazyPiece> blackKing = new ArrayList<CrazyPiece>();
+
         for(CrazyPiece crazy: crazyList){
             if(crazy.getIdEquipa()==10 && crazy.getIdTipoPeca()==0){
                 blackKing.add(crazy);
@@ -200,7 +201,7 @@ public class Simulador {
                 whiteKing.add(crazy);
             }
         }
-        if (blackKing.size()==1 && whiteKing.size()==1){
+        if (blackKing.size() == 1 && whiteKing.size() == 1){
             resultadoFinal="EMPATE";
             return true;
         }
