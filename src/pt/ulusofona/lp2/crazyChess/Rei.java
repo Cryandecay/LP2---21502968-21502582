@@ -4,10 +4,14 @@ public class Rei extends CrazyPiece {
 
     public Rei(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "Rei";
+        valorRelativo = "(infinito)";
     }
 
     public Rei(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "Rei";
+        valorRelativo = "(infinito)";
     }
 
     @Override
@@ -27,7 +31,6 @@ public class Rei extends CrazyPiece {
                     System.out.println(crazy.getIdEquipa());
                     if (xD == xO + 1 && yD == yO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -36,7 +39,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (xD == xO - 1 && yD == yO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -45,7 +47,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
@@ -54,7 +55,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
@@ -63,7 +63,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -73,7 +72,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -83,7 +81,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -93,7 +90,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -103,7 +99,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaPretas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -111,7 +106,6 @@ public class Rei extends CrazyPiece {
                         findCapture(xD, yD,crazy.getId(), crazy.getIdEquipa());
                         return true;
                     }
-                    estatisticas.jodaInvalidaPretas++;
                     return false;
                 }
 
@@ -119,7 +113,6 @@ public class Rei extends CrazyPiece {
                     System.out.println(crazy.getIdEquipa());
                     if (xD == xO + 1 && yD == yO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -128,7 +121,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (xD == xO - 1 && yD == yO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -137,7 +129,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
@@ -146,7 +137,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaY(yD);
@@ -155,7 +145,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -165,7 +154,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -175,7 +163,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO + 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -185,7 +172,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO + 1 && xD == xO - 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -195,7 +181,6 @@ public class Rei extends CrazyPiece {
                     }
                     if (yD == yO - 1 && xD == xO - 1) {
                         if(!findFriend(xD, yD, crazy.getId(), crazy.getIdEquipa())){
-                            estatisticas.jodaInvalidaBrancas++;
                             return false;
                         }
                         crazy.setCoordenadaX(xD);
@@ -204,15 +189,7 @@ public class Rei extends CrazyPiece {
                         return true;
                     }
 
-                    estatisticas.jodaInvalidaBrancas++;
                     return false;
-                }
-                if (crazy.getIdEquipa() != estatisticas.equipaAJogar ) {
-                    if (crazy.getIdEquipa()==10){
-                        estatisticas.jodaInvalidaPretas++;
-                    }else{
-                        estatisticas.jodaInvalidaBrancas++;
-                    }
                 }
         return false;
     }

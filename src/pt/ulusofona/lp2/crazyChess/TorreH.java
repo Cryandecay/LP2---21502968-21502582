@@ -1,14 +1,17 @@
 package pt.ulusofona.lp2.crazyChess;
 
 public class TorreH extends CrazyPiece {
-    String tipo = "TorreH";
 
     public TorreH(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "TorreH";
+        valorRelativo = "3";
     }
 
     public TorreH(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "TorreH";
+        valorRelativo = "3";
     }
 
     @Override

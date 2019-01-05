@@ -9,6 +9,9 @@ public abstract class CrazyPiece {
     List<CrazyPiece> capturas = null;
     Estatisticas estatisticas = null;
 
+    protected String tipoeDePeca;
+    protected String valorRelativo;
+
     protected int idPeca;
     protected int idTipoPeca;
     protected int idEquipa;
@@ -42,8 +45,9 @@ public abstract class CrazyPiece {
 
     @Override
     public String toString() {//TODO: Falta fazer para capturadas
-        return  idPeca + " | "
-                + getClass().getSimpleName() + " | "
+        return  idPeca + " | " +
+                this.valorRelativo + " | "
+                + this.tipoeDePeca + " | "
                 + idEquipa + " | "
                 + alcunha + " @"+
                 " (" + coordenadaX +
@@ -79,14 +83,6 @@ public abstract class CrazyPiece {
         estatisticas.turno++;
         estatisticas.turnoCaptura++;
 
-        if (estatisticas.equipaAJogar == 10){
-            estatisticas.equipaAJogar = 20;
-            estatisticas.jodaValidaPretas++;
-        } else {
-            estatisticas.equipaAJogar = 10;
-            estatisticas.jodaValidaBrancas++;
-        }
-
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
                 if(crazy.getId() != iD && crazy.getId() != 0){
@@ -115,6 +111,18 @@ public abstract class CrazyPiece {
 
     public int getId(){
         return idPeca;
+    }
+
+    public List<CrazyPiece> getCrazyList() {
+        return crazyList;
+    }
+
+    public List<CrazyPiece> getCapturas() {
+        return capturas;
+    }
+
+    public Estatisticas getEstatisticas() {
+        return estatisticas;
     }
 
     public int getIdTipoPeca() {

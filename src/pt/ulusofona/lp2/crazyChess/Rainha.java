@@ -5,10 +5,14 @@ import java.util.List;
 public class Rainha extends CrazyPiece{
     public Rainha(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "Rainha";
+        valorRelativo = "8";
     }
 
     public Rainha(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
+        tipoeDePeca = "Rainha";
+        valorRelativo = "8";
     }
 
     @Override

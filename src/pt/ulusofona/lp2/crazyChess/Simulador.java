@@ -131,7 +131,7 @@ public class Simulador {
     }
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
-        Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar, jodaInvalidaBrancas, jodaInvalidaPretas, jodaValidaBrancas, jodaValidaPretas);
+        Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
 
         if(xO == xD && yO == yD){
             jogadaInvalida();
@@ -156,7 +156,21 @@ public class Simulador {
                      memPeca.add(crazy.getId());
                      memPeca.add(xO);
                      memPeca.add(yO);
-                      return crazy.movimento(xO, yO, xD, yD, crazy);
+
+                     if (equipaAJogar == 10){
+                         equipaAJogar = 20;
+                         jodaValidaPretas++;
+                     } else {
+                         equipaAJogar = 10;
+                         jodaValidaBrancas++;
+                     }
+
+                     turno = crazy.getEstatisticas().getTurno();
+                     turnoCaptura = crazy.getEstatisticas().getTurnoCaptura();
+                     capturas = crazy.getCapturas();
+                     crazyList = crazy.getCrazyList();
+
+                     return crazy.movimento(xO, yO, xD, yD, crazy);
                  } else {
                      jogadaInvalida();
                      return false;
