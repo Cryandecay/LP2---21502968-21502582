@@ -28,7 +28,11 @@ public class Rei extends CrazyPiece {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
-        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1){
+        if (deltaX > 1 || deltaY > 1){
+            return false;
+        }
+
+        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1 || deltaX == deltaY){
 
             if(!findFriend(xD, yD, idPeca, idEquipa)){
                 return false;
@@ -50,9 +54,20 @@ public class Rei extends CrazyPiece {
 
     @Override
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+        int deltaX = Math.abs(xD - xO);
+        int deltaY = Math.abs(yD - yO);
 
+        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1){
 
-        return false;
+            if(!findFriend(xD, yD, idPeca, idEquipa)){
+                return false;
+            }
+
+            return true; //TODO: Até contrário funciona.
+
+        } else {
+            return false;
+        }
     }
 
 }

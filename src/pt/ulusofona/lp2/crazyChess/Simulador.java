@@ -213,7 +213,7 @@ public class Simulador {
             resultadoFinal="VENCERAM AS PRETAS";
             return true;
         }
-        if(turnoCaptura==10 && capturas.size()>=1){
+        if(turnoCaptura == 10 && capturas.size() >= 1){
             resultadoFinal="EMPATE";
             return true;
         }
@@ -245,22 +245,24 @@ public class Simulador {
 
     public List<String> getResultados(){//TODO:Ler e confirmar no enunciado
         List<String> resultado = new ArrayList<String>();
+
         resultado.add("JOGO DE CRAZY CHESS");
         resultado.add("Resultado: " + resultadoFinal );
         resultado.add( "---" );
         resultado.add("Equipa das Pretas");
-        resultado.add(contarPecasCapturadas(1)+"");
+        resultado.add(contarPecasCapturadas(10)+"");
         resultado.add(jodaValidaPretas+"");
         resultado.add(jodaInvalidaPretas+"");
         resultado.add("Equipa das Brancas");
-        resultado.add( contarPecasCapturadas(0)+"" );
+        resultado.add( contarPecasCapturadas(20)+"" );
         resultado.add(jodaValidaBrancas+"" );
         resultado.add("" + jodaInvalidaBrancas);
+
         return resultado;
     }
 
     public int contarPecasCapturadas(int equipa){
-        int capturadas=0;
+        int capturadas = 0;
         for (CrazyPiece captured: capturas){
             if(captured.getIdEquipa()==equipa){
                 capturadas++;
@@ -283,18 +285,32 @@ public class Simulador {
 
     public List<String> obterSugestoesJogada(int xO, int yO){
         List<String> listaDeSugestoes = new ArrayList<>();
+        Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
+        String equipaNaoAtiva = "Pedido Invalido";
 
         for (CrazyPiece aCrazyList : crazyList) {
             if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
-                for (int a = 0; a < getTamanhoTabuleiro(); a++) {
-                    for (int e = 0; e < getTamanhoTabuleiro(); e++) {
-                        if (aCrazyList.movimentoPrevisao(xO, yO, a, e, aCrazyList)) {
-                            listaDeSugestoes.add(e + "," + a);
+
+                if (equipaAJogar != aCrazyList.getIdEquipa()) {
+                    listaDeSugestoes.add(equipaNaoAtiva);
+                    return listaDeSugestoes;
+                }
+                aCrazyList.setCrayList(crazyList);
+                aCrazyList.setCapturas(capturas);
+                aCrazyList.setEstatisticas(estatisticas);
+
+                for (int linhaX = 0; linhaX < getTamanhoTabuleiro(); linhaX++) {
+                    for (int colunaY = 0; colunaY < getTamanhoTabuleiro(); colunaY++) {
+                        if (aCrazyList.movimentoPrevisao(xO, yO, linhaX, colunaY, aCrazyList)) {
+                            listaDeSugestoes.add(linhaX + ", " + colunaY);
                         }
                     }
                 }
+                return listaDeSugestoes;
             }
         }
+
+        listaDeSugestoes.add(equipaNaoAtiva);
         return listaDeSugestoes;
     }
 
