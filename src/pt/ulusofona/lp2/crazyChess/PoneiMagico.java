@@ -63,12 +63,18 @@ public class PoneiMagico extends CrazyPiece {
         int deltaXReiDestino;
         int deltaYReiDestino;
 
+        int lateralX;
+        int lateralY;
+
         for (CrazyPiece rei: reis){
             deltaXReiOrigem = Math.abs(rei.coordenadaX - xO);
             deltaYReiOrigem = Math.abs(rei.coordenadaY - yO);
 
             deltaXReiDestino = Math.abs(rei.coordenadaX - xD);
             deltaYReiDestino = Math.abs(rei.coordenadaY - yD);
+
+            lateralX = rei.coordenadaX - xO;
+            lateralY = rei.coordenadaY - yO;
 
             if (rei.coordenadaX == xD && rei.coordenadaY == yD){
                 return true;
@@ -84,52 +90,59 @@ public class PoneiMagico extends CrazyPiece {
 
             if (direcaoX < 0 && direcaoY > 0) {//ESQUERDA BAIXO
 
-                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                if ((lateralX == -1 && lateralY == 0) && (lateralX == 0 && lateralY == 1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
 
             }
 
             if (direcaoX < 0 && direcaoY < 0) {//ESQUERDA CIMA
 
-                if (deltaXReiOrigem == -1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                if ((lateralX == -1 && lateralY == 0) && (lateralX == 0 && lateralY == -1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
             if (direcaoX > 0 && direcaoY < 0) {//DIREITA CIMA
 
-                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == -1){
+                if ((lateralX == 1 && lateralY == 0) && (lateralX == 0 && lateralY == -1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
             if (direcaoX > 0 && direcaoY > 0) {//DIREITA BAIXO
 
-                if (deltaXReiOrigem == 1 && deltaYReiOrigem == 0 || deltaXReiOrigem == 0 && deltaYReiOrigem == 1){
+                if ((lateralX == 1 && lateralY == 0) && (lateralX == 0 && lateralY == 1)){
                     return false;
                 }
 
-                if(deltaXReiDestino <= 2 && deltaYReiDestino <= 2){
+                if((deltaXReiDestino <= 2 && deltaYReiDestino == 0) && (deltaXReiDestino == 0 && deltaYReiDestino <= 2)){
                     return false;
                 }
+
+                return true;
             }
 
         }
-
-        return true;
+        return false;
     }
 
     @Override

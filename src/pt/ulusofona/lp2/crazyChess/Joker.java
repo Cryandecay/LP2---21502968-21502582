@@ -28,7 +28,7 @@ public class Joker extends CrazyPiece {
     @Override
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         if (estatisticas.turno % 5 == 0 && estatisticas.turno != 0){
-            
+
         }
         if (estatisticas.turno == 0){//Rainha
             idTipoPeca = 1;
