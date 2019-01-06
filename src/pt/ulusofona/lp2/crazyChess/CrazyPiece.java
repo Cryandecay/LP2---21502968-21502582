@@ -58,6 +58,14 @@ public abstract class CrazyPiece {
         crazyList = lista;
     }
 
+    public void setTipoeDePeca(String tipoeDePeca) {
+        this.tipoeDePeca = tipoeDePeca;
+    }
+
+    public void setIdTipoPeca(int idTipoPeca) {
+        this.idTipoPeca = idTipoPeca;
+    }
+
     void setEstatisticas(Estatisticas dados){
         estatisticas = dados;
     }

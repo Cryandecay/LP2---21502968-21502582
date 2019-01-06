@@ -560,5 +560,4 @@ public class Joker extends CrazyPiece {
             return true; //TODO: Até contrário funciona.
         }
     }
-
 }

@@ -12,6 +12,7 @@ public class Simulador {
     List<Integer> memPeca = new ArrayList<Integer>();
     List<CrazyPiece> crazyList = new ArrayList<>();
     List<CrazyPiece> capturas = new ArrayList<>();
+    List<CrazyPiece> listaDeJokers = new ArrayList<>();
     int turnoCaptura = 0; //contador dos turnos sem captura
     int turno = 0; //Turnos do jogo
     int equipaAJogar = 10;// 10 pretas 20 brancas
@@ -129,6 +130,7 @@ public class Simulador {
 
                         } else if(peca.get(i).get(1).equals("7")){//Joker
                             crazyList.add(new Joker(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+                            listaDeJokers.add(new Joker(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
                         }
                     }
                 }
@@ -144,8 +146,61 @@ public class Simulador {
         }
     }
 
+    void atualizaJoker(CrazyPiece joker){
+
+        int contador = 0;
+        int multiploDe5 = 0;
+        while(contador != turno){
+
+            if (contador % 5 == 0 && contador != 0){
+                multiploDe5 = multiploDe5 + 5;
+            }
+
+            contador++;
+        }
+
+        if (turno - multiploDe5 == 0){//Rainha
+            joker.setIdTipoPeca(1);
+            joker.setTipoeDePeca("Joker/Rainha");
+        }
+
+        if (turno - multiploDe5 == 1){//Ponei Magico
+            joker.setIdTipoPeca(2);
+            joker.setTipoeDePeca("Joker/Magico");
+        }
+
+        if (turno - multiploDe5 == 2){//Padre da Vila
+            joker.setIdTipoPeca(3);
+            joker.setTipoeDePeca("Joker/Padre da Vila");
+        }
+
+        if (turno - multiploDe5 == 3){//TorreH
+            joker.setIdTipoPeca(4);
+            joker.setTipoeDePeca("Joker/TorreH");
+        }
+
+        if (turno - multiploDe5 == 4){//TorreV
+            joker.setIdTipoPeca(5);
+            joker.setTipoeDePeca("Joker/TorreV");
+        }
+
+        if (turno - multiploDe5 == 5){//Lebre
+            joker.setIdTipoPeca(6);
+            joker.setTipoeDePeca("Joker/Lebre");
+        }
+
+    }
+
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
+
+        for (CrazyPiece crazy: crazyList){
+            for (CrazyPiece joker: listaDeJokers){
+                if (joker.getId() == crazy.getId()){
+                    atualizaJoker(crazy);
+                }
+            }
+        }
 
         if(xO == xD && yO == yD){
             jogadaInvalida();

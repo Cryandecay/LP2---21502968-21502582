@@ -18,13 +18,13 @@ public class TowerV extends CrazyPiece {
     public String getImagePNG() {
         if (idEquipa == 10){
             return "TowerBlackV.png";
-        } else {
-            return "TowerWhiteV.png";
-        }
-    }
+                    } else {
+                    return "TowerWhiteV.png";
+                    }
+                    }
 
-    @Override
-    public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+@Override
+public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
@@ -32,25 +32,25 @@ public class TowerV extends CrazyPiece {
         int direcaoY = yD - yO;
 
         if (deltaX != 0) {
-            return false;
+        return false;
         }
 
         if (!findFriend(xD, yD, idPeca, idEquipa)) {
-            return false;
+        return false;
         }
 
         if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
-            return false;
+        return false;
         }
 
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaY = yD;
 
         return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
-    }
+        }
 
-    @Override
-    public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
+@Override
+public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
@@ -58,17 +58,17 @@ public class TowerV extends CrazyPiece {
         int direcaoY = yD - yO;
 
         if (deltaX != 0) {
-            return false;
+        return false;
         }
 
         if (!findFriend(xD, yD, idPeca, idEquipa)) {
-            return false;
+        return false;
         }
 
         if (!descobreDirecao(direcaoX, direcaoY, xO, yO, deltaX, deltaY)) {
-            return false;
+        return false;
         }
 
         return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
-    }
-}
+        }
+        }
