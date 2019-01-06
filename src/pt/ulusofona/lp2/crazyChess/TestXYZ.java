@@ -137,7 +137,7 @@ public class TestXYZ {
 
 
         System.out.println(simulador.obterSugestoesJogada(2,2));
-        assertEquals(simulador.obterSugestoesJogada(2,2).get(0),"Pedido Invalido");
+        assertEquals(simulador.obterSugestoesJogada(2,2).get(0),"Pedido inválido");
 
     }
 

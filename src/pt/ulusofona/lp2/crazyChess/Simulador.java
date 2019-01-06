@@ -291,8 +291,8 @@ public class Simulador {
     }
 
     public List<String> getAutores(){
-        autores.add("André Graça");
-        autores.add("João Lionço");
+        autores.add("André Graça/21502968");
+        autores.add("João Lionço/21502583");
         return autores;
     }
 
