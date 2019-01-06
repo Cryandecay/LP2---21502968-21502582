@@ -62,8 +62,8 @@ public class TestXYZ {
 
     @Test
     public void getAutores() {
-        assertEquals(simulador.getAutores().get(0),"André Graça");
-        assertEquals(simulador.getAutores().get(1),"João Lionço");
+        assertEquals(simulador.getAutores().get(0),"André Graça/21502968");
+        assertEquals(simulador.getAutores().get(1),"João Lionço/21502583");
         assertEquals(simulador.getAutores().size(),6);
     }
 
