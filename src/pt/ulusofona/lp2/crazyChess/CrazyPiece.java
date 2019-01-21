@@ -88,15 +88,15 @@ public abstract class CrazyPiece {
     }
 
     void findCapture(int x, int y, int iD, int equipa) {
-        estatisticas.turno++;
-        estatisticas.turnoCaptura++;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         for(CrazyPiece crazy: crazyList){
             if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
                 if(crazy.getId() != iD && crazy.getId() != 0){
                     if(crazy.getIdEquipa() != equipa){
                         capturas.add(crazy);
-                        estatisticas.turnoCaptura = 0;
+                        estatisticas.setTurnoCaptura(0);
                     }
                 }
             }
@@ -105,7 +105,7 @@ public abstract class CrazyPiece {
         for(CrazyPiece crazy: crazyList){
             if(crazy.getId() == 0){
                 capturas.add(crazy);
-                estatisticas.turnoCaptura = 0;
+                estatisticas.setTurnoCaptura(0);
             }
         }
         removeCrazyList();

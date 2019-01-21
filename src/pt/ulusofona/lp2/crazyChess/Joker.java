@@ -29,7 +29,7 @@ public class Joker extends CrazyPiece {
     public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int contador = 0;
         int multiploDe5 = 0;
-        while(contador != estatisticas.turno){
+        while(contador != estatisticas.getTurno()){
 
             if (contador % 5 == 0 && contador != 0){
                 multiploDe5 = multiploDe5 + 5;
@@ -38,32 +38,32 @@ public class Joker extends CrazyPiece {
             contador++;
         }
 
-        if (estatisticas.turno - multiploDe5 == 0){//Rainha
+        if (estatisticas.getTurno() - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
             return movimentoRainha(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 1){//Ponei Magico
+        if (estatisticas.getTurno() - multiploDe5 == 1){//Ponei Magico
             idTipoPeca = 2;
             return movimentoPoneiMagico(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 2){//Padre da Vila
+        if (estatisticas.getTurno() - multiploDe5 == 2){//Padre da Vila
             idTipoPeca = 3;
             return movimentoPadreDaVila(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 3){//TorreH
+        if (estatisticas.getTurno() - multiploDe5 == 3){//TorreH
             idTipoPeca = 4;
             return movimentoTorreH(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 4){//TorreV
+        if (estatisticas.getTurno() - multiploDe5 == 4){//TorreV
             idTipoPeca = 5;
             return movimentoTorreV(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 5){//Lebre
+        if (estatisticas.getTurno() - multiploDe5 == 5){//Lebre
             idTipoPeca = 6;
             return movimentoLebre(xO, yO, xD, yD, crazy);
         }
@@ -329,7 +329,7 @@ public class Joker extends CrazyPiece {
     }
 
     public boolean movimentoLebre(int xO, int yO, int xD, int yD, CrazyPiece crazy){
-        if(estatisticas.turno%2 != 0){
+        if(estatisticas.getTurno()%2 != 0){
             return false;
         } else {
 
@@ -360,7 +360,7 @@ public class Joker extends CrazyPiece {
     public boolean movimentoPrevisao(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
         int contador = 0;
         int multiploDe5 = 0;
-        while(contador != estatisticas.turno){
+        while(contador != estatisticas.getTurno()){
 
             if (contador % 5 == 0 && contador != 0){
                 multiploDe5 = multiploDe5 + 5;
@@ -369,32 +369,32 @@ public class Joker extends CrazyPiece {
             contador++;
         }
 
-        if (estatisticas.turno - multiploDe5 == 0){//Rainha
+        if (estatisticas.getTurno() - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
             return movimentoPrevisaoRainha(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 1){//Ponei Magico
+        if (estatisticas.getTurno() - multiploDe5 == 1){//Ponei Magico
             idTipoPeca = 2;
             return movimentoPrevisaoPoneiMagico(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 2){//Padre da Vila
+        if (estatisticas.getTurno() - multiploDe5 == 2){//Padre da Vila
             idTipoPeca = 3;
             return movimentoPrevisaoPadreDaVila(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 3){//TorreH
+        if (estatisticas.getTurno() - multiploDe5 == 3){//TorreH
             idTipoPeca = 4;
             return movimentoPrevisaoTorreH(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 4){//TorreV
+        if (estatisticas.getTurno() - multiploDe5 == 4){//TorreV
             idTipoPeca = 5;
             return movimentoPrevisaoTorreV(xO, yO, xD, yD, crazy);
         }
 
-        if (estatisticas.turno - multiploDe5 == 5){//Lebre
+        if (estatisticas.getTurno() - multiploDe5 == 5){//Lebre
             idTipoPeca = 6;
             return movimentoPrevisaoLebre(xO, yO, xD, yD, crazy);
         }
@@ -540,7 +540,7 @@ public class Joker extends CrazyPiece {
 
     public boolean movimentoPrevisaoLebre(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
 
-        if(estatisticas.turno%2 != 0){
+        if(estatisticas.getTurno()%2 != 0){
             return false;
         } else {
 

@@ -1,9 +1,9 @@
 package pt.ulusofona.lp2.crazyChess;
 
 public class Estatisticas {
-    int turnoCaptura = 0; //contador dos turnos sem captura
-    int turno = 0; //Turnos do jogo
-    int equipaAJogar = 0;// 10 pretas 20 brancas
+    private int turnoCaptura = 0; //contador dos turnos sem captura
+    private int turno = 0; //Turnos do jogo
+    private int equipaAJogar = 0;// 10 pretas 20 brancas
 
     public Estatisticas(int turnoCaptura, int turno, int equipaAJogar) {
         this.turnoCaptura = turnoCaptura;
@@ -17,6 +17,22 @@ public class Estatisticas {
 
     public int getTurno() {
         return turno;
+    }
+
+    public void setTurnoCaptura(int turnoCaptura) {
+        this.turnoCaptura = turnoCaptura;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public void maisUmTurno(){
+        turno++;
+    }
+
+    public void maisUmTurnoCaptura(){
+        turnoCaptura++;
     }
 
     public int getEquipaAJogar() {
