@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class Simulador {
 
     //File ficheiroInicial;
@@ -36,7 +38,7 @@ public class Simulador {
         this.capturas = capturas;
     }
 
-    public boolean iniciaJogo(File ficheiroInicial) {
+    public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
             List<List <String>> firstRow = new ArrayList<List <String>>();
             List<List <String>> mapas = new ArrayList<List <String>>();
             List<List <String>> pecas = new ArrayList<List <String>>();
@@ -45,7 +47,7 @@ public class Simulador {
                 File ficheiro = new File(ficheiroInicial.getName());
                 Scanner leitorFicheiro = new Scanner(ficheiro);
 
-                while(leitorFicheiro.hasNextLine()) {
+                while (leitorFicheiro.hasNextLine()) {
                     List<String> testew = new ArrayList<String>();
                     String linha = leitorFicheiro.nextLine();
                     String dados[] = linha.split(":");
@@ -57,41 +59,39 @@ public class Simulador {
                 tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
 
-                if (firstRow.size()==tamanhoTabuleiro+numeroPecas+1){
-                    for (int e=0;e<Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(0));e++) {
-                        capturas.add(new Rei("0","0","10","Dummie",2,1));
+                if (firstRow.size() == tamanhoTabuleiro + numeroPecas + 1) {
+                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++) {
+                        capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
                     }
-                    jodaValidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(1));
-                    jodaInvalidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(2));
-                    for (int e=0;e<Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(3));e++) {
-                        capturas.add(new Rei("0","0","20","Dummie",2,1));
+                    jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(1));
+                    jodaInvalidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(2));
+                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(3)); e++) {
+                        capturas.add(new Rei("0", "0", "20", "Dummie", 2, 1));
                     }
-                    jodaValidaPretas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(4));
-                    jodaInvalidaBrancas=Integer.parseInt(firstRow.get(tamanhoTabuleiro+numeroPecas+2).get(5));
-                    firstRow.remove(tamanhoTabuleiro+numeroPecas+2);
+                    jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(4));
+                    jodaInvalidaBrancas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(5));
+                    firstRow.remove(tamanhoTabuleiro + numeroPecas + 2);
                 }
 
-                for(int i = 2; i < numeroPecas + 2; i++){
+                for (int i = 2; i < numeroPecas + 2; i++) {
                     pecas.add(firstRow.get(i));
                 }
-                for(int i = 2 + numeroPecas; i < firstRow.size(); i++){
+                for (int i = 2 + numeroPecas; i < firstRow.size(); i++) {
                     mapas.add(firstRow.get(i));
                 }
 
                 stringTest(pecas, mapas);
 
-                if (crazyList.size() != numeroPecas){
-                    for (int i = 0; i < numeroPecas - crazyList.size() + 1; i++){
-                        crazyList.add(new Rei(0,0,10,"0",-1,-1));
+                if (crazyList.size() != numeroPecas) {
+                    for (int i = 0; i < numeroPecas - crazyList.size() + 1; i++) {
+                        crazyList.add(new Rei(0, 0, 10, "0", -1, -1));
                     }
                 }
 
-                return true;
-
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
+            throw new IOException();
         }
+
 
     }
 
@@ -353,8 +353,8 @@ public class Simulador {
         return capturas;
     }
 
-    public List<String> obterSugestoesJogada(int xO, int yO){
-        List<String> listaDeSugestoes = new ArrayList<>();
+    public List<Comparable> obterSugestoesJogada(int xO, int yO){
+        List<Comparable> listaDeSugestoes = new ArrayList<>();
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
         String equipaNaoAtiva = "Pedido inválido";
 
