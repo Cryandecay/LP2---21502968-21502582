@@ -59,6 +59,8 @@ public class Rainha extends CrazyPiece{
             findCapture(xD, yD, idPeca, idEquipa);
             coordenadaX = xD;
             coordenadaY = yD;
+            estatisticas.maisUmTurno();
+            estatisticas.maisUmTurnoCaptura();
 
             return true;//TODO:Testar direcao, testar caça rainha
         } else {
