@@ -12,6 +12,8 @@ public abstract class CrazyPiece {
     protected String tipoeDePeca;
     protected String valorRelativo;
 
+    protected List<CrazyPiece> capturasFeitasPorEstaPeca;
+
     protected int idPeca;
     protected int idTipoPeca;
     protected int idEquipa;
@@ -96,6 +98,7 @@ public abstract class CrazyPiece {
                 if(crazy.getId() != iD && crazy.getId() != 0){
                     if(crazy.getIdEquipa() != equipa){
                         capturas.add(crazy);
+                        capturasFeitasPorEstaPeca.add(crazy);
                         estatisticas.setTurnoCaptura(0);
                     }
                 }
@@ -159,6 +162,22 @@ public abstract class CrazyPiece {
 
     public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
+    }
+
+    public String getTipoeDePeca() {
+        return tipoeDePeca;
+    }
+
+    public String getValorRelativo() {
+        return valorRelativo;
+    }
+
+    public List<CrazyPiece> getCapturasFeitasPorEstaPeca() {
+        return capturasFeitasPorEstaPeca;
+    }
+
+    public int getIdPeca() {
+        return idPeca;
     }
 
     public boolean encontraRainha(int xD, int yD){
@@ -355,4 +374,25 @@ public abstract class CrazyPiece {
         return false;
     }
 
+    public boolean temCapturas(){
+        if (capturasFeitasPorEstaPeca.size() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public int numeroDePontos(){
+
+        int total = 0;
+
+        if (temCapturas() == false){
+            return 0;
+        } else {
+           for (CrazyPiece peca: capturasFeitasPorEstaPeca){
+               total = total + Integer.parseInt(peca.valorRelativo);
+           }
+
+           return total;
+        }
+    }
 }

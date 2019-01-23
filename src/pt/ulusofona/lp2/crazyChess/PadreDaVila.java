@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.crazyChess;
 
 
 public class PadreDaVila extends CrazyPiece {
-    String tipo = "Padre da Vila";
+    private String tipo = "Padre da Vila";
 
     public PadreDaVila(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
@@ -93,5 +93,7 @@ public class PadreDaVila extends CrazyPiece {
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
 
-
+    public String getTipo() {
+        return tipo;
     }
+}

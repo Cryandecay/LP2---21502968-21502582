@@ -1,11 +1,7 @@
 package pt.ulusofona.lp2.crazyChess;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
+import java.util.*;
 
 
 public class Simulador {
@@ -251,7 +247,7 @@ public class Simulador {
         return false;
     }
 
-    public List<CrazyPiece> getPecasMalucas(){//TODO:Confirmar, era suposto dar TODOS OS RESULTADOS, so retornavamos o crazyList
+    public List<CrazyPiece> getPecasMalucas(){
         List<CrazyPiece> merged = new ArrayList<>();
         merged.addAll(crazyList);
         merged.addAll(capturas);
@@ -313,7 +309,7 @@ public class Simulador {
         return equipaAJogar;
     }
 
-    public List<String> getResultados(){//TODO:Ler e confirmar no enunciado
+    public List<String> getResultados(){//TODO:No Clue
         List<String> resultado = new ArrayList<String>();
 
         resultado.add("JOGO DE CRAZY CHESS");
@@ -353,7 +349,7 @@ public class Simulador {
         return capturas;
     }
 
-    public List<Comparable> obterSugestoesJogada(int xO, int yO){
+    public List<Comparable> obterSugestoesJogada(int xO, int yO){ //TODO: isto ta mal
         List<Comparable> listaDeSugestoes = new ArrayList<>();
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
         String equipaNaoAtiva = "Pedido inválido";
@@ -384,7 +380,7 @@ public class Simulador {
         return listaDeSugestoes;
     }
 
-    public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
+    public void anularJogadaAnterior(){//TODO:funciona?
         for (int i=0;i<crazyList.size();i++){
             if (memPeca.get(0)==crazyList.get(i).getId()){
                 for (int a=0;a<capturas.size();a++){
@@ -410,7 +406,7 @@ public class Simulador {
 
     }
 
-    public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
+    public boolean gravarJogo(File ficheiroDestino){//TODO:??
         String newLine = System.getProperty( "line.separator" );
         try {
             File output = new File( ficheiroDestino.getName() );
@@ -469,6 +465,31 @@ public class Simulador {
             System.out.println( "Ocorreu um erro." );
         }
         return true;
+    }
+
+
+    public Map<String, List<String>> getEstatisticas(){//TODO:Testar
+
+        List<CrazyPiece> todasAsPecas = getPecasMalucas();
+        Map<String, List<String>> estatisticas = new HashMap<>();
+
+        List<String> top5Capturas = todasAsPecas.stream()
+                .filter((p) -> p.temCapturas())
+                .sorted((p1, p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
+                .limit(5)
+
+
+        List<String> top5Pontos = todasAsPecas.stream()
+                .filter((p) -> p.temCapturas())
+                .sorted((p1, p2) -> p2.numeroDePontos() - p1.numeroDePontos())
+                .limit(5)
+
+        List<String> pecasMais5Capturas = todasAsPecas.stream()
+                .filter((p) -> p.temCapturas())
+                .filter((p) -> p.getCapturasFeitasPorEstaPeca().size() >= 5)
+
+
+        //p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()
     }
 
 }
