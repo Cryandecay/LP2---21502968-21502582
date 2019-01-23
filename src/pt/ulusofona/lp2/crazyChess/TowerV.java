@@ -47,6 +47,8 @@ public boolean movimento(int xO, int yO, int xD, int yD, CrazyPiece crazy) {
 
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaY = yD;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         return true;//TODO:funcionou para Cima e Baixo nao mexe na direcao em que tiver pecas
         }
