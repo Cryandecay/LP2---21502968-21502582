@@ -477,14 +477,16 @@ public class Simulador {
     public Map<String, List<String>> getEstatisticas(){//TODO:Testar
 
         List<CrazyPiece> todasAsPecas = getPecasMalucas();
+
         Map<String, List<String>> estatisticas = new HashMap<>();
+
         List<String> top5Capturas = new ArrayList<>();
+
 
         todasAsPecas.stream()//top5Capturas
                 .filter((p) -> p.temCapturas())
                 .sorted((p1, p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
-                .limit(5)
-                .forEach((p) -> );
+                .limit(5);
 
         todasAsPecas.stream()//top5Pontos
                 .filter((p) -> p.temCapturas())
@@ -503,7 +505,9 @@ public class Simulador {
                 .sorted((p1,p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size());
 
 
+        estatisticas.put("top5Capturas",top5Capturas);
 
+        return estatisticas;
 
         //p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()
     }
