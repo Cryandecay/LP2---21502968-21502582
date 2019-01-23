@@ -47,6 +47,8 @@ public class TorreH extends CrazyPiece {
 
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
