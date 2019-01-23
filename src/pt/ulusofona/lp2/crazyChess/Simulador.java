@@ -492,7 +492,7 @@ public class Simulador {
     }
 
 
-public Map<String, List<String>> getEstatisticas(){//TODO:Testar
+    public Map<String, List<String>> getEstatisticas(){//TODO:Testar
 
         List<CrazyPiece> todasAsPecas = getPecasMalucas();
 
@@ -524,7 +524,7 @@ public Map<String, List<String>> getEstatisticas(){//TODO:Testar
                 .forEach((p) -> pecasMais5Capturadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
         todasAsPecas.stream()//3PecasMaisBaralhadas
-                    .sorted((p1, p2) -> p2.jogadaInvalidaPeca/numeroDeJogadas - p1.jogadaInvalidaPeca/numeroDeJogadas)
+                    .sorted((p1, p2) -> p2.getJogadaInvalidaPeca()/(p2.getJogadaInvalidaPeca() + p2.getJogadaValidaPeca()) - p1.getJogadaInvalidaPeca()/(p1.getJogadaInvalidaPeca() + p1.getJogadaValidaPeca()))
                     .limit(3)
                     .forEach((p) -> PecasMaisBaralhadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.getJogadaInvalidaPeca() + ":" + p.getJogadaValidaPeca()));
 
