@@ -49,6 +49,8 @@ public class Lebre extends CrazyPiece {
             findCapture(xD, yD, idPeca, idEquipa);
             coordenadaX = xD;
             coordenadaY = yD;
+            estatisticas.maisUmTurno();
+            estatisticas.maisUmTurnoCaptura();
 
             return true; //TODO: Até contrário funciona.
             }
