@@ -34,7 +34,8 @@ public class Simulador {
         this.capturas = capturas;
     }
 
-    public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
+      public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
+
             List<List <String>> firstRow = new ArrayList<List <String>>();
             List<List <String>> mapas = new ArrayList<List <String>>();
             List<List <String>> pecas = new ArrayList<List <String>>();
@@ -55,13 +56,23 @@ public class Simulador {
                 tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
                 numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
 
+                if (firstRow.size()>tamanhoTabuleiro+numeroPecas+3){
+                    throw new InvalidSimulatorInputException(firstRow.size(), tamanhoTabuleiro+numeroPecas+2);
+                }
+                if (firstRow.size()<tamanhoTabuleiro+numeroPecas+1){
+                    throw new InvalidSimulatorInputException(firstRow.size(), tamanhoTabuleiro+numeroPecas+2);
+                }
+
                 if (firstRow.size() == tamanhoTabuleiro + numeroPecas + 1) {
-                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++) {
-                        capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
+                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++){
+                            linhaDeErro = e;
+                            capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
+
                     }
                     jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(1));
                     jodaInvalidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(2));
                     for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(3)); e++) {
+                        linhaDeErro = e;
                         capturas.add(new Rei("0", "0", "20", "Dummie", 2, 1));
                     }
                     jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(4));
@@ -86,11 +97,13 @@ public class Simulador {
 
         } catch (FileNotFoundException e) {
             throw new IOException();
-        }
+        }catch (IOException ex){
+                throw new InvalidSimulatorInputException(getLinhaErro());
+            }
 
 
     }
-
+    
     void stringTest(List<List<String>> peca, List<List <String>> mapas){
         for(int i=0; i< peca.size();i++) {
             for (int e = 0; e < mapas.size(); e++) {
