@@ -508,6 +508,7 @@ public class Simulador {
         todasAsPecas.stream()//top5Capturas
                 .filter((p) -> p.temCapturas())
                 .sorted((p1, p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
+                .sorted((p1, p2) -> p2.getAlcunha().compareTo(p1.getAlcunha()))
                 .limit(5)
                 .forEach((p) -> top5Capturas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
@@ -515,9 +516,10 @@ public class Simulador {
         todasAsPecas.stream()//top5Pontos
                 .filter((p) -> p.temCapturas())
                 .sorted((p1, p2) -> p2.numeroDePontos() - p1.numeroDePontos())
+                .sorted((p1, p2) -> p2.getAlcunha().compareTo(p1.getAlcunha()))
                 .limit(5)
                 .forEach((p) -> top5Pontos.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
-
+        
         todasAsPecas.stream()//pecasMais5Capturas
                 .filter((p) -> p.temCapturas())
                 .filter((p) -> p.getCapturasFeitasPorEstaPeca().size() >= 5)
