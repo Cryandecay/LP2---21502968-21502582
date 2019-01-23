@@ -11,8 +11,11 @@ public abstract class CrazyPiece {
 
     protected String tipoeDePeca;
     protected String valorRelativo;
+    protected int valorRelativoParaCalculo;
 
     protected List<CrazyPiece> capturasFeitasPorEstaPeca;
+    protected int jogadaInvalidaPeca;
+    protected int jogadaValidaPeca;
 
     protected int idPeca;
     protected int idTipoPeca;
@@ -389,10 +392,32 @@ public abstract class CrazyPiece {
             return 0;
         } else {
            for (CrazyPiece peca: capturasFeitasPorEstaPeca){
-               total = total + Integer.parseInt(peca.valorRelativo);
+               total = total + peca.valorRelativoParaCalculo;
            }
 
            return total;
         }
     }
+
+    public int getValorRelativoParaCalculo() {
+        return valorRelativoParaCalculo;
+    }
+
+    public int getJogadaInvalidaPeca() {
+        return jogadaInvalidaPeca;
+    }
+
+    public int getJogadaValidaPeca() {
+        return jogadaValidaPeca;
+    }
+
+    public void adicionaJogadaInvalidaPeca(){
+        jogadaInvalidaPeca++;
+    }
+
+    public void adicionaJogadaValidaPeca(){
+        jogadaValidaPeca++;
+    }
+
+
 }

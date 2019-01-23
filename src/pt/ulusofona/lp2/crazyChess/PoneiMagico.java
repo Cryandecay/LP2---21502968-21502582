@@ -8,12 +8,14 @@ public class PoneiMagico extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Ponei Magico";
         valorRelativo = "5";
+        valorRelativoParaCalculo = 5;
     }
 
     public PoneiMagico(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Ponei Magico";
         valorRelativo = "5";
+        valorRelativoParaCalculo = 5;
     }
 
     @Override

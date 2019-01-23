@@ -7,12 +7,14 @@ public class Rainha extends CrazyPiece{
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Rainha";
         valorRelativo = "8";
+        valorRelativoParaCalculo = 8;
     }
 
     public Rainha(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Rainha";
         valorRelativo = "8";
+        valorRelativoParaCalculo = 8;
     }
 
     @Override

@@ -9,12 +9,14 @@ public class Joker extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Joker";
         valorRelativo = "4";
+        valorRelativoParaCalculo = 4;
     }
 
     public Joker(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Joker";
         valorRelativo = "4";
+        valorRelativoParaCalculo = 4;
     }
 
     public String getImagePNG() {

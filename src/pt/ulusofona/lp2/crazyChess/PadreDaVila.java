@@ -8,12 +8,14 @@ public class PadreDaVila extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Padre da Vila";
         valorRelativo = "3";
+        valorRelativoParaCalculo = 3;
     }
 
     public PadreDaVila(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Padre da Vila";
         valorRelativo = "3";
+        valorRelativoParaCalculo = 3;
     }
 
     @Override

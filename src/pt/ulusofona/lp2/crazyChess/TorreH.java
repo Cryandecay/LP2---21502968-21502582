@@ -6,12 +6,14 @@ public class TorreH extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "TorreH";
         valorRelativo = "3";
+        valorRelativoParaCalculo = 3;
     }
 
     public TorreH(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "TorreH";
         valorRelativo = "3";
+        valorRelativoParaCalculo = 3;
     }
 
     @Override

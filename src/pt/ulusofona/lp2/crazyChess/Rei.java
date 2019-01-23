@@ -6,12 +6,14 @@ public class Rei extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Rei";
         valorRelativo = "(infinito)";
+        valorRelativoParaCalculo = 1000;
     }
 
     public Rei(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Rei";
         valorRelativo = "(infinito)";
+        valorRelativoParaCalculo = 1000;
     }
 
     @Override
@@ -55,7 +57,11 @@ public class Rei extends CrazyPiece {
         int deltaX = Math.abs(xD - xO);
         int deltaY = Math.abs(yD - yO);
 
-        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1){
+        if (deltaX > 1 || deltaY > 1){
+            return false;
+        }
+
+        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1 || deltaX == deltaY){
 
             if(!findFriend(xD, yD, idPeca, idEquipa)){
                 return false;

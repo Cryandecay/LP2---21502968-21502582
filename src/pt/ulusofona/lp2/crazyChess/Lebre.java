@@ -6,12 +6,14 @@ public class Lebre extends CrazyPiece {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Lebre";
         valorRelativo = "2";
+        valorRelativoParaCalculo = 2;
     }
 
     public Lebre(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
         tipoeDePeca = "Lebre";
         valorRelativo = "2";
+        valorRelativoParaCalculo = 2;
     }
 
     @Override
