@@ -22,6 +22,7 @@ public class Simulador {
     int numeroPecas = 0;
     String resultadoFinal;
     List<String> autores = new ArrayList<>();
+    private int linhaDeErro;
 
 
     public Simulador(){ }
@@ -98,10 +99,14 @@ public class Simulador {
         } catch (FileNotFoundException e) {
             throw new IOException();
         }catch (IOException ex){
-                throw new InvalidSimulatorInputException(getLinhaErro());
+                throw new InvalidSimulatorInputException(listaDeSugestoes());
             }
 
 
+    }
+
+    public int listaDeSugestoes(){
+        return linhaDeErro;   
     }
     
     void stringTest(List<List<String>> peca, List<List <String>> mapas){
