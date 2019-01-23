@@ -2,18 +2,33 @@ package pt.ulusofona.lp2.crazyChess;
 
 import java.io.IOException;
 
-    class InvalidSimulatorInputException extends IOException {
+    public class InvalidSimulatorInputException extends IOException {
     private int  linhaErro;
-    InvalidSimulatorInputException(int linhaErro) {
+    private int numeroTotal;
+    private int numeroEsperado;
+
+    public InvalidSimulatorInputException(int linhaErro) {
         this.linhaErro = linhaErro;
     }
-    int getLinhaErro() {
+
+    public InvalidSimulatorInputException(int numeroTotal, int numerEsperado) {
+            this.numeroTotal= numeroTotal;
+            this.numeroEsperado = numerEsperado;
+    }
+
+    public int getLinhaErro() {
         return linhaErro;
     }
 
     public String getDescricaoProblema(){
-        return "DADOS A MAIS (Esperava: x ; Obtive: y )";
+        if (numeroTotal > numeroEsperado){
+            return "DADOS A MAIS (Esperava: " + numeroEsperado +" ; Obtive: " + numeroTotal +" )";
+        } else {
+            return "DADOS A MENOS (Esperava: " + numeroEsperado +" ; Obtive: " + numeroTotal +" )";
+        }
     }
 
 
+
 }
+
