@@ -199,12 +199,13 @@ public class Simulador {
 
         if (turno - multiploDe5 == 4){//TorreV
             joker.setIdTipoPeca(5);
-            joker.setTipoeDePeca("Joker/Rainha");
+            joker.setTipoeDePeca("Joker/Lebre");
+
         }
 
         if (turno - multiploDe5 == 5){//Lebre
             joker.setIdTipoPeca(6);
-            joker.setTipoeDePeca("Joker/Lebre");
+            joker.setTipoeDePeca("Joker/Rainha");
         }
 
     }
@@ -219,7 +220,6 @@ public class Simulador {
                 }
             }
         }
-
         System.out.println(crazyList);
         if(xO == xD && yO == yD){
             jogadaInvalida();
@@ -248,7 +248,6 @@ public class Simulador {
 
 
                      if(crazy.movimento(xO, yO, xD, yD, crazy)){
-
                          turno = crazy.getEstatisticas().getTurno();
                          turnoCaptura = crazy.getEstatisticas().getTurnoCaptura();
                          capturas = crazy.getCapturas();
