@@ -487,38 +487,52 @@ public class Simulador {
     }
 
 
-    public Map<String, List<String>> getEstatisticas(){//TODO:Testar
+public Map<String, List<String>> getEstatisticas(){//TODO:Testar
 
         List<CrazyPiece> todasAsPecas = getPecasMalucas();
 
         Map<String, List<String>> estatisticas = new HashMap<>();
 
         List<String> top5Capturas = new ArrayList<>();
+        List<String> top5Pontos = new ArrayList<>();
+        List<String> pecasMais5Capturadas = new ArrayList<>();
+        List<String> PecasMaisBaralhadas = new ArrayList<>();
+        List<String> tiposPecaCapturados = new ArrayList<>();
 
 
         todasAsPecas.stream()//top5Capturas
                 .filter((p) -> p.temCapturas())
                 .sorted((p1, p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
-                .limit(5);
+                .limit(5)
+                .forEach((p) -> top5Capturas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
+
 
         todasAsPecas.stream()//top5Pontos
                 .filter((p) -> p.temCapturas())
                 .sorted((p1, p2) -> p2.numeroDePontos() - p1.numeroDePontos())
-                .limit(5);
+                .limit(5)
+                .forEach((p) -> top5Pontos.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
-        todasAsPecas.stream()//pecas5MaisCapturas
+        todasAsPecas.stream()//pecasMais5Capturas
                 .filter((p) -> p.temCapturas())
-                .filter((p) -> p.getCapturasFeitasPorEstaPeca().size() >= 5);
+                .filter((p) -> p.getCapturasFeitasPorEstaPeca().size() >= 5)
+                .forEach((p) -> pecasMais5Capturadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
-        todasAsPecas.stream()//3pecasMaisBaralhadas
+        todasAsPecas.stream()//3PecasMaisBaralhadas
                     .sorted((p1, p2) -> p2.jogadaInvalidaPeca/numeroDeJogadas - p1.jogadaInvalidaPeca/numeroDeJogadas)
-                    .limit(3);
+                    .limit(3)
+                    .forEach((p) -> PecasMaisBaralhadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.getJogadaInvalidaPeca() + ":" + p.getJogadaValidaPeca()));
 
         todasAsPecas.stream()
-                .sorted((p1,p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size());
+                .sorted((p1,p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
+                .forEach((p) -> tiposPecaCapturados.add(p.getIdTipoPeca() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
 
         estatisticas.put("top5Capturas",top5Capturas);
+        estatisticas.put("top5Pontos", top5Pontos);
+        estatisticas.put("pecasMais5Capturas", pecasMais5Capturadas);
+        estatisticas.put("3PecasMaisBaralhadas", PecasMaisBaralhadas);
+        estatisticas.put("tipoPecaCapturados", tiposPecaCapturados);
 
         return estatisticas;
 
