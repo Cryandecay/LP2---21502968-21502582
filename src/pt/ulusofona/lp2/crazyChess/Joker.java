@@ -112,6 +112,8 @@ public class Joker extends CrazyPiece {
             findCapture(xD, yD, idPeca, idEquipa);
             coordenadaX = xD;
             coordenadaY = yD;
+            estatisticas.maisUmTurno();
+            estatisticas.maisUmTurnoCaptura();
 
             return true;//TODO:Testar direcao, testar caça rainha
         } else {
@@ -160,6 +162,8 @@ public class Joker extends CrazyPiece {
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
         coordenadaY = yD;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         return true;
     }
@@ -283,6 +287,8 @@ public class Joker extends CrazyPiece {
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
         coordenadaY = yD;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
@@ -333,6 +339,8 @@ public class Joker extends CrazyPiece {
 
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaY = yD;
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
 
         return true;
     }
@@ -359,6 +367,8 @@ public class Joker extends CrazyPiece {
             findCapture(xD, yD, idPeca, idEquipa);
             coordenadaX = xD;
             coordenadaY = yD;
+            estatisticas.maisUmTurno();
+            estatisticas.maisUmTurnoCaptura();
 
             return true; //TODO: Até contrário funciona.
         }
