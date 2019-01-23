@@ -98,9 +98,7 @@ public abstract class CrazyPiece {
     }
 
     void findCapture(int x, int y, int iD, int equipa) {
-        estatisticas.maisUmTurno();
-        estatisticas.maisUmTurnoCaptura();
-
+      
         for (CrazyPiece crazy : crazyList) {
             if (crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y) {
                 if (crazy.getId() != iD && crazy.getId() != 0) {
