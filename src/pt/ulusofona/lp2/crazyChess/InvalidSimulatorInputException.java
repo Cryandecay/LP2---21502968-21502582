@@ -4,8 +4,8 @@ import java.io.IOException;
 
     public class InvalidSimulatorInputException extends IOException {
     private int  linhaErro;
-    private int numeroTotal;
-    private int numeroEsperado;
+    private static int numeroTotal;
+    private static int numeroEsperado;
 
     public InvalidSimulatorInputException(int linhaErro) {
         this.linhaErro = linhaErro;
