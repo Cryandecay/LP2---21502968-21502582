@@ -37,6 +37,8 @@ public class Rei extends CrazyPiece {
         if (deltaX == 0 || deltaY == 0){
             return false;
         }
+        
+        if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1 || deltaX == deltaY){
 
             if(!findFriend(xD, yD, idPeca, idEquipa)){
                 return false;
@@ -48,7 +50,9 @@ public class Rei extends CrazyPiece {
 
             return true; //TODO: Até contrário funciona.
 
-        
+        } else {
+            return false;
+        }
 
     }
 
@@ -65,11 +69,17 @@ public class Rei extends CrazyPiece {
             return false;
         }
 
+            if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1 || deltaX == deltaY){
+
             if(!findFriend(xD, yD, idPeca, idEquipa)){
                 return false;
             }
 
             return true; //TODO: Até contrário funciona.
+
+        } else {
+            return false;
+        }
 
     }
 
