@@ -61,7 +61,6 @@ public class PadreDaVila extends CrazyPiece {
         coordenadaY = yD;
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
-
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
 

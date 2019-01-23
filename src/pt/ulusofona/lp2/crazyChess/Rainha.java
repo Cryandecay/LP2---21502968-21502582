@@ -61,7 +61,6 @@ public class Rainha extends CrazyPiece{
             coordenadaY = yD;
             estatisticas.maisUmTurno();
             estatisticas.maisUmTurnoCaptura();
-
             return true;//TODO:Testar direcao, testar caça rainha
         } else {
             return false;
@@ -77,7 +76,6 @@ public class Rainha extends CrazyPiece{
 
         int direcaoX = xD - xO;
         int direcaoY = yD - yO;
-
 
 
         if (deltaX > 5) {

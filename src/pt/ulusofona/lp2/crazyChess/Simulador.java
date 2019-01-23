@@ -102,7 +102,7 @@ public class Simulador {
             throw new InvalidSimulatorInputException(listaDeSugestoes());
         }
 
-
+        System.out.println(crazyList);
     }
 
     public int listaDeSugestoes(){
@@ -178,27 +178,28 @@ public class Simulador {
 
         if (turno - multiploDe5 == 0){//Rainha
             joker.setIdTipoPeca(1);
-            joker.setTipoeDePeca("Joker/Rainha");
+            joker.setTipoeDePeca("Joker/Ponei Magico");
         }
 
         if (turno - multiploDe5 == 1){//Ponei Magico
             joker.setIdTipoPeca(2);
-            joker.setTipoeDePeca("Joker/Magico");
+            joker.setTipoeDePeca("Joker/Padre da Vila");
         }
 
         if (turno - multiploDe5 == 2){//Padre da Vila
             joker.setIdTipoPeca(3);
-            joker.setTipoeDePeca("Joker/Padre da Vila");
+            joker.setTipoeDePeca("Joker/TorreH");
+
         }
 
         if (turno - multiploDe5 == 3){//TorreH
             joker.setIdTipoPeca(4);
-            joker.setTipoeDePeca("Joker/TorreH");
+            joker.setTipoeDePeca("Joker/TorreV");
         }
 
         if (turno - multiploDe5 == 4){//TorreV
             joker.setIdTipoPeca(5);
-            joker.setTipoeDePeca("Joker/TorreV");
+            joker.setTipoeDePeca("Joker/Rainha");
         }
 
         if (turno - multiploDe5 == 5){//Lebre
@@ -210,7 +211,7 @@ public class Simulador {
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-        System.out.println(crazyList);
+
         for (CrazyPiece crazy: crazyList){
             for (CrazyPiece joker: listaDeJokers){
                 if (joker.getId() == crazy.getId()){
@@ -219,6 +220,7 @@ public class Simulador {
             }
         }
 
+        System.out.println(crazyList);
         if(xO == xD && yO == yD){
             jogadaInvalida();
             return false;
@@ -244,18 +246,20 @@ public class Simulador {
                      memPeca.add(xO);
                      memPeca.add(yO);
 
-                     if (equipaAJogar == 10){
-                         equipaAJogar = 20;
-                         jodaValidaPretas++;
-                     } else {
-                         equipaAJogar = 10;
-                         jodaValidaBrancas++;
-                     }
+
                      if(crazy.movimento(xO, yO, xD, yD, crazy)){
+
                          turno = crazy.getEstatisticas().getTurno();
                          turnoCaptura = crazy.getEstatisticas().getTurnoCaptura();
                          capturas = crazy.getCapturas();
                          crazyList = crazy.getCrazyList();
+                         if (equipaAJogar == 10){
+                             equipaAJogar = 20;
+                             jodaValidaPretas++;
+                         } else {
+                             equipaAJogar = 10;
+                             jodaValidaBrancas++;
+                         }
                          return true;
                      }
                      return false;
@@ -389,7 +393,6 @@ public class Simulador {
                 }
             }
         }
-        System.out.println(sugestaos.get(0));
         return sugestaos;
 
     }

@@ -55,7 +55,6 @@ public class PoneiMagico extends CrazyPiece {
         coordenadaY = yD;
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
-
         return true;//TODO:Testado e encontra reis
     }
 

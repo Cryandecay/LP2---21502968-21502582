@@ -51,7 +51,6 @@ public class Lebre extends CrazyPiece {
             coordenadaY = yD;
             estatisticas.maisUmTurno();
             estatisticas.maisUmTurnoCaptura();
-
             return true; //TODO: Até contrário funciona.
             }
         }

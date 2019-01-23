@@ -7,14 +7,14 @@ public class Joker extends CrazyPiece {
 
     public Joker(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
-        tipoeDePeca = "Joker/Rei";
+        tipoeDePeca = "Joker/Rainha";
         valorRelativo = "4";
         valorRelativoParaCalculo = 4;
     }
 
     public Joker(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
-        tipoeDePeca = "Joker/Rei";
+        tipoeDePeca = "Joker/Rainha";
         valorRelativo = "4";
         valorRelativoParaCalculo = 4;
     }
@@ -42,7 +42,7 @@ public class Joker extends CrazyPiece {
 
         if (estatisticas.getTurno() - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
-            this.tipoeDePeca = "Joker/Rainha";
+            this.tipoeDePeca = "Joker/PoneiMagico";
             return movimentoRainha(xO, yO, xD, yD, crazy);
         }
 
@@ -114,7 +114,6 @@ public class Joker extends CrazyPiece {
             coordenadaY = yD;
             estatisticas.maisUmTurno();
             estatisticas.maisUmTurnoCaptura();
-
             return true;//TODO:Testar direcao, testar caça rainha
         } else {
             return false;
@@ -164,7 +163,6 @@ public class Joker extends CrazyPiece {
         coordenadaY = yD;
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
-
         return true;
     }
     public boolean antiRei(int xO, int yO, int xD, int yD, int direcaoX, int direcaoY) {
@@ -289,7 +287,6 @@ public class Joker extends CrazyPiece {
         coordenadaY = yD;
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
-
         return true; //TODO:Testar com board maior, para quando encontra alguem na direcao em que se dirige
     }
 
@@ -314,7 +311,8 @@ public class Joker extends CrazyPiece {
 
         findCapture(xD, yD, idPeca, idEquipa);
         coordenadaX = xD;
-
+        estatisticas.maisUmTurno();
+        estatisticas.maisUmTurnoCaptura();
         return true;//TODO:funciona esquerda direita, nao mexe na direçao em que encontra pecas
     }
 
@@ -341,7 +339,6 @@ public class Joker extends CrazyPiece {
         coordenadaY = yD;
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
-
         return true;
     }
 
@@ -369,7 +366,6 @@ public class Joker extends CrazyPiece {
             coordenadaY = yD;
             estatisticas.maisUmTurno();
             estatisticas.maisUmTurnoCaptura();
-
             return true; //TODO: Até contrário funciona.
         }
     }
