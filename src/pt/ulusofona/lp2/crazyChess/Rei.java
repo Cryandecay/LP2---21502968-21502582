@@ -63,9 +63,7 @@ public class Rei extends CrazyPiece {
             return false;
         }
 
-        if (deltaX == 0 || deltaY == 0){
-            return false;
-        }
+
 
         if (deltaX == 1 && deltaY == 0 || deltaX == 0 && deltaY == 1 || deltaX == deltaY){
 
