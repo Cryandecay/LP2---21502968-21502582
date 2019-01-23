@@ -374,34 +374,24 @@ public class Simulador {
     }
 
     public List<Comparable> obterSugestoesJogada(int xO, int yO){ //TODO: isto ta mal
-        List<Comparable> listaDeSugestoes = new ArrayList<>();
-        Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-        String equipaNaoAtiva = "Pedido inválido";
+        Sugestao sugestao = new Sugestao(crazyList,capturas,getIDEquipaAJogar(),getTamanhoTabuleiro(),xO,yO);
 
-        for (CrazyPiece aCrazyList : crazyList) {
-            if (aCrazyList.getCoordenadaX() == xO && aCrazyList.getCoordenadaY() == yO) {
-
-                if (equipaAJogar != aCrazyList.getIdEquipa()) {
-                    listaDeSugestoes.add(equipaNaoAtiva);
-                    return listaDeSugestoes;
+        List<Comparable> sugestaos = sugestao.sugestao();
+        List<Integer> pontos = sugestao.getPontos();
+        for (int i=0; i<pontos.size();i++) {
+            for (int e=0; e<pontos.size(); e++){
+                if (1 == pontos.get(i).compareTo(pontos.get(e))) {
+                    int tmpPonto = pontos.get(e);
+                    Comparable tmpSujest = sugestaos.get(e);
+                    pontos.set(e, pontos.get(i));
+                    sugestaos.set(e, sugestaos.get(i));
+                    pontos.set(i, tmpPonto);
+                    sugestaos.set(i, tmpSujest);
                 }
-                aCrazyList.setCrayList(crazyList);
-                aCrazyList.setCapturas(capturas);
-                aCrazyList.setEstatisticas(estatisticas);
-
-                for (int linhaX = 0; linhaX < getTamanhoTabuleiro(); linhaX++) {
-                    for (int colunaY = 0; colunaY < getTamanhoTabuleiro(); colunaY++) {
-                        if (aCrazyList.movimentoPrevisao(xO, yO, linhaX, colunaY, aCrazyList)) {
-                            listaDeSugestoes.add(linhaX + ", " + colunaY);
-                        }
-                    }
-                }
-                return listaDeSugestoes;
             }
         }
-
-        listaDeSugestoes.add(equipaNaoAtiva);
-        return listaDeSugestoes;
+        System.out.println(sugestaos.get(0));
+        return sugestaos;
     }
 
     public void anularJogadaAnterior(){//TODO:funciona?
