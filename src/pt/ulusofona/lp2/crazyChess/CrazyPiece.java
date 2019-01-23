@@ -418,6 +418,15 @@ public abstract class CrazyPiece {
     public void adicionaJogadaValidaPeca(){
         jogadaValidaPeca++;
     }
+    
+    public int previsaoDePontos(int xO, int yO) {
+        for (CrazyPiece peca: crazyList){
+            if (peca.getCoordenadaY()==yO && peca.getCoordenadaX() == xO){
+                return  peca.valorRelativoParaCalculo;
+            }
+        }
+        return 0;
+    }
 
 
 }
