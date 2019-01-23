@@ -7,14 +7,14 @@ public class Joker extends CrazyPiece {
 
     public Joker(String idPeca, String idTipoPeca, String idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
-        tipoeDePeca = "Joker";
+        tipoeDePeca = "Joker/Rei";
         valorRelativo = "4";
         valorRelativoParaCalculo = 4;
     }
 
     public Joker(int idPeca, int idTipoPeca, int idEquipa, String alcunha, int x, int y) {
         super(idPeca, idTipoPeca, idEquipa, alcunha, x, y);
-        tipoeDePeca = "Joker";
+        tipoeDePeca = "Joker/Rei";
         valorRelativo = "4";
         valorRelativoParaCalculo = 4;
     }
@@ -42,31 +42,37 @@ public class Joker extends CrazyPiece {
 
         if (estatisticas.getTurno() - multiploDe5 == 0){//Rainha
             idTipoPeca = 1;
+            this.tipoeDePeca = "Joker/Rainha";
             return movimentoRainha(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.getTurno() - multiploDe5 == 1){//Ponei Magico
             idTipoPeca = 2;
+            this.tipoeDePeca = "Joker/PoneiMagico";
             return movimentoPoneiMagico(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.getTurno() - multiploDe5 == 2){//Padre da Vila
             idTipoPeca = 3;
+            this.tipoeDePeca = "Joker/PadreDaVila";
             return movimentoPadreDaVila(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.getTurno() - multiploDe5 == 3){//TorreH
             idTipoPeca = 4;
+            this.tipoeDePeca = "Joker/TorreH";
             return movimentoTorreH(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.getTurno() - multiploDe5 == 4){//TorreV
             idTipoPeca = 5;
+            this.tipoeDePeca = "Joker/TorreV";
             return movimentoTorreV(xO, yO, xD, yD, crazy);
         }
 
         if (estatisticas.getTurno() - multiploDe5 == 5){//Lebre
             idTipoPeca = 6;
+            this.tipoeDePeca = "Joker/Lebre";
             return movimentoLebre(xO, yO, xD, yD, crazy);
         }
 

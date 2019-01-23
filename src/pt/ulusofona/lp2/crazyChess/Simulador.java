@@ -210,7 +210,7 @@ public class Simulador {
 
     public boolean processaJogada(int xO, int yO, int xD, int yD) {
         Estatisticas estatisticas = new Estatisticas(turnoCaptura, turno, equipaAJogar);
-
+        System.out.println(crazyList);
         for (CrazyPiece crazy: crazyList){
             for (CrazyPiece joker: listaDeJokers){
                 if (joker.getId() == crazy.getId()){
