@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Simulador {
 
-    int numeroDeJogadas;
+
     List<Integer> memPeca = new ArrayList<Integer>();
     List<CrazyPiece> crazyList = new ArrayList<>();
     List<CrazyPiece> capturas = new ArrayList<>();
@@ -24,7 +24,6 @@ public class Simulador {
     List<String> autores = new ArrayList<>();
     private int linhaDeErro;
 
-
     public Simulador(){ }
 
     public Simulador(List<CrazyPiece> crazyList, int turno, int equipaAJogar, List<CrazyPiece> capturas) {
@@ -35,7 +34,6 @@ public class Simulador {
         this.capturas = capturas;
     }
 
-     
     public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
 
         List<List <String>> firstRow = new ArrayList<List <String>>();
@@ -65,7 +63,7 @@ public class Simulador {
                 throw new InvalidSimulatorInputException( firstRow.size(),tamanhoTabuleiro+numeroPecas+2 );
             }
 
-            if (firstRow.size() == tamanhoTabuleiro + numeroPecas + 1) {
+            if (firstRow.size() == tamanhoTabuleiro + numeroPecas+3) {
                 for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++){
                     linhaDeErro = e;
                     capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
@@ -79,6 +77,7 @@ public class Simulador {
                 }
                 jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(4));
                 jodaInvalidaBrancas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(5));
+                turno = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(6));
                 firstRow.remove(tamanhoTabuleiro + numeroPecas + 2);
             }
 
@@ -156,10 +155,7 @@ public class Simulador {
     }
 
 
-    void jogadaInvalida(CrazyPiece crazy){
-
-        crazy.adicionaJogadaInvalidaPeca();
-
+    void jogadaInvalida(){
         if(equipaAJogar == 10){
             jodaInvalidaPretas++;
         } else {
@@ -223,23 +219,20 @@ public class Simulador {
             }
         }
 
-        numeroDeJogadas++;
+        if(xO == xD && yO == yD){
+            jogadaInvalida();
+            return false;
+        }
+        if(xD < 0 || yD < 0){
+            jogadaInvalida();
+            return false;
+        }
+        if(xD > tamanhoTabuleiro || yD > tamanhoTabuleiro){
+            jogadaInvalida();
+            return false;
+        }
 
         for (CrazyPiece crazy: crazyList) {
-
-            if(xO == xD && yO == yD){
-                jogadaInvalida(crazy);
-                return false;
-            }
-            if(xD < 0 || yD < 0){
-                jogadaInvalida(crazy);
-                return false;
-            }
-            if(xD > tamanhoTabuleiro || yD > tamanhoTabuleiro){
-                jogadaInvalida(crazy);
-                return false;
-            }
-
             crazy.setCrayList(crazyList);
             crazy.setCapturas(capturas);
             crazy.setEstatisticas(estatisticas);
@@ -258,24 +251,26 @@ public class Simulador {
                          equipaAJogar = 10;
                          jodaValidaBrancas++;
                      }
+                     if(crazy.movimento(xO, yO, xD, yD, crazy)){
+                         turno = crazy.getEstatisticas().getTurno();
+                         turnoCaptura = crazy.getEstatisticas().getTurnoCaptura();
+                         capturas = crazy.getCapturas();
+                         crazyList = crazy.getCrazyList();
+                         return true;
+                     }
+                     return false;
 
-                     turno = crazy.getEstatisticas().getTurno();
-                     turnoCaptura = crazy.getEstatisticas().getTurnoCaptura();
-                     capturas = crazy.getCapturas();
-                     crazyList = crazy.getCrazyList();
-
-                     crazy.adicionaJogadaValidaPeca();
-                     return crazy.movimento(xO, yO, xD, yD, crazy);
                  } else {
-                     jogadaInvalida(crazy);
+                     jogadaInvalida();
                      return false;
                  }
              }
         }
+        jogadaInvalida();
         return false;
     }
 
-    public List<CrazyPiece> getPecasMalucas(){
+    public List<CrazyPiece> getPecasMalucas(){//TODO:Confirmar, era suposto dar TODOS OS RESULTADOS, so retornavamos o crazyList
         List<CrazyPiece> merged = new ArrayList<>();
         merged.addAll(crazyList);
         merged.addAll(capturas);
@@ -337,7 +332,7 @@ public class Simulador {
         return equipaAJogar;
     }
 
-    public List<String> getResultados(){//TODO:No Clue
+    public List<String> getResultados(){//TODO:Ler e confirmar no enunciado
         List<String> resultado = new ArrayList<String>();
 
         resultado.add("JOGO DE CRAZY CHESS");
@@ -377,7 +372,7 @@ public class Simulador {
         return capturas;
     }
 
-    public List<Comparable> obterSugestoesJogada(int xO, int yO){ //TODO: isto ta mal
+    public List<Comparable> obterSugestoesJogada(int xO, int yO){
         Sugestao sugestao = new Sugestao(crazyList,capturas,getIDEquipaAJogar(),getTamanhoTabuleiro(),xO,yO);
 
         List<Comparable> sugestaos = sugestao.sugestao();
@@ -396,9 +391,10 @@ public class Simulador {
         }
         System.out.println(sugestaos.get(0));
         return sugestaos;
+
     }
 
-    public void anularJogadaAnterior(){//TODO:funciona?
+    public void anularJogadaAnterior(){//TODO:Variaveis criadas, tratar de fazer a logica
         for (int i=0;i<crazyList.size();i++){
             if (memPeca.get(0)==crazyList.get(i).getId()){
                 for (int a=0;a<capturas.size();a++){
@@ -424,7 +420,7 @@ public class Simulador {
 
     }
 
-    public boolean gravarJogo(File ficheiroDestino){//TODO:??
+    public boolean gravarJogo(File ficheiroDestino){//TODO:Por fazer
         String newLine = System.getProperty( "line.separator" );
         try {
             File output = new File( ficheiroDestino.getName() );
@@ -477,6 +473,8 @@ public class Simulador {
             writer.write(String.valueOf(jodaValidaBrancas));
             writer.write(":");
             writer.write(String.valueOf(jodaInvalidaBrancas));
+            writer.write(":");
+            writer.write(String.valueOf(turno));
             writer.close();
         }
         catch (IOException e) {
@@ -484,8 +482,6 @@ public class Simulador {
         }
         return true;
     }
-
-
     public Map<String, List<String>> getEstatisticas(){//TODO:Testar
 
         List<CrazyPiece> todasAsPecas = getPecasMalucas();
@@ -513,16 +509,16 @@ public class Simulador {
                 .sorted((p1, p2) -> p2.getAlcunha().compareTo(p1.getAlcunha()))
                 .limit(5)
                 .forEach((p) -> top5Pontos.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
-        
+
         todasAsPecas.stream()//pecasMais5Capturas
                 .filter((p) -> p.temCapturas())
                 .filter((p) -> p.getCapturasFeitasPorEstaPeca().size() >= 5)
                 .forEach((p) -> pecasMais5Capturadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()));
 
         todasAsPecas.stream()//3PecasMaisBaralhadas
-                    .sorted((p1, p2) -> p2.getJogadaInvalidaPeca()/(p2.getJogadaInvalidaPeca() + p2.getJogadaValidaPeca()) - p1.getJogadaInvalidaPeca()/(p1.getJogadaInvalidaPeca() + p1.getJogadaValidaPeca()))
-                    .limit(3)
-                    .forEach((p) -> PecasMaisBaralhadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.getJogadaInvalidaPeca() + ":" + p.getJogadaValidaPeca()));
+                .sorted((p1, p2) -> p2.getJogadaInvalidaPeca()/(p2.getJogadaInvalidaPeca() + p2.getJogadaValidaPeca()) - p1.getJogadaInvalidaPeca()/(p1.getJogadaInvalidaPeca() + p1.getJogadaValidaPeca()))
+                .limit(3)
+                .forEach((p) -> PecasMaisBaralhadas.add(p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.getJogadaInvalidaPeca() + ":" + p.getJogadaValidaPeca()));
 
         todasAsPecas.stream()
                 .sorted((p1,p2) -> p2.getCapturasFeitasPorEstaPeca().size() - p1.getCapturasFeitasPorEstaPeca().size())
@@ -539,5 +535,6 @@ public class Simulador {
 
         //p.getIdEquipa() + ":" + p.getAlcunha() + ":" + p.numeroDePontos() + ":" + p.getCapturasFeitasPorEstaPeca().size()
     }
+
 
 }

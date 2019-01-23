@@ -9,13 +9,12 @@ public abstract class CrazyPiece {
     List<CrazyPiece> capturas = null;
     Estatisticas estatisticas = null;
 
-    protected String tipoeDePeca;
-    protected String valorRelativo;
-    protected int valorRelativoParaCalculo;
-
     protected List<CrazyPiece> capturasFeitasPorEstaPeca;
     protected int jogadaInvalidaPeca;
     protected int jogadaValidaPeca;
+
+    protected String tipoeDePeca;
+    protected String valorRelativo;
 
     protected int idPeca;
     protected int idTipoPeca;
@@ -23,6 +22,8 @@ public abstract class CrazyPiece {
     protected String alcunha;
     protected int coordenadaX;
     protected int coordenadaY;
+    protected int valorRelativoParaCalculo;
+
 
     public CrazyPiece(String idPeca, String idTipoPeca,String idEquipa , String alcunha, int x, int y) {
         this.idPeca = Integer.parseInt(idPeca);
@@ -75,6 +76,10 @@ public abstract class CrazyPiece {
         estatisticas = dados;
     }
 
+
+
+
+
     public void setCapturas(List<CrazyPiece> capturas) {
         this.capturas = capturas;
     }
@@ -96,24 +101,24 @@ public abstract class CrazyPiece {
         estatisticas.maisUmTurno();
         estatisticas.maisUmTurnoCaptura();
 
-        for(CrazyPiece crazy: crazyList){
-            if(crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y ){
-                if(crazy.getId() != iD && crazy.getId() != 0){
-                    if(crazy.getIdEquipa() != equipa){
+        for (CrazyPiece crazy : crazyList) {
+            if (crazy.getCoordenadaX() == x && crazy.getCoordenadaY() == y) {
+                if (crazy.getId() != iD && crazy.getId() != 0) {
+                    if (crazy.getIdEquipa() != equipa) {
                         capturas.add(crazy);
-                        capturasFeitasPorEstaPeca.add(crazy);
                         estatisticas.setTurnoCaptura(0);
                     }
                 }
             }
         }
 
-        for(CrazyPiece crazy: crazyList){
-            if(crazy.getId() == 0){
+        for (CrazyPiece crazy : crazyList) {
+            if (crazy.getId() == 0) {
                 capturas.add(crazy);
                 estatisticas.setTurnoCaptura(0);
             }
         }
+
         removeCrazyList();
     }
 
@@ -165,22 +170,6 @@ public abstract class CrazyPiece {
 
     public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
-    }
-
-    public String getTipoeDePeca() {
-        return tipoeDePeca;
-    }
-
-    public String getValorRelativo() {
-        return valorRelativo;
-    }
-
-    public List<CrazyPiece> getCapturasFeitasPorEstaPeca() {
-        return capturasFeitasPorEstaPeca;
-    }
-
-    public int getIdPeca() {
-        return idPeca;
     }
 
     public boolean encontraRainha(int xD, int yD){
@@ -391,11 +380,11 @@ public abstract class CrazyPiece {
         if (temCapturas() == false){
             return 0;
         } else {
-           for (CrazyPiece peca: capturasFeitasPorEstaPeca){
-               total = total + peca.valorRelativoParaCalculo;
-           }
+            for (CrazyPiece peca: capturasFeitasPorEstaPeca){
+                total = total + peca.valorRelativoParaCalculo;
+            }
 
-           return total;
+            return total;
         }
     }
 
@@ -418,7 +407,7 @@ public abstract class CrazyPiece {
     public void adicionaJogadaValidaPeca(){
         jogadaValidaPeca++;
     }
-    
+
     public int previsaoDePontos(int xO, int yO) {
         for (CrazyPiece peca: crazyList){
             if (peca.getCoordenadaY()==yO && peca.getCoordenadaX() == xO){
@@ -428,5 +417,7 @@ public abstract class CrazyPiece {
         return 0;
     }
 
-
+    public List<CrazyPiece> getCapturasFeitasPorEstaPeca() {
+        return capturasFeitasPorEstaPeca;
+    }
 }

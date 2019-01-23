@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.crazyChess;
 
 import java.io.IOException;
 
-    public class InvalidSimulatorInputException extends IOException {
+public class InvalidSimulatorInputException extends IOException {
     private int  linhaErro;
     private static int numeroTotal;
     private static int numeroEsperado;
@@ -12,8 +12,8 @@ import java.io.IOException;
     }
 
     public InvalidSimulatorInputException(int numeroTotal, int numerEsperado) {
-            this.numeroTotal= numeroTotal;
-            this.numeroEsperado = numerEsperado;
+        this.numeroTotal= numeroTotal;
+        this.numeroEsperado = numerEsperado;
     }
 
     public int getLinhaErro() {
@@ -31,4 +31,3 @@ import java.io.IOException;
 
 
 }
-

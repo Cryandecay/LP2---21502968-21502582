@@ -81,6 +81,7 @@ public class Joker extends CrazyPiece {
         int direcaoX = xD - xO;
         int direcaoY = yD - yO;
 
+
         if (deltaX > 5) {
             return false;
         }
@@ -410,6 +411,7 @@ public class Joker extends CrazyPiece {
 
         int direcaoX = xD - xO;
         int direcaoY = yD - yO;
+
 
         if (deltaX > 5) {
             return false;

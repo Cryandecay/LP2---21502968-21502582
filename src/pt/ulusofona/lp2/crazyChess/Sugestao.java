@@ -56,17 +56,17 @@ public class Sugestao implements Comparable<Sugestao>{
                 for (int i=0; i<pontos.size();i++) {
 
 
-                       for (int e=0; e<pontos.size(); e++){
-                            if (1 == pontos.get(i).compareTo(pontos.get(e))) {
-                                int tmpPonto = pontos.get(e);
-                                Comparable tmpSujest = listaDeSugestoes.get(e);
-                                pontos.set(e, pontos.get(i));
-                                listaDeSugestoes.set(e, listaDeSugestoes.get(i));
-                                pontos.set(i, tmpPonto);
-                                listaDeSugestoes.set(i, tmpSujest);
+                    for (int e=0; e<pontos.size(); e++){
+                        if (1 == pontos.get(i).compareTo(pontos.get(e))) {
+                            int tmpPonto = pontos.get(e);
+                            Comparable tmpSujest = listaDeSugestoes.get(e);
+                            pontos.set(e, pontos.get(i));
+                            listaDeSugestoes.set(e, listaDeSugestoes.get(i));
+                            pontos.set(i, tmpPonto);
+                            listaDeSugestoes.set(i, tmpSujest);
 
-                            }
-                       }
+                        }
+                    }
 
                 }
 
