@@ -35,81 +35,82 @@ public class Simulador {
         this.capturas = capturas;
     }
 
-      public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
+     
+    public void iniciaJogo(File ficheiroInicial) throws InvalidSimulatorInputException, IOException{
 
-            List<List <String>> firstRow = new ArrayList<List <String>>();
-            List<List <String>> mapas = new ArrayList<List <String>>();
-            List<List <String>> pecas = new ArrayList<List <String>>();
-            try {
+        List<List <String>> firstRow = new ArrayList<List <String>>();
+        List<List <String>> mapas = new ArrayList<List <String>>();
+        List<List <String>> pecas = new ArrayList<List <String>>();
+        try {
 
-                File ficheiro = new File(ficheiroInicial.getName());
-                Scanner leitorFicheiro = new Scanner(ficheiro);
+            File ficheiro = new File(ficheiroInicial.getName());
+            Scanner leitorFicheiro = new Scanner(ficheiro);
 
-                while (leitorFicheiro.hasNextLine()) {
-                    List<String> testew = new ArrayList<String>();
-                    String linha = leitorFicheiro.nextLine();
-                    String dados[] = linha.split(":");
-                    testew.addAll(Arrays.asList(dados));
-                    firstRow.add(testew);
+            while (leitorFicheiro.hasNextLine()) {
+                List<String> testew = new ArrayList<String>();
+                String linha = leitorFicheiro.nextLine();
+                String dados[] = linha.split(":");
+                testew.addAll(Arrays.asList(dados));
+                firstRow.add(testew);
+            }
+            leitorFicheiro.close();
+            tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
+            numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
+
+            if (firstRow.size()>tamanhoTabuleiro+numeroPecas+3){
+                throw new InvalidSimulatorInputException(firstRow.size(), tamanhoTabuleiro+numeroPecas+2);
+            }
+            System.out.println(firstRow);
+            if (firstRow.size()<tamanhoTabuleiro+numeroPecas+2){
+                throw new InvalidSimulatorInputException( firstRow.size(),tamanhoTabuleiro+numeroPecas+2 );
+            }
+
+            if (firstRow.size() == tamanhoTabuleiro + numeroPecas + 1) {
+                for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++){
+                    linhaDeErro = e;
+                    capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
+
                 }
-                leitorFicheiro.close();
-
-                tamanhoTabuleiro = Integer.parseInt(firstRow.get(0).get(0));
-                numeroPecas = Integer.parseInt(firstRow.get(1).get(0));
-
-                if (firstRow.size()>tamanhoTabuleiro+numeroPecas+3){
-                    throw new InvalidSimulatorInputException(firstRow.size(), tamanhoTabuleiro+numeroPecas+2);
+                jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(1));
+                jodaInvalidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(2));
+                for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(3)); e++) {
+                    linhaDeErro = e;
+                    capturas.add(new Rei("0", "0", "20", "Dummie", 2, 1));
                 }
-                if (firstRow.size()<tamanhoTabuleiro+numeroPecas+1){
-                    throw new InvalidSimulatorInputException(firstRow.size(), tamanhoTabuleiro+numeroPecas+2);
-                }
+                jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(4));
+                jodaInvalidaBrancas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(5));
+                firstRow.remove(tamanhoTabuleiro + numeroPecas + 2);
+            }
 
-                if (firstRow.size() == tamanhoTabuleiro + numeroPecas + 1) {
-                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(0)); e++){
-                            linhaDeErro = e;
-                            capturas.add(new Rei("0", "0", "10", "Dummie", 2, 1));
+            for (int i = 2; i < numeroPecas + 2; i++) {
+                pecas.add(firstRow.get(i));
+            }
+            for (int i = 2 + numeroPecas; i < firstRow.size(); i++) {
+                mapas.add(firstRow.get(i));
+            }
 
-                    }
-                    jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(1));
-                    jodaInvalidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(2));
-                    for (int e = 0; e < Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(3)); e++) {
-                        linhaDeErro = e;
-                        capturas.add(new Rei("0", "0", "20", "Dummie", 2, 1));
-                    }
-                    jodaValidaPretas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(4));
-                    jodaInvalidaBrancas = Integer.parseInt(firstRow.get(tamanhoTabuleiro + numeroPecas + 2).get(5));
-                    firstRow.remove(tamanhoTabuleiro + numeroPecas + 2);
-                }
+            stringTest(pecas, mapas);
 
-                for (int i = 2; i < numeroPecas + 2; i++) {
-                    pecas.add(firstRow.get(i));
+            if (crazyList.size() != numeroPecas) {
+                for (int i = 0; i < numeroPecas - crazyList.size() + 1; i++) {
+                    crazyList.add(new Rei(0, 0, 10, "0", -1, -1));
                 }
-                for (int i = 2 + numeroPecas; i < firstRow.size(); i++) {
-                    mapas.add(firstRow.get(i));
-                }
-
-                stringTest(pecas, mapas);
-
-                if (crazyList.size() != numeroPecas) {
-                    for (int i = 0; i < numeroPecas - crazyList.size() + 1; i++) {
-                        crazyList.add(new Rei(0, 0, 10, "0", -1, -1));
-                    }
-                }
+            }
 
         } catch (FileNotFoundException e) {
             throw new IOException();
         }catch (IOException ex){
-                throw new InvalidSimulatorInputException(listaDeSugestoes());
-            }
+            throw new InvalidSimulatorInputException(listaDeSugestoes());
+        }
 
 
     }
 
     public int listaDeSugestoes(){
-        return linhaDeErro;   
+        return linhaDeErro+3;
     }
-    
-    void stringTest(List<List<String>> peca, List<List <String>> mapas){
+
+    void stringTest(List<List<String>> peca, List<List <String>> mapas) throws InvalidSimulatorInputException {
         for(int i=0; i< peca.size();i++) {
             for (int e = 0; e < mapas.size(); e++) {
                 for (int u = 0; u < mapas.get(e).size(); u++) {
@@ -120,7 +121,7 @@ public class Simulador {
                         //peca.get(i).get(3) = alcunhas
                         //coordenadaX= u;
                         //coordenadaY= e;
-
+                        linhaDeErro = i;
                         if(peca.get(i).get(1).equals("0")) {//Rei
                             crazyList.add(new Rei(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
 
@@ -145,12 +146,15 @@ public class Simulador {
                         } else if(peca.get(i).get(1).equals("7")){//Joker
                             crazyList.add(new Joker(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
                             listaDeJokers.add(new Joker(peca.get(i).get(0),peca.get(i).get(1) , peca.get(i).get(2), peca.get(i).get(3), u, e));
+                        }else{
+                            throw new InvalidSimulatorInputException(listaDeSugestoes());
                         }
                     }
                 }
             }
         }
     }
+
 
     void jogadaInvalida(CrazyPiece crazy){
 
