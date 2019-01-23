@@ -33,7 +33,11 @@ public class Rainha extends CrazyPiece{
 
         int direcaoX = xD - xO;
         int direcaoY = yD - yO;
-
+        
+        if(deltaX == 0 && deltaY == 0){
+            return false;
+        }
+        
         if (deltaX > 5) {
             return false;
         }
@@ -74,6 +78,10 @@ public class Rainha extends CrazyPiece{
 
         int direcaoX = xD - xO;
         int direcaoY = yD - yO;
+        
+        if(deltaX == 0 && deltaY == 0){
+            return false;
+        }
 
         if (deltaX > 5) {
             return false;
